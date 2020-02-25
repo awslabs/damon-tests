@@ -57,4 +57,10 @@ do
 	sleep 1
 done
 
-sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
+if [ "$var" = "rec" ]
+then
+	sudo $DAMO record -o $1/damon.data $pid
+elif [ "$var" = "ethp" ]
+then
+	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
+fi
