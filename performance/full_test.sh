@@ -2,7 +2,7 @@
 
 LBX=$HOME/lazybox
 
-EXPERIMENTS='./'
+EXPERIMENTS=`dirname $0`
 
 parsec_workloads="blackscholes bodytrack canneal dedup facesim ferret "
 parsec_workloads+="fluidanimate freqmine raytrace streamcluster swaptions "
