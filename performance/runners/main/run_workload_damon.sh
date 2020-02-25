@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # exp: performance
-# variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp)
-# $1: <...>/results/performance/(parsec3|splash2x)/<workload>/(orig|thp|ethp)/0(0-9)/
+# variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp|rec)
+# $1: <...>/results/<exp>/<variance>/0(0-9)
 
 if [ $# -ne 1 ]
 then
