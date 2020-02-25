@@ -19,7 +19,20 @@ LBX="$HOME/lazybox"
 EXP_DIR="$ODIR/../../../../../../performance/"
 var=$(basename $(dirname $ODIR))
 work=$(basename $(dirname $(dirname $ODIR)))
-echo $work
+work_category=$(basename $(dirname $(dirname $(dirname $ODIR))))
+echo $work_category $work
+
+if [ "$work_category" = "splash2x" ]
+then
+	PARSEC_RUN+=" splash2x.$work"
+elif [ "$work_category" = "parsec3" ]
+then
+	PARSEC_RUN+=" $work"
+fi
+
+PARSEC_RUN+=" | tee $ODIR/commlog"
+
+echo "PARSEC_RUN: $PARSEC_RUN"
 
 if [ "$var" = "orig" ] || [ "$var" = "thp" ]
 then
@@ -30,14 +43,14 @@ then
 		sudo $LBX/scripts/turn_thp.sh madvise
 	fi
 
-	$PARSEC_RUN $work | tee $ODIR/commlog
+	eval $PARSEC_RUN
 	exit
 fi
 
-# var == ethp
+# var is 'rec' or 'ethp'
 sudo $LBX/scripts/turn_thp.sh madvise
-$PARSEC_RUN $work | tee $ODIR/commlog &
-if [ "$work" = "raytrace" ]
+eval $PARSEC_RUN &
+if [ "$work_category/$work" = "parsec3/raytrace" ]
 then
 	work="rtview"
 fi
