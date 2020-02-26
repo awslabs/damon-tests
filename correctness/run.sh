@@ -23,7 +23,7 @@ cp ./Makefile.kselftest $ksft_abs_path/Makefile
 
 # run
 cd $LINUX_DIR
-make -C $ksft_dir run_tests
+make -C $ksft_dir/../ TARGETS="damon-tests damon" run_tests
 
 if [ $? -eq 0 ]
 then
