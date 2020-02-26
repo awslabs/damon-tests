@@ -25,6 +25,8 @@ cp ./Makefile.kselftest $ksft_abs_path/Makefile
 cd $LINUX_DIR
 make -silent -C $ksft_dir/../ TARGETS="damon-tests damon" run_tests | tee log
 
+echo
+
 grep -q -e '^not ok' log
 if [ $? -ne 0 ]
 then
@@ -34,4 +36,5 @@ else
 fi
 echo -e "\e[39m"
 
-echo "# $ksft_abs_path is in dirty state now, remove it if you don't want so"
+echo "# kselftest dir $ksft_abs_path is in dirty state."
+echo "# the log is at $PWD/log."
