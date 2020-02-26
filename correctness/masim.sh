@@ -1,17 +1,36 @@
 #!/bin/bash
 
-CDIR=`pwd`
+ksft_skip=4
 
-BINDIR=`dirname $0`
-cd $BINDIR
+TEST_DIR=$PWD
 
-source ./__common.sh
+if [ $EUID -ne 0 ]
+then
+	echo "Run as root"
+	exit $ksft_skip
+fi
 
-DAMO=$KDIR/tools/damon/damo
+if [ ! -d ./masim ]
+then
+	git clone https://github.com/sjp38/masim
+	if [ ! -d ./masim ]
+	then
+		echo "masim clone failed"
+		exit $ksft_skip
+	fi
 
-MCFG=`dirname $MASIM`/configs/
+	make -C masim -s
+
+	if [ ! -f masim/masim ]
+	then
+		echo "masim not built"
+		exit $ksft_skip
+	fi
+fi
+
+DAMO=../../../damon/damo
 
 for pattern in stairs zigzag
 do
-	sudo $DAMO record -o $CDIR/$pattern.data "$MASIM $MCFG/$pattern.cfg"
+	$DAMO record "./masim/masim masim/configs/$pattern.cfg"
 done
