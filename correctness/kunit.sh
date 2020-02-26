@@ -1,11 +1,7 @@
 #!/bin/bash
 
-BINDIR=`dirname $0`
-cd $BINDIR
-
-source ./__common.sh
-
-KUNIT_BDIR=$HOME/kunit.out
+TEST_DIR=$PWD
+KUNIT_BDIR=$TEST_DIR/kunit.out
 KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
 
 mkdir -p $KUNIT_BDIR
@@ -17,5 +13,6 @@ if [ ! -f $KUNITCONFIG ]; then
 	CONFIG_DAMON_KUNIT_TEST=y" > $KUNITCONFIG
 fi
 
-cd $KDIR
+# we are in tools/testing/selftests/damon-tests/
+cd ../../../../
 ./tools/testing/kunit/kunit.py run --build_dir $KUNIT_BDIR
