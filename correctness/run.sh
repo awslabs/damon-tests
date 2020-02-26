@@ -27,9 +27,10 @@ make -C $ksft_dir run_tests
 
 if [ $? -eq 0 ]
 then
-	echo "PASS"
+	echo -e "\e[92mPASS"
 else
-	echo "FAIL"
+	echo -e "\e[91mFAIL"
 fi
+echo -e "\e[39m"
 
 echo "# $ksft_abs_path is in dirty state now, remove it if you don't want so"
