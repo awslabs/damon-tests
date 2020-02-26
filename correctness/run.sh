@@ -23,9 +23,10 @@ cp ./Makefile.kselftest $ksft_abs_path/Makefile
 
 # run
 cd $LINUX_DIR
-make -C $ksft_dir/../ TARGETS="damon-tests damon" run_tests
+make -silent -C $ksft_dir/../ TARGETS="damon-tests damon" run_tests | tee log
 
-if [ $? -eq 0 ]
+grep -q -e '^not ok' log
+if [ $? -ne 0 ]
 then
 	echo -e "\e[92mPASS"
 else
