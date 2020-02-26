@@ -33,4 +33,15 @@ DAMO=../../../damon/damo
 for pattern in stairs zigzag
 do
 	$DAMO record "./masim/masim masim/configs/$pattern.cfg"
+	if [ ! -f damon.data ]
+	then
+		echo "damon.data for $pattern not found"
+		exit 1
+	fi
+	python3 ../damon/_chk_record.py damon.data
+	if [ $? -ne 0 ]
+	then
+		echo "record file for $pattern is wrong"
+		exit 1
+	fi
 done
