@@ -1,6 +1,12 @@
 #!/bin/bash
 
-LOG=$PWD/log
+if [ $# -ne 1 ]
+then
+	echo "Usage: $0 <log>"
+	exit 1
+fi
+
+LOG=$1
 
 echo -e "\e[32m"
 grep -e '^ok' $LOG

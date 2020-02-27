@@ -30,4 +30,4 @@ $BINDIR/_install.sh $LINUX_DIR
 )
 
 # print results
-$BINDIR/_summary_results.sh
+$BINDIR/_summary_results.sh $LOG
