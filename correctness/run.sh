@@ -26,8 +26,8 @@ cd $LINUX_DIR
 make -silent -C $ksft_dir/../damon run_tests | tee log
 make -silent -C $ksft_dir/ run_tests | tee -a log
 
+# print results
 echo
-
 grep -q -e '^not ok' log
 if [ $? -ne 0 ]
 then
