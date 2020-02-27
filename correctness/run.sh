@@ -17,9 +17,7 @@ fi
 ksft_dir=tools/testing/selftests/damon-tests
 ksft_abs_path=$LINUX_DIR/$ksft_dir
 
-# install
-mkdir -p $ksft_abs_path
-cp ./tests/* $ksft_abs_path
+$BINDIR/_install.sh $LINUX_DIR
 
 # run
 cd $LINUX_DIR
