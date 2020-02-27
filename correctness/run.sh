@@ -18,8 +18,7 @@ ksft_abs_path=$LINUX_DIR/$ksft_dir
 
 # install
 mkdir -p $ksft_abs_path
-cp ./* $ksft_abs_path
-cp ./Makefile.kselftest $ksft_abs_path/Makefile
+cp ./tests/* $ksft_abs_path
 
 # run
 cd $LINUX_DIR
