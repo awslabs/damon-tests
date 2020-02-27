@@ -33,6 +33,9 @@ if [ $? -ne 0 ]
 then
 	echo -e "\e[92mPASS"
 else
+	echo -e "\e[93mFailed tests:"
+	grep -e '^not ok' log
+	echo
 	echo -e "\e[91mFAIL"
 fi
 echo -e "\e[39m"
