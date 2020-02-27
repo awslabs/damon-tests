@@ -8,12 +8,10 @@ echo -e "\e[33m"
 grep -e '^not ok' $LOG
 failed=$?
 
-echo
-
-if [ $failed ]
+if [ $failed -eq 0 ]
 then
-	echo -e "\e[91mFAIL"
+	echo
+	echo -e "\e[91mFAIL\e[39m"
 else
-	echo -e "\e[92mPASS"
+	echo -e "\e[92mPASS\e[39m"
 fi
-echo -e "\e[39m"
