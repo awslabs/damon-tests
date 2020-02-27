@@ -24,7 +24,7 @@ cp ./Makefile.kselftest $ksft_abs_path/Makefile
 # run
 cd $LINUX_DIR
 make -silent -C $ksft_dir/../damon run_tests | tee log
-make -silent -C $ksft_dir/ run_tests | tee log
+make -silent -C $ksft_dir/ run_tests | tee -a log
 
 echo
 
