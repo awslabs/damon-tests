@@ -13,11 +13,15 @@ then
 	exit $ksft_skip
 fi
 
+nr_checks=0
 for f in $record_files
 do
+	echo "check $f"
 	python3 ../damon/_chk_record.py $f
 	if [ $? -ne 0 ]
 	then
 		exit 1
 	fi
+	nr_checks=$(($nr_checks + 1))
 done
+echo "$nr_checks records checked"
