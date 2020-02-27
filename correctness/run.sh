@@ -39,5 +39,5 @@ else
 fi
 echo -e "\e[39m"
 
-echo "# kselftest dir $ksft_abs_path is in dirty state."
-echo "# the log is at $PWD/log."
+echo "# kselftest dir '$ksft_abs_path' is in dirty state."
+echo "# the log is at '$PWD/log'."
