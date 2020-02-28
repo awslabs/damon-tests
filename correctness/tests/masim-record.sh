@@ -50,11 +50,4 @@ do
 		echo "record file for $pattern is wrong"
 		exit 1
 	fi
-
-	$DAMO schemes -c $ETHP "./masim/masim masim/configs/$pattern.cfg"
-	if [ $? -ne 0 ]
-	then
-		echo "applying scheme for $pattern is wrong"
-		exit 1
-	fi
 done
