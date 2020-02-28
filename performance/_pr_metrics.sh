@@ -8,7 +8,7 @@ then
 fi
 
 BINDIR=`dirname $0`
-source $BINDIR/configs/full.sh
+source $BINDIR/full_config.sh
 
 stat=$1
 metric=$2
