@@ -11,8 +11,11 @@ ODIR=$TESTDIR/`basename $0`.out
 mkdir -p bin
 PATH=$TESTDIR/bin/:$PATH
 
-wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ./bin/make.cross
-chmod +x ./bin/make.cross
+if [ ! -x ./bin/make.cross ]
+then
+	wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ./bin/make.cross
+	chmod +x ./bin/make.cross
+fi
 
 mkdir -p $ODIR
 
