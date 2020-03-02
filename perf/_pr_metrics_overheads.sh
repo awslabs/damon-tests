@@ -22,7 +22,8 @@ for w in $workloads
 do
 	orig_d=results/$w/orig/stat/$stat
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
-	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" 'BEGIN {print a + b}'`
+	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
+		'BEGIN {print a + b}'`
 	printf "%23s  %.3f" $w $orig_nr
 	for var in rec thp ethp
 	do
@@ -30,7 +31,8 @@ do
 		number=$(cat $d/$metric | awk '{print $2}')
 		overhead=`awk -v a="$orig_nr" -v b="$number" \
 			'BEGIN {print (b / a - 1) * 100}'`
-		sums[$var]=`awk -v a="${sums[$var]}" -v b="$number" 'BEGIN {print a + b}'`
+		sums[$var]=`awk -v a="${sums[$var]}" -v b="$number" \
+			'BEGIN {print a + b}'`
 
 		printf "  %8.3f (%6.2f)" $number $overhead
 		if [ "$var" = "ethp" ]
