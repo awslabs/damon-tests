@@ -25,9 +25,9 @@ do
 
 		if [ "$var" = "orig" ]
 		then
-			printf "%s\t%s" $w $number
+			printf "%s\t%.3f" $w $number
 		else
-			printf "\t%s" $number
+			printf "\t%.3f" $number
 		fi
 		if [ "$var" = "ethp" ]
 		then
