@@ -13,7 +13,7 @@ source $BINDIR/full_config.sh
 stat=$1
 metric=$2
 
-echo $metric "orig rec thp ethp"
+echo $metric'_'$stat'	orig	rec	thp	ethp'
 
 for w in $workloads
 do
