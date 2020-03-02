@@ -1,0 +1,26 @@
+This directory contains files for the performance test of DAMON.
+
+The test measures the runtime and memory footprint of 25 workloads in PARSEC3
+and SPLASH-2X benchmark suites with different kernel configurations.  The
+configurations are as below:
+
+    orig	Original kernel running THP with 'madvise()' enable policy
+    rec		Kernel running DAMON with record option for the workloads
+    thp		Original kernel running THP with 'always' enable policy
+    ethp	Kernel running 'efficient THP' operation scheme.
+
+
+Pre-requisites
+==============
+
+To be added.
+
+
+TL; DR
+======
+
+Just sequentially execute below three commands.
+
+    $ ./run.sh
+    $ ./post.sh
+    $ ./pr_report.sh
