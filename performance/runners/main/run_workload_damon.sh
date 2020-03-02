@@ -76,4 +76,5 @@ then
 elif [ "$var" = "ethp" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
+	dmesg | tail -n 10 > $1/dmesg
 fi
