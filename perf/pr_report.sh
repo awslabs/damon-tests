@@ -2,19 +2,16 @@
 
 BINDIR=`dirname $0`
 
-echo "========="
-echo "Overheads"
-echo "========="
+echo "======="
+echo "Summary"
+echo "======="
 echo
 
-for stat in avg
+for metric in runtime memused.avg
 do
-	for metric in runtime memused.avg
-	do
-		$BINDIR/_pr_overheads.sh $stat $metric
-		echo
-		echo
-	done
+	$BINDIR/_pr_metrics_overheads.sh avg $metric
+	echo
+	echo
 done
 
 echo "==========="
@@ -26,9 +23,6 @@ for stat in avg stdev min max
 do
 	for metric in runtime memused.avg
 	do
-		echo "$metric ($stat)"
-		echo "================="
-		echo
 		$BINDIR/_pr_metrics.sh $stat $metric
 		echo
 		echo
