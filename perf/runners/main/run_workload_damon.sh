@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# exp: performance
+# exp: perf
 # variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp|rec)
 # $1: <...>/results/<exp>/<variance>/0(0-9)
 
@@ -16,7 +16,7 @@ PARSEC_RUN="$HOME/parsec3_on_ubuntu/run.sh"
 DAMO="$HOME/linux/tools/damon/damo"
 LBX="$HOME/lazybox"
 
-EXP_DIR="$ODIR/../../../../../../performance/"
+EXP_DIR="$ODIR/../../../../../../perf/"
 var=$(basename $(dirname $ODIR))
 work=$(basename $(dirname $(dirname $ODIR)))
 work_category=$(basename $(dirname $(dirname $(dirname $ODIR))))
@@ -76,5 +76,9 @@ then
 elif [ "$var" = "ethp" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
+	dmesg | tail -n 10 > $1/dmesg
+elif [ "$var" = "prcl" ]
+then
+	sudo $DAMO schemes -c $EXP_DIR/schemes/prcl.damos $pid
 	dmesg | tail -n 10 > $1/dmesg
 fi
