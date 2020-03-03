@@ -20,9 +20,11 @@ do
 	workloads+=" splash2x/$w"
 done
 
+vars="orig rec thp ethp"
+
 VARIANTS=""
 
-for v in orig rec thp ethp
+for v in $vars
 do
 	for w in $workloads
 	do
