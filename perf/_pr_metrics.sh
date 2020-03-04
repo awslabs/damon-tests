@@ -13,11 +13,16 @@ source $BINDIR/full_config.sh
 stat=$1
 metric=$2
 
-echo $metric'_'$stat'	orig	rec	thp	ethp'
+printf $metric'_'$stat
+for v in $vars
+do
+	printf " %s" $v
+done
+printf "\n"
 
 for w in $workloads
 do
-	for var in orig rec thp ethp
+	for var in $vars
 	do
 		d=results/$w/$var/stat/$stat
 
@@ -29,9 +34,6 @@ do
 		else
 			printf "\t%.3f" $number
 		fi
-		if [ "$var" = "ethp" ]
-		then
-			printf "\n"
-		fi
 	done
+	printf "\n"
 done
