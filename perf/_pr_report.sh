@@ -9,7 +9,7 @@ echo
 
 for metric in runtime memused.avg
 do
-	$BINDIR/_pr_metrics_overheads.sh avg $metric
+	$BINDIR/_summary_results.sh avg $metric
 	echo
 	echo
 done
