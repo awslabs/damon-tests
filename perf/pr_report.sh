@@ -14,9 +14,9 @@ do
 	echo
 done
 
-echo "==========="
-echo "Raw Numbers"
-echo "==========="
+echo "====="
+echo "Stats"
+echo "====="
 echo
 
 for stat in avg stdev min max
