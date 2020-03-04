@@ -2,7 +2,8 @@
 
 ODIR=$1
 work=$(basename $(dirname $(dirname $ODIR)))
-if [ "$work" = "raytrace" ]
+work_category=$(basename $(dirname $(dirname $(dirname $ODIR))))
+if [ "$work_category" = "parsec3" ] && [ "$work" = "raytrace" ]
 then
 	work="rtview"
 fi
