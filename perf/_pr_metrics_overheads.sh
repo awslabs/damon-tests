@@ -15,15 +15,15 @@ metric=$2
 
 declare -A sums
 
-printf "%23s  " $metric
+printf "%s" $metric
 for v in $vars
 do
 	if [ "$v" = "orig" ]
 	then
-		printf "%s " $v
+		printf "\t%s" $v
 		continue
 	fi
-	printf " %s (overhead)" $v
+	printf "\t%s\t(overhead)" $v
 done
 printf "\n"
 
@@ -33,7 +33,7 @@ do
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
 	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
 		'BEGIN {print a + b}'`
-	printf "%23s  %.3f" $w $orig_nr
+	printf "%s\t%.3f" $w $orig_nr
 	for var in $vars
 	do
 		if [ "$var" = "orig" ]
@@ -47,13 +47,13 @@ do
 		sums[$var]=`awk -v a="${sums[$var]}" -v b="$number" \
 			'BEGIN {print a + b}'`
 
-		printf "  %8.3f (%.2f)" $number $overhead
+		printf "\t%.3f\t(%.2f)" $number $overhead
 	done
 	printf "\n"
 done
 
 orig_sum=${sums[orig]}
-printf "%23s  %.3f" "total" $orig_sum
+printf "%s\t%.3f" "total" $orig_sum
 for var in $vars
 do
 	if [ "$var" = "orig" ]
@@ -64,6 +64,6 @@ do
 	sum=${sums[$var]}
 	overhead=`awk -v a="$orig_sum" -v b="$sum" \
 		'BEGIN {print (b / a - 1) * 100}'`
-	printf "  %8.3f (%.2f)" $sum $overhead
+	printf "\t%.3f\t(%.2f)" $sum $overhead
 done
 printf "\n"
