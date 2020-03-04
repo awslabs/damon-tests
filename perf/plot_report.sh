@@ -4,7 +4,7 @@ BINDIR=`dirname $0`
 LBX=$HOME/lazybox
 PLOT=$LBX/gnuplot/plot.py
 
-REPORTS_DIR=reports
+REPORTS_DIR=reports/plots/
 mkdir -p $REPORTS_DIR
 
 for metric in runtime memused.avg
