@@ -19,7 +19,7 @@ printf $metric'_'$stat
 for var in $vars
 do
 	if [ "$var" = "orig" ]; then continue; fi
-	printf " %s" $var
+	printf "\t%s" $var
 done
 printf "\n"
 
