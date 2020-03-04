@@ -22,8 +22,8 @@ do
 			--ytitle "$metric overhead\n(percent)" \
 			--font "Times New Roman" \
 			$OUTPUT_IMG
-	if [ $? -eq 0 ]
+	if [ $? -ne 0 ]
 	then
-		echo "'$OUTPUT_IMG' generated"
+		echo "'$OUTPUT_IMG' generation failed"
 	fi
 done
