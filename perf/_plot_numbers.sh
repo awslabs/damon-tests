@@ -31,11 +31,3 @@ do
 		fi
 	done
 done
-
-HTML=$ODIR/index.html
-echo > $HTML
-
-for metric in runtime memused.avg
-do
-	echo "<img src=./$metric.png />" >> $HTML
-done

@@ -14,3 +14,18 @@ do
 	echo
 	echo
 done
+
+HTMLDIR=$REPORT_DIR/html/
+mkdir -p $HTMLDIR
+HTML=$HTMLDIR/index.html
+echo > $HTML
+
+for metric in runtime memused.avg
+do
+	echo "<img src=../plots/$metric.png />" >> $HTML
+done
+
+echo "<br><br>" >> $HTML
+echo "<pre>" >> $HTML
+cat $REPORT_DIR/report.txt >> $HTML
+echo "</pre>" >> $HTML
