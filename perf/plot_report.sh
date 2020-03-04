@@ -12,7 +12,7 @@ do
 	OUTPUT_IMG=$REPORTS_DIR/$metric.pdf
 	$BINDIR/_pr_overheads.sh avg $metric | \
 		$PLOT --stdin --type clustered_boxes --xtics_rotate -90 \
-			--ytitle "$metric overhead (percent)" \
+			--ytitle "$metric overhead\n(percent)" \
 			--font "Times New Roman" \
 			$OUTPUT_IMG
 	if [ $? -eq 0 ]
