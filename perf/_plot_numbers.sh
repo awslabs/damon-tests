@@ -16,14 +16,26 @@ mkdir -p $ODIR
 
 for metric in runtime memused.avg
 do
-	OUTPUT_IMG=$ODIR/$metric.pdf
-	$BINDIR/_pr_overheads.sh avg $metric | \
-		$PLOT --stdin --type clustered_boxes --xtics_rotate -90 \
-			--ytitle "$metric overhead\n(percent)" \
-			--font "Times New Roman" \
-			$OUTPUT_IMG
-	if [ $? -ne 0 ]
-	then
-		echo "'$OUTPUT_IMG' generation failed"
-	fi
+	for suffix in pdf png
+	do
+		OUTPUT_IMG=$ODIR/$metric.$suffix
+		$BINDIR/_pr_overheads.sh avg $metric | \
+			$PLOT --stdin --type clustered_boxes \
+				--xtics_rotate -90 \
+				--ytitle "$metric overhead\n(percent)" \
+				--font "Times New Roman" \
+				$OUTPUT_IMG
+		if [ $? -ne 0 ]
+		then
+			echo "'$OUTPUT_IMG' generation failed"
+		fi
+	done
+done
+
+HTML=$ODIR/index.html
+echo > $HTML
+
+for metric in runtime memused.avg
+do
+	echo "<img src=./$metric.png />" >> $HTML
 done
