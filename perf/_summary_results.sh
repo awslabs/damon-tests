@@ -8,7 +8,16 @@ then
 fi
 
 BINDIR=`dirname $0`
-source $BINDIR/full_config.sh
+if [ -z "$CFG" ]
+then
+	CFG=$BINDIR/full_config.sh
+fi
+source $CFG
+
+if [ ! -z "$custom_vars" ]
+then
+	vars=$custom_vars
+fi
 
 stat=$1
 metric=$2
