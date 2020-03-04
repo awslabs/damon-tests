@@ -15,7 +15,13 @@ metric=$2
 
 declare -A sums
 
-echo $metric"_overhead	rec	thp	ethp"
+printf $metric'_'$stat
+for var in $vars
+do
+	if [ "$var" = "orig" ]; then continue; fi
+	printf " %s" $var
+done
+printf "\n"
 
 for w in $workloads
 do
@@ -23,8 +29,9 @@ do
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
 	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
 		'BEGIN {print a + b}'`
-	for var in rec thp ethp
+	for var in $vars
 	do
+		if [ "$var" = "orig" ]; then continue; fi
 		d=results/$w/$var/stat/$stat
 		number=$(cat $d/$metric | awk '{print $2}')
 		overhead=`awk -v a="$orig_nr" -v b="$number" \
@@ -38,17 +45,15 @@ do
 		else
 			printf "\t%.3f" $overhead
 		fi
-		if [ "$var" = "ethp" ]
-		then
-			printf "\n"
-		fi
 	done
+	printf "\n"
 done
 
 printf "total"
 orig_sum=${sums[orig]}
-for var in rec thp ethp
+for var in $vars
 do
+	if [ "$var" = "orig" ]; then continue; fi
 	sum=${sums[$var]}
 	overhead=`awk -v a="$orig_sum" -v b="$sum" \
 		'BEGIN {print (b / a - 1) * 100}'`
