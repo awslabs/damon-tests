@@ -20,8 +20,8 @@ Pre-requisites
 lazybox
 -------
 
-The tests are using lazybox[1].  You should place lazybox at '$HOME/lazybox'.
-For example:
+The tests are using lazybox[1], a toolset for various cases.  You should place
+it at '$HOME/lazybox'.  For example:
 
     $ cd $HOME; git clone https://github.com/sjp38/lazybox
 
@@ -31,10 +31,9 @@ For example:
 parsec3_on_ubuntu
 -----------------
 
-The performance tests in this directory use 13 workloads in PARSEC3[1] and 12
-workloads in SPLASH-2X[2] benchmark suites.  For more easier and automated
-settings, the tests use another wrapper for the benchmark suites, called
-parsec3_on_ubuntu[3].  You should first place it at '$HOME/parsec3_on_ubuntu'.
+For more easier and automated use of the target workloads in PARSEC3 and
+SPLASH-2X, the tests use another wrapper for the benchmark suites, called
+parsec3_on_ubuntu[1].  You should first place it at '$HOME/parsec3_on_ubuntu'.
 For example:
 
     $ cd $HOME; git clone https://github.com/sjp38/parsec3_on_ubuntu
@@ -47,16 +46,22 @@ install PARSEC3 and SPLASH-2X workloads.  For example, if you are on Ubuntu
     $ ./getsrc.sh; ./patch-for-ubntu-xenial.sh; ./intall_dep-xenial.sh;
     $ ./build.sh; ./build.sh splash2x
 
-[1] https://parsec.cs.princeton.edu/parsec3-doc.htm
-[2] https://parsec.cs.princeton.edu/parsec3-doc.htm#splash2x
-[3] https://github.com/sjp38/parsec3_on_ubuntu
+[1] https://github.com/sjp38/parsec3_on_ubuntu
+
+
+Python3
+-------
+
+Lazybox depends on Python3.  Install it using your package manager.  However,
+most python scripts in the lazybox are python2 compatible.   You could try
+changing the shebangs to python2.
 
 
 gnuplot
 -------
 
-The generation of the outputs report uses 'gnuplot'.  Install it using your
-package manager.
+Visualization of the outputs in the reports are made using 'gnuplot'.  Install
+it using your package manager.
 
 
 TL; DR
