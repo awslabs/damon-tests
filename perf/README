@@ -64,11 +64,31 @@ Visualization of the outputs in the reports are made using 'gnuplot'.  Install
 it using your package manager.
 
 
-TL; DR
-======
+HOWTO
+=====
+
+This section describes how you can run the tests and make a report on your
+system.  Before following below instructions, please ensure that your system
+meets the above mentioned pre-requisites.
 
 Just sequentially execute below three commands.
 
     $ ./run.sh
     $ ./post.sh
-    $ ./pr_report.sh
+    $ ./mk_reports.sh
+
+The first command runs the workloads and measure some metrics.  It would take
+more than 10 hours.  The second command does post-processing of the numbers
+gathered during the runs.  The final command generates the reports for you and
+show a summary in text form.  It generates detailed report in text form, and in
+html form at 'report/report.txt' and 'report/html/index.html', respectively.
+The html form report includes simple visualizations of the output, either.  The
+visualizations are also available in 'report/plots/' directory.
+
+
+Contacts
+========
+
+If you have some questions or comments regarding this, please contact to:
+
+    SeongJae Park <sjpark@amazon.de>
