@@ -1,14 +1,17 @@
 This directory contains files for the performance test of DAMON.
 
-The test measures the runtime and memory footprint of 25 workloads in PARSEC3
-and SPLASH-2X benchmark suites with different kernel configurations.  The
-configurations are as below:
+The test measures the runtime and memory footprint of 25 workloads in
+PARSEC3[1] and SPLASH-2X[2] benchmark suites with different kernel
+configurations.  The configurations are as below:
 
     orig	Original kernel running THP with 'madvise()' enable policy
     rec		Kernel running DAMON with record option for the workloads
     thp		Original kernel running THP with 'always' enable policy
     ethp	Kernel running 'efficient THP' operation scheme.
     prcl	Kernel running 'proactive reclamation' operation scheme.
+
+[1] https://parsec.cs.princeton.edu/parsec3-doc.htm
+[2] https://parsec.cs.princeton.edu/parsec3-doc.htm#splash2x
 
 
 Pre-requisites
