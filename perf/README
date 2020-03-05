@@ -13,7 +13,46 @@ configurations are as below:
 Pre-requisites
 ==============
 
-To be added.
+lazybox
+-------
+
+The tests are using lazybox[1].  You should place lazybox at '$HOME/lazybox'.
+For example:
+
+    $ cd $HOME; git clone https://github.com/sjp38/lazybox
+
+[1] https://github.com/sjp38/lazybox
+
+
+parsec3_on_ubuntu
+-----------------
+
+The performance tests in this directory use 13 workloads in PARSEC3[1] and 12
+workloads in SPLASH-2X[2] benchmark suites.  For more easier and automated
+settings, the tests use another wrapper for the benchmark suites, called
+parsec3_on_ubuntu[3].  You should first place it at '$HOME/parsec3_on_ubuntu'.
+For example:
+
+    $ cd $HOME; git clone https://github.com/sjp38/parsec3_on_ubuntu
+
+After that, you should follow the instructions in the README in the project to
+install PARSEC3 and SPLASH-2X workloads.  For example, if you are on Ubuntu
+18.04:
+
+    $ cd $HOME/parsec3_on_ubuntu
+    $ ./getsrc.sh; ./patch-for-ubntu-xenial.sh; ./intall_dep-xenial.sh;
+    $ ./build.sh; ./build.sh splash2x
+
+[1] https://parsec.cs.princeton.edu/parsec3-doc.htm
+[2] https://parsec.cs.princeton.edu/parsec3-doc.htm#splash2x
+[3] https://github.com/sjp38/parsec3_on_ubuntu
+
+
+gnuplot
+-------
+
+The generation of the outputs report uses 'gnuplot'.  Install it using your
+package manager.
 
 
 TL; DR
