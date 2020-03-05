@@ -14,7 +14,7 @@ PLOT=$LBX/gnuplot/plot.py
 
 mkdir -p $ODIR
 
-for metric in runtime memused.avg
+for metric in runtime memused.avg rss.avg
 do
 	for suffix in pdf png
 	do

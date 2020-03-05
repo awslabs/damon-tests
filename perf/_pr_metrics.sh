@@ -26,6 +26,9 @@ do
 	do
 		d=results/$w/$var/stat/$stat
 
+		if [ ! -f $d/$metric ]; then
+			continue
+		fi
 		number=$(cat $d/$metric | awk '{print $2}')
 
 		if [ "$var" = "orig" ]

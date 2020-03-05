@@ -20,7 +20,7 @@ mkdir -p $HTMLDIR
 HTML=$HTMLDIR/index.html
 echo > $HTML
 
-for metric in runtime memused.avg
+for metric in runtime memused.avg rss.avg
 do
 	echo "<img src=../plots/$metric.png />" >> $HTML
 done
