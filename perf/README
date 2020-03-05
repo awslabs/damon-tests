@@ -8,6 +8,7 @@ configurations are as below:
     rec		Kernel running DAMON with record option for the workloads
     thp		Original kernel running THP with 'always' enable policy
     ethp	Kernel running 'efficient THP' operation scheme.
+    prcl	Kernel running 'proactive reclamation' operation scheme.
 
 
 Pre-requisites
