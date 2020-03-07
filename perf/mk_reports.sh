@@ -8,7 +8,7 @@ $BINDIR/_plot_numbers.sh $REPORT_DIR/plots
 
 $BINDIR/_pr_report.sh | $FMT > $REPORT_DIR/report.txt
 
-for metric in runtime memused.avg
+for metric in runtime memused.avg rss.avg
 do
 	$BINDIR/_summary_results.sh avg $metric | $FMT
 	echo
