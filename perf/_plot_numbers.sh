@@ -20,7 +20,7 @@ do
 	do
 		OUTPUT_IMG=$ODIR/$metric.$suffix
 		$BINDIR/_pr_overheads.sh avg $metric | \
-			$PLOT --stdin --type clustered_boxes \
+			$PLOT --type clustered_boxes \
 				--xtics_rotate -90 \
 				--ytitle "$metric overhead\n(percent)" \
 				--font "Times New Roman" \
