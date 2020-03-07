@@ -10,6 +10,11 @@ fi
 BINDIR=`dirname $0`
 source $BINDIR/full_config.sh
 
+if [ "$custom_vars" ]
+then
+	vars=$custom_vars
+fi
+
 stat=$1
 metric=$2
 
