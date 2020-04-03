@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXPERIMENTS=`dirname $BASH_SOURCE`/../../perf
+EXPERIMENTS=`dirname $BASH_SOURCE`/../../../perf
 
 parsec_workloads="blackscholes bodytrack canneal dedup facesim ferret "
 parsec_workloads+="fluidanimate freqmine raytrace streamcluster swaptions "
