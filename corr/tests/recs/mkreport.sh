@@ -26,7 +26,7 @@ do
 	html="$img.html"
 	echo > $html
 	img+=".png"
-	for f in `find . -name $img`
+	for f in `find . -name $img | sort`
 	do
 		workload=$(basename $(dirname $f))
 		category=$(basename $(dirname $(dirname $f)))
