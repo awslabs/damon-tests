@@ -1,4 +1,4 @@
 # format is: <min/max size> <min/max frequency (0-100)> <min/max age> <action>
 
-512K	null	5	null	null	null	hugepage
+2M	null	5	null	null	null	hugepage
 2M	null	null	5	1s	null	nohugepage
