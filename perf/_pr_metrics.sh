@@ -7,8 +7,14 @@ then
 	exit 1
 fi
 
+ODIR_ROOT="results"
+
 BINDIR=`dirname $0`
-source $BINDIR/full_config.sh
+if [ -z "$CFG" ]
+then
+	CFG=$BINDIR/full_config.sh
+fi
+source $CFG
 
 stat=$1
 metric=$2
@@ -24,7 +30,7 @@ for w in $workloads
 do
 	for var in $vars
 	do
-		d=results/$w/$var/stat/$stat
+		d=$ODIR_ROOT/$w/$var/stat/$stat
 
 		if [ ! -f $d/$metric ]; then
 			continue

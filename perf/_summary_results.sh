@@ -7,6 +7,8 @@ then
 	exit 1
 fi
 
+ODIR_ROOT="results"
+
 BINDIR=`dirname $0`
 if [ -z "$CFG" ]
 then
@@ -38,7 +40,7 @@ printf "\n"
 
 for w in $workloads
 do
-	orig_d=results/$w/orig/stat/$stat
+	orig_d=$ODIR_ROOT/$w/orig/stat/$stat
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
 	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
 		'BEGIN {print a + b}'`
@@ -49,7 +51,7 @@ do
 		then
 			continue
 		fi
-		d=results/$w/$var/stat/$stat
+		d=$ODIR_ROOT/$w/$var/stat/$stat
 		number=$(cat $d/$metric | awk '{print $2}')
 		overhead=`awk -v a="$orig_nr" -v b="$number" \
 			'BEGIN {print (b / a - 1) * 100}'`
