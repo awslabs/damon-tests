@@ -14,3 +14,4 @@ make O=$ODIR ARCH=x86_64 allnoconfig
 echo 'CONFIG_DAMON=m' >> $ODIR/.config
 echo 'CONFIG_DAMON_KUNIT_TEST=m' >> $ODIR/.config
 make O=$ODIR ARCH=x86_64 -j`grep -e '^processor' /proc/cpuinfo | wc -l`
+exit $?
