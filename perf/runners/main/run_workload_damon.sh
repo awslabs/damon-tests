@@ -72,15 +72,13 @@ done
 
 if [ "$var" = "rec" ]
 then
-	sudo $DAMO record -o $1/damon.data $pid
+	sudo $DAMO record -o $ODIR/damon.data $pid
 elif [ "$var" = "ethp" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
-	dmesg | tail -n 10 > $1/dmesg
 elif [ "$var" = "prcl" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/prcl.damos $pid
-	dmesg | tail -n 10 > $1/dmesg
 elif [ "$var" = "prec" ]
 then
 	function prec_for {
