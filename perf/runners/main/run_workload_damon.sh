@@ -89,7 +89,7 @@ then
 		$DAMO record -o $ODIR/damon.data paddr &
 		damo_pid=$!
 
-		for i in {1..3600}
+		for i in {1..1200}
 		do
 			pid=`pidof $work`
 			if [ $? -ne 0 ]
@@ -97,12 +97,12 @@ then
 				break
 			fi
 
-			if [ $i -eq 3600 ]
+			if [ $i -eq 1200 ]
 			then
 				echo "Timeout"
 				killall $work
 			fi
-			sleep 1
+			sleep 3
 		done
 
 		kill -SIGINT "$damo_pid"
