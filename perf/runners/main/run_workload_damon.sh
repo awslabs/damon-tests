@@ -106,6 +106,19 @@ then
 		done
 
 		kill -SIGINT "$damo_pid"
+
+		i=0
+		while true
+		do
+			on=$(cat /sys/kernel/debug/damon/monitor_on)
+			if [ "$on" = "off" ]
+			then
+				break
+			fi
+			echo "wait for monitor off $i seconds"
+			i=$((i + 1))
+			sleep 1
+		done
 	}
 	sudo bash -c "$(declare -f prec_for); prec_for $work $DAMO $ODIR"
 else
