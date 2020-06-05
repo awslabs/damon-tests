@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # exp: perf
-# variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp|rec)
+# variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp|rec|prec)
 # $1: <...>/results/<exp>/<variance>/0(0-9)
 
 if [ $# -ne 1 ]
@@ -47,7 +47,7 @@ then
 	exit
 fi
 
-# var is 'rec' or 'ethp'
+# var is neither 'orig' nor 'thp'
 sudo $LBX/scripts/turn_thp.sh madvise
 eval $PARSEC_RUN &
 if [ "$work_category/$work" = "parsec3/raytrace" ]
@@ -81,4 +81,37 @@ elif [ "$var" = "prcl" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/prcl.damos $pid
 	dmesg | tail -n 10 > $1/dmesg
+elif [ "$var" = "prec" ]
+then
+	function prec_for {
+		work=$1
+		DAMO=$2
+		ODIR=$3
+
+		$DAMO record -o $ODIR/damon.data paddr &
+		damo_pid=$!
+
+		for i in {1..3600}
+		do
+			pid=`pidof $work`
+			if [ $? -ne 0 ]
+			then
+				break
+			fi
+
+			if [ $i -eq 3600 ]
+			then
+				echo "Timeout"
+				killall $work
+			fi
+			sleep 1
+		done
+
+		kill -SIGINT "$damo_pid"
+	}
+	sudo bash -c "$(declare -f prec_for); prec_for $work $DAMO $ODIR"
+else
+	echo "Wrong var $var"
+	killall $work
+	exit 1
 fi
