@@ -23,16 +23,21 @@ cd $reports_dir
 
 for img in $images
 do
-	html="$img.html"
-	echo > $html
 	img+=".png"
 	for f in `find . -name $img | sort`
 	do
-		workload=$(basename $(dirname $f))
-		category=$(basename $(dirname $(dirname $f)))
+		var=$(basename $(dirname $f))
+		html="$var.$img.html"
+		if [ ! -f $html ]
+		then
+			echo > $html
+		fi
+
+		workload=$(basename $(dirname $(dirname $f)))
+		category=$(basename $(dirname $(dirname $(dirname $f))))
 		echo "<table style=\"float: left;\">" >> $html
 		echo "<tr><td><center>" >> $html
-		echo "$category/$workload" >> $html
+		echo "$category/$workload/$var" >> $html
 		echo "<br>" >> $html
 		echo "<img src=$f>" >> $html
 		echo "</td></tr></table>" >> $html

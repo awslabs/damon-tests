@@ -8,18 +8,20 @@ then
 	exit 1
 fi
 
-# data file path: <...>/(parsec3|splash2x)/<workload>/rec/(0-9)+/damon.data
+# data file path: <...>/(parsec3|splash2x)/<workload>/[p]rec/(0-9)+/damon.data
 data_file_path=$1
 report_dir_root=$2
 
+var=$(basename $(dirname $(dirname $data_file_path)))
 workload=$(basename $(dirname $(dirname $(dirname $data_file_path))))
 category=$(basename $(dirname $(dirname $(dirname $(dirname $data_file_path)))))
-name=$category/$workload
+name=$category/$workload/$var
 report_dir=$report_dir_root/$name
 html=$report_dir/report.html
 
 if [ -d $report_dir ]
 then
+	echo "the report already exists at $report_dir"
 	exit 1
 fi
 
