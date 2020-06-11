@@ -21,7 +21,9 @@ mkdir -p $ODIR
 
 cd $LINUX_SRC
 make O=$ODIR ARCH=m68k allnoconfig
+echo 'CONFIG_MODULES=y' >> $ODIR/.config
 echo 'CONFIG_DAMON=m' >> $ODIR/.config
+GCC_VERSION=7.5.0 make.cross O=$ODIR ARCH=m68k olddefconfig
 GCC_VERSION=7.5.0 make.cross O=$ODIR ARCH=m68k \
 	-j`grep -e '^processor' /proc/cpuinfo | wc -l`
 exit $?
