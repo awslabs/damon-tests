@@ -23,7 +23,10 @@ cd $LINUX_SRC
 make O=$ODIR ARCH=m68k allnoconfig
 echo 'CONFIG_MODULES=y' >> $ODIR/.config
 echo 'CONFIG_DAMON=m' >> $ODIR/.config
-COMPILER_INSTALL_PATH=$HOME/0day GCC_VERSION=7.5.0 make.cross O=$ODIR ARCH=m68k olddefconfig
-COMPILER_INSTALL_PATH=$HOME/0day GCC_VERSION=7.5.0 make.cross O=$ODIR ARCH=m68k \
-	-j`grep -e '^processor' /proc/cpuinfo | wc -l`
+
+export COMPILER_INSTALL_PATH=$HOME/0day
+export GCC_VERSION=7.5.0
+
+make.cross O=$ODIR ARCH=m68k olddefconfig
+make.cross O=$ODIR ARCH=m68k -j`grep -e '^processor' /proc/cpuinfo | wc -l`
 exit $?
