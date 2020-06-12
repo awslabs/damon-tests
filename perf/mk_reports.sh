@@ -4,6 +4,12 @@ BINDIR=`dirname $0`
 FMT="$HOME/lazybox/scripts/report/fmt_tbl.py --spaces 1 "
 REPORT_DIR=report/
 
+if [ -z "$CFG" ] || [ ! -f "$CFG" ]
+then
+	echo "Set 'CFG' env variable to proper config, please"
+	exit 1
+fi
+
 $BINDIR/_plot_numbers.sh $REPORT_DIR/plots
 
 $BINDIR/_pr_report.sh | $FMT > $REPORT_DIR/report.txt

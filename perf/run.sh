@@ -3,9 +3,10 @@
 LBX=$HOME/lazybox
 BINDIR=`dirname $0`
 
-if [ -z "$CFG" ]
+if [ -z "$CFG" ] || [ ! -f "$CFG" ]
 then
-	CFG=$BINDIR/full_config.sh
+	echo "Set 'CFG' env variable to proper config, please"
+	exit 1
 fi
 
 time CFG=$CFG $LBX/repeat_runs/run.sh
