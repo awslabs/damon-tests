@@ -31,8 +31,8 @@ fi
 ETHP=$TEST_DIR/ethp.damos
 echo "# format is: <min/max size> <min/max frequency (0-100)> <min/max age> <action>
 
-2M      null    5       null    1s      null    hugepage
-2M      null    null    5       1s      null    nohugepage" > $ETHP
+2M      max    5       max     1s      max    hugepage
+2M      max    min     5       1s      max    nohugepage" > $ETHP
 
 DAMO=../../../damon/damo
 
