@@ -11,7 +11,7 @@ fi
 results_dir=$1
 reports_dir=$2
 
-for f in `find $results_dir -name damon.data`
+for f in `find $results_dir -name damon.data | grep 01/damon.data`
 do
 	$BINDIR/_mkreport.sh $f $reports_dir
 done
