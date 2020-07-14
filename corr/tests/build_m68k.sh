@@ -22,7 +22,7 @@ mkdir -p $ODIR
 cd $LINUX_SRC
 make O=$ODIR ARCH=m68k allnoconfig
 echo 'CONFIG_MODULES=y' >> $ODIR/.config
-echo 'CONFIG_DAMON=m' >> $ODIR/.config
+echo 'CONFIG_DAMON=y' >> $ODIR/.config
 
 export COMPILER_INSTALL_PATH=$HOME/0day
 export GCC_VERSION=7.5.0
