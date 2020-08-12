@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LC_NUMERIC="en_US.UTF-8"
+
 BINDIR=`dirname $0`
 FMT="$HOME/lazybox/scripts/report/fmt_tbl.py --spaces 1 "
 REPORT_DIR=report/
