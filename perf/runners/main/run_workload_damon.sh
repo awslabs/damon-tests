@@ -75,7 +75,7 @@ then
 	sudo $DAMO record -o $ODIR/damon.data $pid
 elif [ "$var" = "ethp" ]
 then
-	sudo $DAMO schemes -n 3 -c $EXP_DIR/schemes/ethp.damos $pid
+	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
 elif [ "$var" = "prcl" ]
 then
 	sudo $DAMO schemes -c $EXP_DIR/schemes/prcl.damos $pid
