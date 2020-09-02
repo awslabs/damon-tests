@@ -15,7 +15,6 @@ end, as below:
     ok 3 selftests: damon-tests: chk_records.sh
     ok 4 selftests: damon-tests: build_i386.sh
     ok 5 selftests: damon-tests: build_m68k.sh
-    ok 6 selftests: damon-tests: build_x86_64-modules.sh
     
     PASS
 
@@ -81,13 +80,5 @@ build_m68k
 Test m68k cross build for a previous build failure, which reported by kbuild
 robot[2].
 
-
-build_x86_64-modules
---------------------
-
-Test kunit module build (which is prohibited) for a previous build failure,
-which reported by kbuild robot[3].
-
 [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
 [2] https://lore.kernel.org/linux-mm/202002130710.3P1Y98f7%25lkp@intel.com/
-[3] https://lore.kernel.org/linux-mm/202002140021.Pr9vTFO6%25lkp@intel.com/
