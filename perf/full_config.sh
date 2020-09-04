@@ -2,7 +2,7 @@
 
 EXPERIMENTS=`dirname $BASH_SOURCE`
 
-parsec_workloads="blackscholes bodytrack canneal dedup facesim ferret "
+parsec_workloads="blackscholes bodytrack canneal dedup facesim "
 parsec_workloads+="fluidanimate freqmine raytrace streamcluster swaptions "
 parsec_workloads+="vips x264"
 
