@@ -1,0 +1,6 @@
+This directory contains tests for DAMON[1].  The tests are separated into tests
+for correctness verification and performance evaluation and resides in `corr/`
+and `perf/` directories, respectively.  Please refer to the `README` in the
+directories.
+
+[1] https://damonitor.github.io
