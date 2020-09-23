@@ -13,5 +13,10 @@ cd $LINUX_SRC
 make O=$ODIR ARCH=i386 allnoconfig
 echo 'CONFIG_DAMON=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_KUNIT_TEST=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_PRIMITIVES=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_PRIMITIVES_KUNIT_TEST=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
+
 make O=$ODIR ARCH=i386 -j`grep -e '^processor' /proc/cpuinfo | wc -l`
 exit $?
