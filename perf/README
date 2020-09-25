@@ -73,9 +73,9 @@ meets the above mentioned pre-requisites.
 
 Just sequentially execute below three commands.
 
-    $ ./run.sh
-    $ ./post.sh
-    $ ./mk_reports.sh
+    $ CFG=full_config.sh ./full_run.sh
+    $ CFG=full_config.sh ./post.sh
+    $ CFG=full_config.sh ./mk_reports.sh
 
 The first command runs the workloads and measure some metrics.  It would take
 more than 10 hours.  The second command does post-processing of the numbers
