@@ -84,11 +84,3 @@ show a summary in text form.  It generates detailed report in text form, and in
 html form at 'report/report.txt' and 'report/html/index.html', respectively.
 The html form report includes simple visualizations of the output, either.  The
 visualizations are also available in 'report/plots/' directory.
-
-
-Contacts
-========
-
-If you have some questions or comments regarding this, please contact to:
-
-    SeongJae Park <sjpark@amazon.de>
