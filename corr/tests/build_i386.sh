@@ -11,6 +11,7 @@ mkdir -p $ODIR
 
 cd $LINUX_SRC
 make O=$ODIR ARCH=i386 allnoconfig
+echo 'CONFIG_PAGE_IDLE_FLAG=y' >> $ODIR/.config
 echo 'CONFIG_DAMON=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_KUNIT_TEST=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_PRIMITIVES=y' >> $ODIR/.config
