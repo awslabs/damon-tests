@@ -6,6 +6,9 @@ work_category=$(basename $(dirname $(dirname $(dirname $ODIR))))
 if [ "$work_category" = "parsec3" ] && [ "$work" = "raytrace" ]
 then
 	work="rtview"
+elif [ "$work_category" = "ycsb" ]
+then
+	work="dbtest"
 fi
 
 while true;
