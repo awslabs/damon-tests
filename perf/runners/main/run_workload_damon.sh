@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # exp: perf
-# variance: (parsec3|splash2x)/<workload>/(orig|thp|ethp|rec|prec)
+# variance: (parsec3|splash2x|ycsb)/<workload>/(orig|thp|ethp|rec|prec)
+#     For ycsb, <workload> is the zipfian alpha value.
 # $1: <...>/results/<exp>/<variance>/0(0-9)
 
 if [ $# -ne 1 ]
@@ -13,6 +14,7 @@ fi
 ODIR=$1
 
 PARSEC_RUN="$HOME/parsec3_on_ubuntu/run.sh"
+SILO_DBTEST="$HOME/silo/out-perf.masstree/benchmarks/dbtest"
 DAMO="$HOME/linux/tools/damon/damo"
 LBX="$HOME/lazybox"
 
@@ -24,15 +26,22 @@ echo $work_category $work
 
 if [ "$work_category" = "splash2x" ]
 then
-	PARSEC_RUN+=" splash2x.$work"
+	RUN_CMD="$PARSEC_RUN splash2x.$work"
 elif [ "$work_category" = "parsec3" ]
 then
-	PARSEC_RUN+=" $work"
+	RUN_CMD="$PARSEC_RUN $work"
+elif [ "$work_category" = "ycsb" ]
+then
+	RUN_CMD="$SILO_DBTEST --bench ycsb --verbose --scale-factor 100 \
+		--runtime 60 -o --zipfian-alpha=$work"
+else
+	echo "Unsupported work category $work_category"
+	exit 1
 fi
 
-PARSEC_RUN+=" | tee $ODIR/commlog"
+RUN_CMD+=" | tee $ODIR/commlog"
 
-echo "PARSEC_RUN: $PARSEC_RUN"
+echo "RUN_CMD: $RUN_CMD"
 
 if [ "$var" = "orig" ] || [ "$var" = "thp" ]
 then
@@ -43,16 +52,19 @@ then
 		sudo $LBX/scripts/turn_thp.sh madvise
 	fi
 
-	eval $PARSEC_RUN
+	eval $RUN_CMD
 	exit
 fi
 
 # var is neither 'orig' nor 'thp'
 sudo $LBX/scripts/turn_thp.sh madvise
-eval $PARSEC_RUN &
+eval $RUN_CMD &
 if [ "$work_category/$work" = "parsec3/raytrace" ]
 then
 	work="rtview"
+elif [ "$work_category" = "ycsb" ]
+then
+	work="dbtest"
 fi
 
 for i in {1..10}
