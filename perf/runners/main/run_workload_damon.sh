@@ -32,7 +32,7 @@ then
 	RUN_CMD="$PARSEC_RUN $work"
 elif [ "$work_category" = "ycsb" ]
 then
-	RUN_CMD="$SILO_DBTEST --bench ycsb --verbose --scale-factor 100 \
+	RUN_CMD="$SILO_DBTEST --bench ycsb --verbose --scale-factor 1000 \
 		--runtime 60 -o --zipfian-alpha=$work"
 else
 	echo "Unsupported work category $work_category"
