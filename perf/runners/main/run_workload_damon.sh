@@ -59,17 +59,19 @@ fi
 # var is neither 'orig' nor 'thp'
 sudo $LBX/scripts/turn_thp.sh madvise
 eval $RUN_CMD &
+
+cmdname=$work
 if [ "$work_category/$work" = "parsec3/raytrace" ]
 then
-	work="rtview"
+	cmdname="rtview"
 elif [ "$work_category" = "ycsb" ]
 then
-	work="dbtest"
+	cmdname="dbtest"
 fi
 
 for i in {1..10}
 do
-	pid=`pidof $work`
+	pid=`pidof $cmdname`
 	if [ $? -eq 0 ]
 	then
 		break
@@ -78,7 +80,7 @@ do
 		echo "No pid found"
 		exit 1
 	fi
-	echo 'wait for pidof '$work
+	echo 'wait for pidof '$cmdname
 	sleep 1
 done
 
@@ -94,7 +96,7 @@ then
 elif [ "$var" = "prec" ]
 then
 	function prec_for {
-		work=$1
+		cmdname=$1
 		DAMO=$2
 		ODIR=$3
 
@@ -103,7 +105,7 @@ then
 
 		for i in {1..1200}
 		do
-			pid=`pidof $work`
+			pid=`pidof $cmdname`
 			if [ $? -ne 0 ]
 			then
 				break
@@ -112,7 +114,7 @@ then
 			if [ $i -eq 1200 ]
 			then
 				echo "Timeout"
-				killall $work
+				killall $cmdname
 			fi
 			sleep 3
 		done
@@ -132,9 +134,9 @@ then
 			sleep 1
 		done
 	}
-	sudo bash -c "$(declare -f prec_for); prec_for $work $DAMO $ODIR"
+	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $ODIR"
 else
 	echo "Wrong var $var"
-	killall $work
+	killall $cmdname
 	exit 1
 fi
