@@ -84,15 +84,22 @@ do
 	sleep 1
 done
 
+schemes_dir="$EXP_DIR/schemes"
+schemes_dir_for_work="$schemes_dir/$work_category/$work"
+if [ -d "$schemes_dir_for_work" ]
+then
+	schemes_dir="$schemes_dir_for_work"
+fi
+
 if [ "$var" = "rec" ]
 then
 	sudo $DAMO record -o $ODIR/damon.data $pid
 elif [ "$var" = "ethp" ]
 then
-	sudo $DAMO schemes -c $EXP_DIR/schemes/ethp.damos $pid
+	sudo $DAMO schemes -c "$schemes_dir/ethp.damos" $pid
 elif [ "$var" = "prcl" ]
 then
-	sudo $DAMO schemes -c $EXP_DIR/schemes/prcl.damos $pid
+	sudo $DAMO schemes -c "$schemes_dir/prcl.damos" $pid
 elif [ "$var" = "prec" ]
 then
 	function prec_for {
