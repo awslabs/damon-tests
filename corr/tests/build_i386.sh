@@ -14,8 +14,9 @@ make O=$ODIR ARCH=i386 allnoconfig
 echo 'CONFIG_PAGE_IDLE_FLAG=y' >> $ODIR/.config
 echo 'CONFIG_DAMON=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PRIMITIVES=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PRIMITIVES_KUNIT_TEST=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_VADDR=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_PADDR=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_VADDR_KUNIT_TEST=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
 
