@@ -85,21 +85,21 @@ do
 done
 
 schemes_dir="$EXP_DIR/schemes"
-schemes_dir_for_work="$schemes_dir/$work_category/$work"
-if [ -d "$schemes_dir_for_work" ]
-then
-	schemes_dir="$schemes_dir_for_work"
-fi
+custom_schemes_dir="$schemes_dir/$work_category/$work"
 
 if [ "$var" = "rec" ]
 then
 	sudo $DAMO record -o $ODIR/damon.data $pid
-elif [ "$var" = "ethp" ]
+elif [ "$var" == "ethp" ] || [ "$var" == "prcl" ]
 then
-	sudo $DAMO schemes -c "$schemes_dir/ethp.damos" $pid
-elif [ "$var" = "prcl" ]
-then
-	sudo $DAMO schemes -c "$schemes_dir/prcl.damos" $pid
+	if [ -f "$custom_schemes_dir/$var.damos" ]
+	then
+		scheme="$custom_schemes_dir/$var.damos"
+	else
+		scheme="$schemes_dir/$var.damos"
+	fi
+	echo "apply scheme '$scheme'"
+	sudo $DAMO schemes -c "$scheme" $pid
 elif [ "$var" = "prec" ]
 then
 	function prec_for {
