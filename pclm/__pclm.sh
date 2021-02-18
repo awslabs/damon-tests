@@ -2,10 +2,10 @@
 
 # Getting started:
 #
-#     (terminal A) sudo ./startvm.sh --monitor src damon.disk
-#     (terminal B) sudo ./startvm.sh --monitor dst --sshport 2252 \
-#                                    --incoming mig damon.disk
-#     (terminal C) ./pcml.sh src dst mig
+#     (terminal A) cd ~/qemu_tools; sudo ./startvm.sh --monitor src damon.disk
+#     (terminal B) cd ~/qemu_tools; sudo ./startvm.sh --monitor dst \
+#                                    --incoming mig --sshport 2252 damon.disk
+#     (terminal C) ./__pclm.sh ~/qemu_tools/ src dst mig
 
 if [ $# -ne 4 ]
 then
