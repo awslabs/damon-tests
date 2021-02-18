@@ -21,8 +21,6 @@ mig_sock="$4"
 
 qemu_cmd="$qemu_tools/cmd.sh"
 
-bindir=$(dirname $0)
-
 if ! sudo "$qemu_cmd" "$mon_src" "info status" | \
 	grep -q "VM status: running"
 then
