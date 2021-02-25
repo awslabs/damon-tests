@@ -7,10 +7,10 @@
 #                                    --incoming mig --sshport 2252 damon.disk
 #     (terminal C) ./__pclm.sh ~/qemu_tools/ src dst mig
 
-if [ $# -ne 4 ]
+if [ $# -lt 4 ]
 then
 	echo "USage: $0 <qemu_tools> <src monitor> <dst monitor> \
-		<migration socket>"
+		<migration socket> [<workload> <wait_time>]"
 	exit 1
 fi
 
@@ -18,6 +18,8 @@ qemu_tools="$1"
 mon_src="$2"
 mon_dst="$3"
 mig_sock="$4"
+workload="$5"
+wait_time="$6"
 
 qemu_cmd="$qemu_tools/cmd.sh"
 
@@ -38,6 +40,17 @@ fi
 sudo "$qemu_cmd" "$mon_src" "migrate_set_capability postcopy-ram on"
 sudo "$qemu_cmd" "$mon_dst" "migrate_set_capability postcopy-ram on"
 sudo "$qemu_cmd" "$mon_dst" "migrate_set_capability postcopy-blocktime on"
+
+if [ ! -z "$workload" ]
+then
+	while ! ssh -p 2242 damon@localhost date
+	do
+		echo "wait until the guest boot"
+		sleep 5
+	done
+	ssh -p 2242 damon@localhost "$workload" &
+	sleep "$wait_time"
+fi
 
 sudo "$qemu_cmd" "$mon_src" "migrate -d unix:$mig_sock"
 sudo "$qemu_cmd" "$mon_src" "migrate_start_postcopy"
