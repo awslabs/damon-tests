@@ -50,4 +50,23 @@ do
 		echo "record file for $pattern is wrong"
 		exit 1
 	fi
+
+	if [ "$pattern" == "stairs" ]
+	then
+		min_wss=9000000
+		max_wss=11000000
+	elif [ "$pattern" == "zigzag" ]
+	then
+		min_wss=90000000
+		max_wss=110000000
+	fi
+	wss=$($DAMO report wss --range 50 51 1 | grep -e "^50")
+	wss=$(echo $wss | awk '{print $2}')
+	if [ "$wss" -lt "$min_wss" ] || [ "$wss" -gt "$max_wss" ]
+	then
+		echo "unexpected wss for $pattern: $wss"
+		exit 1
+	else
+		echo "expected wss for $pattern: $min_wss <= $wss <= $max_wss"
+	fi
 done
