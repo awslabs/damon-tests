@@ -1,9 +1,17 @@
 #!/bin/bash
 
 # exp: perf
-# variance: (parsec3|splash2x|ycsb)/<workload>/(orig|thp|ethp|rec|prec)
+# variance: (parsec3|splash2x|ycsb|mysqld)/<workload>/(orig|thp|ethp|rec|prec)
 #     For ycsb, <workload> is the zipfian alpha value.
+#     For mysqld, <workload> is (read|write|oltp)-<runtime in seconds>
 # $1: <...>/results/<exp>/<variance>/0(0-9)
+
+kill_damo_after() {
+	seconds=$1
+	sleep "$seconds"
+	pid=$(ps -ef | grep damo -m 1 | awk '{print $2}')
+	sudo kill 9 "$pid"
+}
 
 if [ $# -ne 1 ]
 then
@@ -34,6 +42,14 @@ elif [ "$work_category" = "ycsb" ]
 then
 	RUN_CMD="$SILO_DBTEST --bench ycsb --verbose --scale-factor 1000 \
 		--runtime 60 -o --zipfian-alpha=$work"
+elif [ "$work_category" = "mysql" ]
+then
+	if [ "$var" = "prec" ]
+	then
+		echo "prec for mysql is not supported yet"
+		exit 1
+	fi
+	RUN_CMD="echo \"mysqld $work\""
 else
 	echo "Unsupported work category $work_category"
 	exit 1
@@ -67,6 +83,9 @@ then
 elif [ "$work_category" = "ycsb" ]
 then
 	cmdname="dbtest"
+elif [ "$work_category" = "mysql" ]
+then
+	cmdname="mysqld"
 fi
 
 for i in {1..10}
@@ -83,6 +102,12 @@ do
 	echo 'wait for pidof '$cmdname
 	sleep 1
 done
+
+if [ "$work_category" = "mysql" ]
+then
+	runtime=$(echo $work | awk -F'-' '{print $2}')
+	kill_damo_after "$runtime"
+fi
 
 schemes_dir="$EXP_DIR/schemes"
 custom_schemes_dir="$schemes_dir/$work_category/$work"
