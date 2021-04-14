@@ -9,6 +9,9 @@ then
 elif [ "$work_category" = "ycsb" ]
 then
 	work="dbtest"
+elif [ "$work_category" = "mysql" ]
+then
+	work="mysqld"
 fi
 
 while true;
