@@ -9,7 +9,7 @@
 kill_damo_after() {
 	seconds=$1
 	sleep "$seconds"
-	pid=$(ps -ef | grep damo -m 1 | awk '{print $2}')
+	pid=$(ps -ef | grep "damo/damo" -m 1 | awk '{print $2}')
 	sudo kill 9 "$pid"
 }
 
@@ -23,7 +23,7 @@ ODIR=$1
 
 PARSEC_RUN="$HOME/parsec3_on_ubuntu/run.sh"
 SILO_DBTEST="$HOME/silo/out-perf.masstree/benchmarks/dbtest"
-DAMO="$HOME/linux/tools/damon/damo"
+DAMO="$HOME/damo/damo"
 LBX="$HOME/lazybox"
 
 EXP_DIR="$ODIR/../../../../../../perf/"
@@ -106,7 +106,7 @@ done
 if [ "$work_category" = "mysql" ]
 then
 	runtime=$(echo $work | awk -F'-' '{print $2}')
-	kill_damo_after "$runtime"
+	kill_damo_after "$runtime" &
 fi
 
 schemes_dir="$EXP_DIR/schemes"
