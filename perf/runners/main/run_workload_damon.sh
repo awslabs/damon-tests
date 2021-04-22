@@ -167,6 +167,56 @@ then
 		done
 	}
 	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $ODIR"
+elif [ "$var" = "pprcl" ]
+then
+	function prec_for {
+		cmdname=$1
+		DAMO=$2
+		scheme=$3
+
+		$DAMO schemes -c $scheme paddr &
+		damo_pid=$!
+
+		for i in {1..1200}
+		do
+			pid=`pidof $cmdname`
+			if [ $? -ne 0 ]
+			then
+				break
+			fi
+
+			if [ $i -eq 1200 ]
+			then
+				echo "Timeout"
+				killall $cmdname
+			fi
+			sleep 3
+		done
+
+		kill -SIGINT "$damo_pid"
+
+		i=0
+		while true
+		do
+			on=$(cat /sys/kernel/debug/damon/monitor_on)
+			if [ "$on" = "off" ]
+			then
+				break
+			fi
+			echo "wait for monitor off $i seconds"
+			i=$((i + 1))
+			sleep 1
+		done
+	}
+
+	if [ -f "$custom_schemes_dir/$var.damos" ]
+	then
+		scheme="$custom_schemes_dir/$var.damos"
+	else
+		scheme="$schemes_dir/$var.damos"
+	fi
+	echo "apply scheme '$scheme'"
+	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $scheme"
 else
 	echo "Wrong var $var"
 	killall $cmdname
