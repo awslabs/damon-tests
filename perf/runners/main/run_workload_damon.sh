@@ -115,7 +115,7 @@ custom_schemes_dir="$schemes_dir/$work_category/$work"
 if [ "$var" = "rec" ]
 then
 	sudo $DAMO record -o $ODIR/damon.data $pid
-elif [ "$var" == "ethp" ] || [ "$var" == "prcl" ]
+elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]]
 then
 	if [ -f "$custom_schemes_dir/$var.damos" ]
 	then
