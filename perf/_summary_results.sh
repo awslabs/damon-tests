@@ -81,16 +81,20 @@ do
 done
 printf "\n"
 
-printf "average"
 orig_average=$(awk -v sum="${sums[orig]}" -v nr="$nr_workloads" \
 	'BEGIN {print (sum / nr)}')
+printf "%s\t%.3f" "average" $orig_average
 for var in $vars
 do
-	if [ "$var" = "orig" ]; then continue; fi
+	if [ "$var" = "orig" ]
+	then
+		continue
+	fi
+
 	average=$(awk -v sum="${sums[$var]}" -v nr="$nr_workloads" \
 		'BEGIN {print (sum / nr)}')
 	overhead=`awk -v a="$orig_average" -v b="$average" \
 		'BEGIN {print (b / a - 1) * 100}'`
-	printf "\t%.3f" $overhead
+	printf "\t%.3f\t(%.2f)" $average $overhead
 done
 printf "\n"
