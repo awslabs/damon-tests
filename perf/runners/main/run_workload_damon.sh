@@ -6,25 +6,22 @@
 #     For mysqld, <workload> is (read|write|oltp)-<runtime in seconds>
 # $1: <...>/results/<exp>/<variance>/0(0-9)
 
-kill_damo_after() {
-	seconds=$1
-	monitor_on_file="/sys/kernel/debug/damon/monitor_on"
-	sleep "$seconds"
-	echo off | sudo tee "$monitor_on_file" > /dev/null
-}
-
 if [ $# -ne 1 ]
 then
 	echo "Usage: $0 <output dir>"
 	exit 1
 fi
 
+BINDIR=$(dirname "$0")
 ODIR=$1
 
+DAMO_WRAPPER="$BINDIR/_run_damo.sh"
 PARSEC_RUN="$HOME/parsec3_on_ubuntu/run.sh"
 SILO_DBTEST="$HOME/silo/out-perf.masstree/benchmarks/dbtest"
 DAMO="$HOME/damo/damo"
 LBX="$HOME/lazybox"
+scheme=""
+timeout=3600
 
 EXP_DIR="$ODIR/../../../../../../perf/"
 var=$(basename $(dirname $ODIR))
@@ -44,8 +41,8 @@ then
 		--runtime 60 -o --zipfian-alpha=$work"
 elif [ "$work_category" = "mysql" ]
 then
-	runtime=$(echo $work | awk -F'-' '{print $2}')
-	RUN_CMD="sleep \"$runtime\""
+	timeout=$(echo $work | awk -F'-' '{print $2}')
+	RUN_CMD="sleep \"$timeout\""
 else
 	echo "Unsupported work category $work_category"
 	exit 1
@@ -99,18 +96,13 @@ do
 	sleep 1
 done
 
-if [ "$work_category" = "mysql" ]
-then
-	runtime=$(echo $work | awk -F'-' '{print $2}')
-	kill_damo_after "$runtime" &
-fi
-
 schemes_dir="$EXP_DIR/schemes"
 custom_schemes_dir="$schemes_dir/$work_category/$work"
 
 if [ "$var" = "rec" ]
 then
-	sudo $DAMO record -o $ODIR/damon.data $pid
+	sudo "$DAMO_WRAPPER" \
+		"$DAMO" "record" "$ODIR/damon.data" "" "$pid" "$pid" "$timeout"
 elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]]
 then
 	if [ -f "$custom_schemes_dir/$var.damos" ]
@@ -120,96 +112,14 @@ then
 		scheme="$schemes_dir/$var.damos"
 	fi
 	echo "apply scheme '$scheme'"
-	sudo $DAMO schemes -c "$scheme" $pid
+	sudo "$DAMO_WRAPPER" \
+		"$DAMO" "schemes" "" "$scheme" "$pid" "$pid" "$timeout"
 elif [ "$var" = "prec" ]
 then
-	if [ "$work_category" = "mysql" ]
-	then
-		sudo $DAMO record -o $ODIR/damon.data paddr
-		exit
-	fi
-	function prec_for {
-		cmdname=$1
-		DAMO=$2
-		ODIR=$3
-
-		$DAMO record -o $ODIR/damon.data paddr &
-		damo_pid=$!
-
-		for i in {1..1200}
-		do
-			pid=`pidof $cmdname`
-			if [ $? -ne 0 ]
-			then
-				break
-			fi
-
-			if [ $i -eq 1200 ]
-			then
-				echo "Timeout"
-				killall $cmdname
-			fi
-			sleep 3
-		done
-
-		kill -SIGINT "$damo_pid"
-
-		i=0
-		while true
-		do
-			on=$(cat /sys/kernel/debug/damon/monitor_on)
-			if [ "$on" = "off" ]
-			then
-				break
-			fi
-			echo "wait for monitor off $i seconds"
-			i=$((i + 1))
-			sleep 1
-		done
-	}
-	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $ODIR"
+	sudo "$DAMO_WRAPPER" \
+		"$DAMO" "record" "$ODIR/damon.data" "" paddr "$pid" "$timeout"
 elif [ "$var" = "pprcl" ]
 then
-	function pprcl_for {
-		cmdname=$1
-		DAMO=$2
-		scheme=$3
-
-		$DAMO schemes -c $scheme paddr &
-		damo_pid=$!
-
-		for i in {1..1200}
-		do
-			pid=`pidof $cmdname`
-			if [ $? -ne 0 ]
-			then
-				break
-			fi
-
-			if [ $i -eq 1200 ]
-			then
-				echo "Timeout"
-				killall $cmdname
-			fi
-			sleep 3
-		done
-
-		kill -SIGINT "$damo_pid"
-
-		i=0
-		while true
-		do
-			on=$(cat /sys/kernel/debug/damon/monitor_on)
-			if [ "$on" = "off" ]
-			then
-				break
-			fi
-			echo "wait for monitor off $i seconds"
-			i=$((i + 1))
-			sleep 1
-		done
-	}
-
 	if [ -f "$custom_schemes_dir/$var.damos" ]
 	then
 		scheme="$custom_schemes_dir/$var.damos"
@@ -217,13 +127,8 @@ then
 		scheme="$schemes_dir/$var.damos"
 	fi
 	echo "apply scheme '$scheme'"
-	if [ "$work_category" = "mysql" ]
-	then
-		sudo $DAMO schemes -c "$scheme" paddr
-		exit
-	fi
-
-	sudo bash -c "$(declare -f pprcl_for); pprcl_for $cmdname $DAMO $scheme"
+	sudo "$DAMO_WRAPPER" \
+		"$DAMO" "schemes" "" "$scheme" paddr "$pid" "$timeout"
 else
 	echo "Wrong var $var"
 	killall $cmdname
