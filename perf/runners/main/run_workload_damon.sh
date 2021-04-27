@@ -49,7 +49,8 @@ then
 		echo "prec for mysql is not supported yet"
 		exit 1
 	fi
-	RUN_CMD="echo \"mysqld $work\""
+	runtime=$(echo $work | awk -F'-' '{print $2}')
+	RUN_CMD="sleep \"$runtime\""
 else
 	echo "Unsupported work category $work_category"
 	exit 1
