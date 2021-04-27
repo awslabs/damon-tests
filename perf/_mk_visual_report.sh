@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DAMO=$HOME/linux/tools/damon/damo
+DAMO=$HOME/damo/damo
 
 if [ $# -ne 2 ]
 then
