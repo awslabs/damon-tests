@@ -217,6 +217,12 @@ then
 		scheme="$schemes_dir/$var.damos"
 	fi
 	echo "apply scheme '$scheme'"
+	if [ "$work_category" = "mysql" ]
+	then
+		sudo $DAMO schemes -c "$scheme" paddr
+		exit
+	fi
+
 	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $scheme"
 else
 	echo "Wrong var $var"
