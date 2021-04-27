@@ -170,7 +170,7 @@ then
 	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $ODIR"
 elif [ "$var" = "pprcl" ]
 then
-	function prec_for {
+	function pprcl_for {
 		cmdname=$1
 		DAMO=$2
 		scheme=$3
@@ -223,7 +223,7 @@ then
 		exit
 	fi
 
-	sudo bash -c "$(declare -f prec_for); prec_for $cmdname $DAMO $scheme"
+	sudo bash -c "$(declare -f pprcl_for); pprcl_for $cmdname $DAMO $scheme"
 else
 	echo "Wrong var $var"
 	killall $cmdname
