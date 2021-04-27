@@ -38,8 +38,10 @@ do
 done
 printf "\n"
 
+nr_workloads=0
 for w in $workloads
 do
+	nr_workloads=$((nr_workloads + 1))
 	orig_d=$ODIR_ROOT/$w/orig/stat/$stat
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
 	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
@@ -76,5 +78,19 @@ do
 	overhead=`awk -v a="$orig_sum" -v b="$sum" \
 		'BEGIN {print (b / a - 1) * 100}'`
 	printf "\t%.3f\t(%.2f)" $sum $overhead
+done
+printf "\n"
+
+printf "average"
+orig_average=$(awk -v sum="${sums[orig]}" -v nr="$nr_workloads" \
+	'BEGIN {print (sum / nr)}')
+for var in $vars
+do
+	if [ "$var" = "orig" ]; then continue; fi
+	average=$(awk -v sum="${sums[$var]}" -v nr="$nr_workloads" \
+		'BEGIN {print (sum / nr)}')
+	overhead=`awk -v a="$orig_average" -v b="$average" \
+		'BEGIN {print (b / a - 1) * 100}'`
+	printf "\t%.3f" $overhead
 done
 printf "\n"
