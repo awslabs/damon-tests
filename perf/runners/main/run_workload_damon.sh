@@ -44,11 +44,6 @@ then
 		--runtime 60 -o --zipfian-alpha=$work"
 elif [ "$work_category" = "mysql" ]
 then
-	if [ "$var" = "prec" ]
-	then
-		echo "prec for mysql is not supported yet"
-		exit 1
-	fi
 	runtime=$(echo $work | awk -F'-' '{print $2}')
 	RUN_CMD="sleep \"$runtime\""
 else
@@ -128,6 +123,11 @@ then
 	sudo $DAMO schemes -c "$scheme" $pid
 elif [ "$var" = "prec" ]
 then
+	if [ "$work_category" = "mysql" ]
+	then
+		sudo $DAMO record -o $ODIR/damon.data paddr
+		exit
+	fi
 	function prec_for {
 		cmdname=$1
 		DAMO=$2
