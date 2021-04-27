@@ -8,9 +8,9 @@
 
 kill_damo_after() {
 	seconds=$1
+	monitor_on_file="/sys/kernel/debug/damon/monitor_on"
 	sleep "$seconds"
-	pid=$(ps -ef | grep "damo/damo" -m 1 | awk '{print $2}')
-	sudo kill 9 "$pid"
+	echo off | sudo tee "$monitor_on_file" > /dev/null
 }
 
 if [ $# -ne 1 ]
