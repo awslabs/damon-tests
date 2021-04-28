@@ -20,7 +20,7 @@ do
 	workloads+=" splash2x/$w"
 done
 
-vars="orig rec prec thp ethp prcl"
+vars="orig rec prec thp ethp prcl pprcl"
 
 VARIANTS=""
 
