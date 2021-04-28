@@ -25,6 +25,7 @@ stat=$1
 metric=$2
 
 declare -A sums
+declare -A overhead_sums
 
 printf "%s" $metric
 for v in $vars
@@ -59,6 +60,8 @@ do
 			'BEGIN {print (b / a - 1) * 100}'`
 		sums[$var]=`awk -v a="${sums[$var]}" -v b="$number" \
 			'BEGIN {print a + b}'`
+		overhead_sums[$var]=`awk -v a="${overhead_sums[$var]}" -v b="$overhead" \
+			'BEGIN {print a + b}'`
 
 		printf "\t%.3f\t(%.2f)" $number $overhead
 	done
@@ -91,10 +94,11 @@ do
 		continue
 	fi
 
-	average=$(awk -v sum="${sums[$var]}" -v nr="$nr_workloads" \
+	number_average=$(awk -v sum="${sums[$var]}" -v nr="$nr_workloads" \
 		'BEGIN {print (sum / nr)}')
-	overhead=`awk -v a="$orig_average" -v b="$average" \
-		'BEGIN {print (b / a - 1) * 100}'`
-	printf "\t%.3f\t(%.2f)" $average $overhead
+	overhead_average=$(awk -v sum="${overhead_sums[$var]}" -v nr="$nr_workloads" \
+		'BEGIN {print (sum / nr)}')
+
+	printf "\t%.3f\t(%.2f)" $number_average $overhead_average
 done
 printf "\n"
