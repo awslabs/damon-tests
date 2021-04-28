@@ -1,5 +1,17 @@
 #!/bin/bash
 
+float_add() {
+	awk -v a="$1" -v b="$2" 'BEGIN {print a + b}'
+}
+
+float_overhead() {
+	awk -v nr="$1" -v orig="$2" 'BEGIN {print (nr / orig - 1) * 100}'
+}
+
+float_divide() {
+	awk -v a="$1" -v b="$2" 'BEGIN {print a / b}'
+}
+
 if [ $# -ne 2 ]
 then
 	echo "Usage: $0 <stat> <metric>"
@@ -45,8 +57,7 @@ do
 	nr_workloads=$((nr_workloads + 1))
 	orig_d=$ODIR_ROOT/$w/orig/stat/$stat
 	orig_nr=$(cat $orig_d/$metric | awk '{print $2}')
-	sums[orig]=`awk -v a="${sums[orig]}" -v b="$orig_nr" \
-		'BEGIN {print a + b}'`
+	sums[orig]=$(float_add "${sums[orig]}" "$orig_nr")
 	printf "%s\t%.3f" $w $orig_nr
 	for var in $vars
 	do
@@ -56,12 +67,10 @@ do
 		fi
 		d=$ODIR_ROOT/$w/$var/stat/$stat
 		number=$(cat $d/$metric | awk '{print $2}')
-		overhead=`awk -v a="$orig_nr" -v b="$number" \
-			'BEGIN {print (b / a - 1) * 100}'`
-		sums[$var]=`awk -v a="${sums[$var]}" -v b="$number" \
-			'BEGIN {print a + b}'`
-		overhead_sums[$var]=`awk -v a="${overhead_sums[$var]}" -v b="$overhead" \
-			'BEGIN {print a + b}'`
+		overhead=$(float_overhead "$number" "$orig_nr")
+		sums[$var]=$(float_add "${sums[$var]}" "$number")
+		overhead_sums[$var]=$(float_add \
+			"${overhead_sums[$var]}" "$overhead")
 
 		printf "\t%.3f\t(%.2f)" $number $overhead
 	done
@@ -78,8 +87,7 @@ do
 	fi
 
 	sum=${sums[$var]}
-	overhead=`awk -v a="$orig_sum" -v b="$sum" \
-		'BEGIN {print (b / a - 1) * 100}'`
+	overhead=$(float_overhead "$sum" "$orig_sum")
 	printf "\t%.3f\t(%.2f)" $sum $overhead
 done
 printf "\n"
@@ -94,10 +102,9 @@ do
 		continue
 	fi
 
-	number_average=$(awk -v sum="${sums[$var]}" -v nr="$nr_workloads" \
-		'BEGIN {print (sum / nr)}')
-	overhead_average=$(awk -v sum="${overhead_sums[$var]}" -v nr="$nr_workloads" \
-		'BEGIN {print (sum / nr)}')
+	number_average=$(float_divide "${sums[$var]}" "$nr_workloads")
+	overhead_average=$(float_divide \
+		"${overhead_sums[$var]}" "$nr_workloads")
 
 	printf "\t%.3f\t(%.2f)" $number_average $overhead_average
 done
