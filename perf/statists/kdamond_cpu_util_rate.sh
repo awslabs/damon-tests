@@ -16,7 +16,7 @@ do
 	STATDIR=$ODIR/$stat
 	mkdir -p $STATDIR
 
-	f=kdamond_cpu_util
+	f=kdamond_cpu_util_rate
 	paths=""
 	for d in $SDIR
 	do
