@@ -2,6 +2,7 @@
 
 while :
 do
-	cat /proc/meminfo | grep MemFree >> $1/memfree;
-	sleep 1;
+	grep -m 1 MemFree /proc/meminfo >> "$1/memfree"
+	grep -m 1 nr_free_pages /proc/vmstat >> "$1/nr_free_pages"
+	sleep 1
 done
