@@ -14,21 +14,27 @@ fi
 
 $BINDIR/_plot_numbers.sh $REPORT_DIR/plots
 
+echo "_plot_numbers done"
+
 $BINDIR/_pr_report.sh | $FMT > $REPORT_DIR/report.txt
 
-for metric in runtime memused.avg rss.avg
+echo "_pr_report done"
+
+for metric in runtime kdamond_cpu_util memused.avg rss.avg
 do
 	$BINDIR/_summary_results.sh avg $metric | $FMT
 	echo
 	echo
 done
 
+echo "_summary_results done"
+
 HTMLDIR=$REPORT_DIR/html/
 mkdir -p $HTMLDIR
 HTML=$HTMLDIR/index.html
 echo > $HTML
 
-for metric in runtime memused.avg rss.avg
+for metric in runtime kdamond_cpu_util memused.avg rss.avg
 do
 	echo "<img src=../plots/$metric.png />" >> $HTML
 done

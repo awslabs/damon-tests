@@ -5,7 +5,12 @@ float_add() {
 }
 
 float_overhead() {
-	awk -v nr="$1" -v orig="$2" 'BEGIN {print (nr / orig - 1) * 100}'
+	awk -v nr="$1" -v orig="$2" 'BEGIN {
+		if (orig == 0)
+			print nr
+		else
+			print (nr / orig - 1) * 100
+	}'
 }
 
 float_divide() {
