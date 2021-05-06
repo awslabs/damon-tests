@@ -96,7 +96,7 @@ orig_average=$(float_divide "${sums[orig]}" "$nr_workloads")
 for var in $vars
 do
 	if [ "$var" = "orig" ]; then continue; fi
-	average=$(float_divide "${sums[$var]}" nr="$nr_workloads")
+	average=$(float_divide "${sums[$var]}" "$nr_workloads")
 	overhead=$(float_overhead "$average" "$orig_average")
 	printf "\t%.3f" $overhead
 done
