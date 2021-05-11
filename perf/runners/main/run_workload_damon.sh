@@ -103,7 +103,7 @@ if [ "$var" = "rec" ]
 then
 	sudo "$DAMO_WRAPPER" \
 		"$DAMO" "record" "$ODIR/damon.data" "" "$pid" "$pid" "$timeout"
-elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]]
+elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]] || [ "$var" == "darc" ]
 then
 	if [ -f "$custom_schemes_dir/$var.damos" ]
 	then
