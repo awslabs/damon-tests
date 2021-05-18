@@ -20,7 +20,7 @@ $BINDIR/_pr_report.sh | $FMT > $REPORT_DIR/report.txt
 
 echo "_pr_report done"
 
-for metric in runtime kdamond_cpu_util memused.avg rss.avg
+for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
 do
 	$BINDIR/_summary_results.sh avg $metric | $FMT
 	echo
@@ -34,7 +34,7 @@ mkdir -p $HTMLDIR
 HTML=$HTMLDIR/index.html
 echo > $HTML
 
-for metric in runtime kdamond_cpu_util memused.avg rss.avg
+for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
 do
 	echo "<img src=../plots/$metric.png />" >> $HTML
 done
