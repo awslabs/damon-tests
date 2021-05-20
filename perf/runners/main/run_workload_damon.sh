@@ -118,7 +118,7 @@ elif [ "$var" = "prec" ]
 then
 	sudo "$DAMO_WRAPPER" \
 		"$DAMO" "record" "$ODIR/damon.data" "" paddr "$pid" "$timeout"
-elif [ "$var" = "pprcl" ]
+elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]]
 then
 	if [ -f "$custom_schemes_dir/$var.damos" ]
 	then
