@@ -19,6 +19,8 @@ echo 'CONFIG_DAMON_PGIDLE=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_VADDR_KUNIT_TEST=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_RECLAIM=y' >> $ODIR/.config
 
+make O=$ODIR ARCH=i386 olddefconfig
 make O=$ODIR ARCH=i386 -j`grep -e '^processor' /proc/cpuinfo | wc -l`
 exit $?

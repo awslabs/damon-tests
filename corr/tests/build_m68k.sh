@@ -30,6 +30,7 @@ echo 'CONFIG_DAMON_PGIDLE=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_VADDR_KUNIT_TEST=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
 echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
+echo 'CONFIG_DAMON_RECLAIM=y' >> $ODIR/.config
 
 export COMPILER_INSTALL_PATH=$HOME/0day
 export GCC_VERSION=7.5.0
