@@ -10,12 +10,8 @@ fi
 
 if [ ! -d ./damo ]
 then
-	git clone https://github.com/awslabs/damo
-	if [ ! -d ./damo ]
-	then
-		echo "damo clone failed"
-		exit $ksft_skip
-	fi
+	echo "damo not installed?"
+	exit "$ksft_skip"
 fi
 
 ./damo/tests/run.sh

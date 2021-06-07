@@ -12,20 +12,8 @@ fi
 
 if [ ! -d ./masim ]
 then
-	git clone https://github.com/sjp38/masim
-	if [ ! -d ./masim ]
-	then
-		echo "masim clone failed"
-		exit $ksft_skip
-	fi
-
-	make -C masim -s
-
-	if [ ! -f masim/masim ]
-	then
-		echo "masim not built"
-		exit $ksft_skip
-	fi
+	echo "masim not installed?"
+	exit $ksft_skip
 fi
 
 ETHP=$TEST_DIR/ethp.damos
@@ -34,7 +22,13 @@ echo "# format is: <min/max size> <min/max frequency (0-100)> <min/max age> <act
 2M      max    5       max     1s      max    hugepage
 2M      max    min     5       1s      max    nohugepage" > $ETHP
 
-DAMO=../../../damon/damo
+DAMO=./damo/damo
+
+if [ ! -f "$DAMO" ]
+then
+	echo "DAMO not installed?"
+	exit $ksft_skip
+fi
 
 for pattern in stairs zigzag
 do

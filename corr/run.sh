@@ -17,7 +17,11 @@ fi
 ksft_dir=tools/testing/selftests/damon-tests
 ksft_abs_path=$LINUX_DIR/$ksft_dir
 
-$BINDIR/_install.sh $LINUX_DIR
+if ! $BINDIR/_install.sh $LINUX_DIR
+then
+	echo "install failed"
+	exit 1
+fi
 
 # run
 (

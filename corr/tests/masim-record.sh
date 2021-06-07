@@ -12,20 +12,8 @@ fi
 
 if [ ! -d ./masim ]
 then
-	git clone https://github.com/sjp38/masim
-	if [ ! -d ./masim ]
-	then
-		echo "masim clone failed"
-		exit $ksft_skip
-	fi
-
-	make -C masim -s
-
-	if [ ! -f masim/masim ]
-	then
-		echo "masim not built"
-		exit $ksft_skip
-	fi
+	echo "masim not installed?"
+	exit "$ksft_skip"
 fi
 
 ETHP=$TEST_DIR/ethp.damos
@@ -34,7 +22,13 @@ echo "# format is: <min/max size> <min/max frequency (0-100)> <min/max age> <act
 2M      null    5       null    1s      null    hugepage
 2M      null    null    5       1s      null    nohugepage" > $ETHP
 
-DAMO=../../../damon/damo
+DAMO=./damo/damo
+
+if [ ! -f $DAMO ]
+then
+	echo "damo not installed?"
+	exit "$ksft_skip"
+fi
 
 for pattern in stairs zigzag
 do
@@ -60,8 +54,8 @@ do
 		min_wss=90000000
 		max_wss=110000000
 	fi
-	wss=$($DAMO report wss --range 50 51 1 | grep -e "^50")
-	wss=$(echo $wss | awk '{print $2}')
+	wss=$($DAMO report wss --raw_number --range 50 51 1 | \
+		grep -e "^ 50" | awk '{print $2}')
 	if [ "$wss" -lt "$min_wss" ] || [ "$wss" -gt "$max_wss" ]
 	then
 		echo "unexpected wss for $pattern: $wss"
