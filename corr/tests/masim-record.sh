@@ -38,11 +38,14 @@ do
 		echo "damon.data for $pattern not found"
 		exit 1
 	fi
-	python3 ../damon/_chk_record.py damon.data
-	if [ $? -ne 0 ]
+	if [ -f ../damon/_chk_record.py ]
 	then
-		echo "record file for $pattern is wrong"
-		exit 1
+		python3 ../damon/_chk_record.py damon.data
+		if [ $? -ne 0 ]
+		then
+			echo "record file for $pattern is wrong"
+			exit 1
+		fi
 	fi
 
 	if [ "$pattern" == "stairs" ]
