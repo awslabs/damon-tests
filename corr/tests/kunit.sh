@@ -23,4 +23,10 @@ fi
 
 # we are in tools/testing/selftests/damon-tests/
 cd ../../../../
+
+# After paddr.c introduction, DAMON_DEBUGFS depends on DAMON_PADDR
+if [ -f "./mm/damon/paddr.c" ]
+then
+	echo "CONFIG_DAMON_PADDR=y" >> "$KUNITCONFIG"
+fi
 ./tools/testing/kunit/kunit.py run --build_dir $KUNIT_BDIR
