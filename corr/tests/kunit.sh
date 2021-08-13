@@ -4,6 +4,7 @@ TEST_DIR=$PWD
 KUNIT_BDIR=$TEST_DIR/kunit.out
 KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
 
+rm -fr "$KUNIT_BDIR"
 mkdir -p $KUNIT_BDIR
 
 if [ ! -f $KUNITCONFIG ]; then
