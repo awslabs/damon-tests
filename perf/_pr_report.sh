@@ -9,7 +9,7 @@ echo
 
 for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
 do
-	$BINDIR/_summary_results.sh avg $metric
+	$BINDIR/_summary_results.sh avg $metric | ~/lazybox/scripts/report/fmt_tbl.py
 	echo
 	echo
 done
