@@ -41,7 +41,7 @@ for region in $regions
 do
 	saddr=`echo $region | awk -F'-' '{print $1}' | sed 's/^0*//'`
 	eaddr=`echo $region | awk -F'-' '{print $2}' | sed 's/^0*//'`
-	addr='--amin '$saddr' --amax '$eaddr
+	addr='--address_range '$saddr' '$eaddr
 	$DAMO report heats $in $addr --heatmap $report_dir/heatmap.$idx.png
 	echo "<img src=heatmap.$idx.png />" >> $html
 	idx=$(($idx + 1))
