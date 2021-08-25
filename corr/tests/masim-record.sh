@@ -30,6 +30,21 @@ then
 	exit "$ksft_skip"
 fi
 
+thp_file="/sys/kernel/mm/transparent_hugepage/enabled"
+if [ -f "$thp_file" ]
+then
+	thps="always madvise"
+else
+	thps=""
+fi
+
+for thp in $thps
+do
+	if [ ! "$thp" = "" ]
+	then
+		echo "$thp" > "$thp_file"
+	fi
+
 for pattern in stairs zigzag
 do
 	$DAMO record "./masim/masim masim/configs/$pattern.cfg"
@@ -67,3 +82,5 @@ do
 		echo "$pattern: expected wss ($min_wss <= $wss <= $max_wss)"
 	fi
 done
+
+done	# thps
