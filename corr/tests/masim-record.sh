@@ -42,6 +42,7 @@ for thp in $thps
 do
 	if [ ! "$thp" = "" ]
 	then
+		echo "set thp $thp"
 		echo "$thp" > "$thp_file"
 	fi
 
