@@ -61,9 +61,9 @@ do
 		grep -e "^ 50" | awk '{print $2}')
 	if [ "$wss" -lt "$min_wss" ] || [ "$wss" -gt "$max_wss" ]
 	then
-		echo "unexpected wss for $pattern: $wss"
+		echo "$pattern: expected wss in [$min_wss, $max_wss] but $wss"
 		exit 1
 	else
-		echo "expected wss for $pattern: $min_wss <= $wss <= $max_wss"
+		echo "$pattern: expected wss ($min_wss <= $wss <= $max_wss)"
 	fi
 done
