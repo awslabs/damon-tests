@@ -65,8 +65,14 @@ do
 
 	if [ "$pattern" == "stairs" ]
 	then
-		min_wss=9000000
-		max_wss=11000000
+		if [ "$thp" = "always" ]
+		then
+			min_wss=7000000
+			max_wss=13000000
+		else
+			min_wss=9000000
+			max_wss=11000000
+		fi
 	elif [ "$pattern" == "zigzag" ]
 	then
 		min_wss=90000000
