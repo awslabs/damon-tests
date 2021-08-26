@@ -16,12 +16,6 @@ then
 	exit "$ksft_skip"
 fi
 
-ETHP=$TEST_DIR/ethp.damos
-echo "# format is: <min/max size> <min/max frequency (0-100)> <min/max age> <action>
-
-2M      null    5       null    1s      null    hugepage
-2M      null    null    5       1s      null    nohugepage" > $ETHP
-
 DAMO=./damo/damo
 
 if [ ! -f $DAMO ]
