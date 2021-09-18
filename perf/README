@@ -5,9 +5,11 @@ different kernel configurations.  The configurations are as below:
 
     orig	Original kernel running THP with 'madvise()' enable policy
     rec		Kernel running DAMON with record option for the workloads
+    prec	Kernel running DAMON with record option for the system
     thp		Original kernel running THP with 'always' enable policy
     ethp	Kernel running 'efficient THP' operation scheme.
-    prcl	Kernel running 'proactive reclamation' operation scheme.
+    prcl	Kernel running 'proactive reclamation' operation scheme for the workloads.
+    pprcl	Kernel running 'proactive reclamation' operation scheme for the system.
 
 The workloads are:
 
@@ -24,8 +26,8 @@ Pre-requisites
 lazybox
 -------
 
-The tests are using lazybox[1], a toolset for various cases.  You should place
-it at '$HOME/lazybox'.  For example:
+The tests are using lazybox[1].  You should place it at '$HOME/lazybox'.  For
+example, you can:
 
     $ cd $HOME; git clone https://github.com/sjp38/lazybox
 
@@ -56,12 +58,13 @@ install PARSEC3 and SPLASH-2X workloads.  For example, if you are on Ubuntu
 silo
 ----
 
-The tests use variant of YCSB-A workload that implemented on a DB storage
+The tests use a variant of YCSB-A workload that implemented on a DB storage
 system, silo[1].  The implementation uses objects smaller than the original
 YCSB and do uniformly distributed requests, while the original YCSB uses
 a zipfian distribution with alpha value 0.99.  To test DAMON against more
 original-like YCSB workloads with various access patterns, users should install
-silo at '$HOME/silo' with 'patches/silo.patch'.  For example:
+silo at '$HOME/silo' with 'patches/silo.patch'.  For example, assuming
+'$DAMON_TESTS' contains the place of 'damon-tests' directory:
 
     $ cd $HOME; git clone https://github.com/stephentu/silo.git
     $ cd silo; git am $DAMON_TESTS/perf/patches/silo.patch
