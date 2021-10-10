@@ -23,7 +23,7 @@ Pre-requisites
 ==============
 
 The kernel containing the version of the DAMON you want to test should be
-running and the DAMON debugfs interface should be enabled.  Envrionment
+running and the DAMON debugfs interface should be enabled.  Environment
 variable named `LINUX_DIR` should point to your kernel source code directory.
 If the variable is not set, it defaults to `$HOME/linux`.
 
@@ -70,15 +70,17 @@ file under your home directory.
 build_i386
 ----------
 
-Test i386 cross build for a previous build failure, which reported by kbuild
-robot[1].
+Test i386 cross build for a previous build failure, which was reported by
+kbuild robot[1].
 
 
 build_m68k
 ----------
 
-Test m68k cross build for a previous build failure, which reported by kbuild
-robot[2].
+Test m68k cross build for a previous build failure, which was reported by
+kbuild robot[2].
 
+```
 [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
 [2] https://lore.kernel.org/linux-mm/202002130710.3P1Y98f7%25lkp@intel.com/
+```
