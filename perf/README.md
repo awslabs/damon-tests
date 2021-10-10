@@ -58,9 +58,9 @@ install PARSEC3 and SPLASH-2X workloads.  For example, if you are on Ubuntu
 silo
 ----
 
-The tests use a variant of YCSB-A workload that implemented on a DB storage
+The tests use a variant of YCSB-A workload which is implemented on a DB storage
 system, silo[1].  The implementation uses objects smaller than the original
-YCSB and do uniformly distributed requests, while the original YCSB uses
+YCSB and does uniformly distributed requests, while the original YCSB uses
 a zipfian distribution with alpha value 0.99.  To test DAMON against more
 original-like YCSB workloads with various access patterns, users should install
 silo at '$HOME/silo' with 'patches/silo.patch'.  For example, assuming
@@ -86,7 +86,7 @@ changing the shebangs to python2.
 gnuplot
 -------
 
-Visualization of the outputs in the reports are made using 'gnuplot'.  Install
+Visualization of the outputs in the reports is made using 'gnuplot'.  Install
 it using your package manager.
 
 
@@ -94,8 +94,8 @@ HOWTO
 =====
 
 This section describes how you can run the tests and make a report on your
-system.  Before following below instructions, please ensure that your system
-meets the above mentioned pre-requisites.
+system.  Before the below instructions, please ensure that your system meets
+the above-mentioned pre-requisites.
 
 Just sequentially execute below three commands.
 
@@ -103,10 +103,10 @@ Just sequentially execute below three commands.
     $ CFG=full_config.sh ./post.sh
     $ CFG=full_config.sh ./mk_reports.sh
 
-The first command runs the workloads and measure some metrics.  It would take
-more than 10 hours.  The second command does post-processing of the numbers
+The first command runs the workloads and measures some metrics.  It would take
+more than 10 hours.  The second command does the post-processing of the numbers
 gathered during the runs.  The final command generates the reports for you and
-show a summary in text form.  It generates detailed report in text form, and in
-html form at 'report/report.txt' and 'report/html/index.html', respectively.
+shows a summary in text form.  It generates a detailed report in text form, and
+in html form in 'report/report.txt' and 'report/html/index.html', respectively.
 The html form report includes simple visualizations of the output, either.  The
 visualizations are also available in 'report/plots/' directory.
