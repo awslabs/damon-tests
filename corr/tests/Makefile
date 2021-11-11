@@ -4,7 +4,7 @@ TEST_GEN_FILES += huge_count_read_write
 TEST_PROGS = kunit.sh
 
 # simple regression tests
-TEST_PROGS += huge_count_read_write.sh buffer_overflow.sh
+TEST_PROGS += huge_count_read_write.sh buffer_overflow.sh rm_contexts.sh
 
 # functional tests
 TEST_PROGS += damo_tests.sh
