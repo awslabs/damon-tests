@@ -50,3 +50,16 @@ do
 	echo "waiting for monitor off $i seconds"
 	sleep 1
 done
+
+if [ "$subcommand" = "record" ] && [ ! -f "/sys/kernel/debug/damon/record" ]
+then
+	while [ -d "/proc/$damo_pid" ]
+	do
+		sleep 1
+		echo "waiting for damo finishes"
+	done
+
+	"$damo" adjust -i "$record_file" -o damon.adjusted.data
+	rm "$record_file" "$record_file.perf.data"
+	mv damon.adjusted.data "$record_file"
+fi
