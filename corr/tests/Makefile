@@ -9,7 +9,7 @@ TEST_PROGS += record_null_deref.sh
 
 # functional tests
 TEST_PROGS += damo_tests.sh
-TEST_PROGS += masim-record.sh masim-damos.sh chk_records.sh
+TEST_PROGS += masim-record.sh masim-damos.sh
 
 # build tests
 TEST_PROGS += build_i386.sh build_m68k.sh build_arm64.sh
