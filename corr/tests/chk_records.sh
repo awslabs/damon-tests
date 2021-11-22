@@ -2,7 +2,7 @@
 
 if [ -z "$record_files" ]
 then
-	record_files=`find $HOME -name damon.data`
+	record_files=$(find . -name damon.data)
 fi
 
 ksft_skip=4
