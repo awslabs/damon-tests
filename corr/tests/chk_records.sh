@@ -6,10 +6,10 @@ then
 fi
 
 ksft_skip=4
-chk_record=../damon/_chk_record.py
-if [ ! -f $chk_record ]
+damo=./damo/damo
+if [ ! -f $damo ]
 then
-	echo "$chk_record not found"
+	echo "$damo not found"
 	exit $ksft_skip
 fi
 
@@ -17,7 +17,8 @@ nr_checks=0
 for f in $record_files
 do
 	echo "check $f"
-	python3 ../damon/_chk_record.py $f
+	python3 "$damo" validate "$f"  --aggr 90000 110000 \
+		--nr_regions 5 1100 --nr_accesses 0 23
 	if [ $? -ne 0 ]
 	then
 		exit 1
