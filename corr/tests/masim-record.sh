@@ -48,14 +48,12 @@ do
 		echo "damon.data for $pattern not found"
 		exit 1
 	fi
-	if [ -f ../damon/_chk_record.py ]
+	if ! "$DAMO" validate
 	then
-		python3 ../damon/_chk_record.py damon.data
-		if [ $? -ne 0 ]
-		then
-			echo "record file for $pattern is wrong"
-			exit 1
-		fi
+		echo "$pattern: record file validation failed"
+		exit 1
+	else
+		echo "$pattern: record file validated"
 	fi
 
 	if [ "$pattern" == "stairs" ]
