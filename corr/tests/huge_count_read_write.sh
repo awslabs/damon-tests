@@ -2,7 +2,10 @@
 
 dmesg -C
 
-./huge_count_read_write
+for file in /sys/kernel/debug/damon/*
+do
+	./huge_count_read_write "$file"
+done
 
 if dmesg | grep -q WARNING
 then

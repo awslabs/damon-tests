@@ -22,17 +22,13 @@ void test(char *file)
 	close(filedesc);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
-	test("/sys/kernel/debug/damon/attrs");
-	test("/sys/kernel/debug/damon/init_regions");
-	test("/sys/kernel/debug/damon/kdamond_pid");
-	test("/sys/kernel/debug/damon/mk_contexts");
-	test("/sys/kernel/debug/damon/monitor_on");
-	test("/sys/kernel/debug/damon/record");
-	test("/sys/kernel/debug/damon/rm_contexts");
-	test("/sys/kernel/debug/damon/schemes");
-	test("/sys/kernel/debug/damon/target_ids");
+	if (argc != 2) {
+		fprintf(stderr, "Usage: %s <file>\n", argv[0]);
+		exit(1);
+	}
+	test(argv[1]);
 
 	return 0;
 }
