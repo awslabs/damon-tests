@@ -40,7 +40,7 @@ do
 		echo "$thp" > "$thp_file"
 	fi
 
-for pattern in stairs zigzag
+for pattern in stairs_30secs zigzag_30secs
 do
 	$DAMO record "./masim/masim masim/configs/$pattern.cfg"
 	if [ ! -f damon.data ]
@@ -56,7 +56,7 @@ do
 		echo "$pattern: record file validated"
 	fi
 
-	if [ "$pattern" == "stairs" ]
+	if [ "$pattern" == "stairs_30secs" ]
 	then
 		if [ "$thp" = "always" ]
 		then
@@ -66,7 +66,7 @@ do
 			min_wss=9000000
 			max_wss=11000000
 		fi
-	elif [ "$pattern" == "zigzag" ]
+	elif [ "$pattern" == "zigzag_30secs" ]
 	then
 		min_wss=90000000
 		max_wss=110000000

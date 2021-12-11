@@ -30,7 +30,7 @@ then
 	exit $ksft_skip
 fi
 
-for pattern in stairs zigzag
+for pattern in stairs_30secs zigzag_30secs
 do
 	$DAMO schemes -c $ETHP "./masim/masim masim/configs/$pattern.cfg"
 	if [ $? -ne 0 ]
