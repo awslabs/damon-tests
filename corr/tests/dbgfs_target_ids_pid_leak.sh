@@ -1,13 +1,11 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0
 
-before=$(script -q -c "stty rows 999; sudo slabtop -o" /dev/null | grep pid | \
-	awk '{print $2}')
+before=$(grep "^pid " /proc/slabinfo | awk '{print $2}')
 
 timeout 1 ./dbgfs_target_ids_pid_leak
 
-after=$(script -q -c "stty rows 999; sudo slabtop -o" /dev/null | grep pid | \
-	awk '{print $2}')
+after=$(grep "^pid " /proc/slabinfo | awk '{print $2}')
 
 echo "number of active pid slabs: $before -> $after"
 if [ $after -gt $before ]
