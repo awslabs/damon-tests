@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 before=$(script -q -c "stty rows 999; sudo slabtop -o" /dev/null | grep pid | \
 	awk '{print $2}')

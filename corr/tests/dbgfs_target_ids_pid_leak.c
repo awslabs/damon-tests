@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Author: SeongJae Park <sj@kernel.org>
+ */
+
 #define _GNU_SOURCE
 
 #include <fcntl.h>
@@ -7,7 +12,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <time.h>
 #include <unistd.h>
 
 #define DBGFS_TARGET_IDS "/sys/kernel/debug/damon/target_ids"
