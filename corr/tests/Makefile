@@ -3,7 +3,7 @@ TEST_GEN_FILES += dbgfs_target_ids_read_before_terminate_race
 TEST_GEN_FILES += dbgfs_target_ids_pid_leak
 
 # unit tests
-# TEST_PROGS = kunit.sh
+TEST_PROGS = kunit.sh
 
 # simple regression tests
 TEST_PROGS += huge_count_read_write.sh buffer_overflow.sh rm_contexts.sh
