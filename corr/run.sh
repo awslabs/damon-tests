@@ -34,4 +34,7 @@ fi
 )
 
 # print results
-$BINDIR/_summary_results.sh $LOG
+if ! $BINDIR/_summary_results.sh $LOG
+then
+	exit 1
+fi

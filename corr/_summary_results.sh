@@ -18,6 +18,7 @@ if [ $failed -eq 0 ]
 then
 	echo
 	echo -e "\e[91mFAIL\e[39m"
+	exit 1
 else
 	echo -e "\e[92mPASS\e[39m"
 fi
