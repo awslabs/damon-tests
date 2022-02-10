@@ -6,14 +6,14 @@ then
 	exit 1
 fi
 
-BINDIR=`dirname $0`
+bindir=$(dirname "$0")
 
 target_dir=$1/tools/testing/selftests/damon-tests
 
-mkdir -p $target_dir
-cp $BINDIR/tests/* $target_dir
+mkdir -p "$target_dir"
+cp "$bindir"/tests/* "$target_dir"
 
-cd "$target_dir"
+cd "$target_dir" || exit 1
 if [ ! -d "damo" ]
 then
 	git clone https://github.com/awslabs/damo
