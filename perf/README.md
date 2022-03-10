@@ -45,12 +45,7 @@ For example:
     $ cd $HOME; git clone https://github.com/sjp38/parsec3_on_ubuntu
 
 After that, you should follow the instructions in the README in the project to
-install PARSEC3 and SPLASH-2X workloads.  For example, if you are on Ubuntu
-18.04:
-
-    $ cd $HOME/parsec3_on_ubuntu
-    $ ./getsrc.sh; ./patch-for-ubntu-xenial.sh; ./intall_dep-xenial.sh;
-    $ ./build.sh; ./build.sh splash2x
+install PARSEC3 and SPLASH-2X workloads.
 
 [1] https://github.com/sjp38/parsec3_on_ubuntu
 
