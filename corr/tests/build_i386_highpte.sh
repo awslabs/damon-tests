@@ -5,22 +5,14 @@
 # [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
 
 LINUX_SRC='../../../../'
+TESTDIR=$PWD
 ODIR=$PWD/`basename $0`.out
 
 mkdir -p $ODIR
 
 cd $LINUX_SRC
 make O=$ODIR ARCH=i386 allnoconfig
-echo 'CONFIG_DAMON=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_VADDR=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PADDR=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PGIDLE=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_VADDR_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_RECLAIM=y' >> $ODIR/.config
-echo 'CONFIG_HIGHPTE=y' >> $ODIR/.config
+cat "$TESTDIR/damon_config" >> "$ODIR/.config"
 
 make O=$ODIR ARCH=i386 olddefconfig
 make O=$ODIR ARCH=i386 -j`grep -e '^processor' /proc/cpuinfo | wc -l`

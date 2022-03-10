@@ -19,15 +19,7 @@ mkdir -p $ODIR
 
 cd $LINUX_SRC
 make O=$ODIR ARCH=arm64 allnoconfig
-echo 'CONFIG_DAMON=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_VADDR=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PADDR=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_PGIDLE=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_VADDR_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_DBGFS=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_DBGFS_KUNIT_TEST=y' >> $ODIR/.config
-echo 'CONFIG_DAMON_RECLAIM=y' >> $ODIR/.config
+cat "$TESTDIR/damon_config" >> $ODIR/.config
 
 export COMPILER_INSTALL_PATH=$HOME/0day
 export COMPILER=gcc-9.3.0
