@@ -5,7 +5,7 @@ LOG=$PWD/log
 
 if [ -z $LINUX_DIR ]
 then
-	LINUX_DIR=$HOME/linux
+	LINUX_DIR=$(realpath "$BINDIR/../../linux")
 fi
 
 if [ ! -d $LINUX_DIR ]
