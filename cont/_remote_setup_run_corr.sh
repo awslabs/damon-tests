@@ -32,10 +32,12 @@ source "$config_sh"
 echo "setup machines"
 for ((i = 0 ; i < ${#test_machines[@]} ; i++))
 do
+	test_user=${test_users[$i]}
+	remote_work_dir="/home/$test_user/damon-tests-cont"
 	logfile=remote_setup_"$i"_${test_machines[$i]}
 	"$bindir/_remote_setup.sh" "${test_users[$i]}" "${test_machines[$i]}" \
 		"${test_ssh_ports[$i]}" "$logs_dir/$logfile" \
-		"downstream/next" "downstream/next" \
+		"$remote_work_dir" "downstream/next" "downstream/next" \
 		"$linux_commit" "$linux_remote" "$linux_url" &
 	# limit number of parallel setups to 5, to not stress remote repos
 	if [ $i -ne 0 ] && [ $((i % 5)) -eq 0 ]
@@ -64,9 +66,11 @@ sleep 60
 echo "run tests"
 for ((i = 0 ; i < ${#test_machines[@]} ; i++))
 do
+	test_user=${test_users[$i]}
+	remote_work_dir="/home/$test_user/damon-tests-cont"
 	logfile=remote_run_corr_"$i"_${test_machines[$i]}
 	"$bindir/_remote_run_corr.sh" "${test_users[$i]}" \
 		"${test_machines[$i]}" "${test_ssh_ports[$i]}" \
-		"$logs_dir/$logfile" &
+		"$logs_dir/$logfile" "$remote_work_dir" &
 done
 wait

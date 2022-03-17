@@ -3,11 +3,11 @@
 
 set -o pipefail
 
-if [ $# -ne 9 ]
+if [ $# -ne 10 ]
 then
 	echo "Usage: $0 <test user> <test machine> <ssh port> <log file> \\"
-	echo "		<damon-tests version> <damo version> <linux ver> \\"
-	echo "		<linux remote name> <linux remote url>"
+	echo "		<work dir> <damon-tests version> <damo version> \\"
+	echo "		<linux ver> <linux remote name> <linux remote url>"
 	exit 1
 fi
 
@@ -16,14 +16,14 @@ test_user=$1
 test_machine=$2
 ssh_port=$3
 log_file=$4
-damon_tests_version=$5
-damo_version=$6
-linux_ver=$7
-linux_remote_name=$8
-linux_remote_url=$9
+remote_work_dir=$5
+damon_tests_version=$6
+damo_version=$7
+linux_ver=$8
+linux_remote_name=$9
+linux_remote_url=$10
 
 local_setup_sh="_local_setup.sh"
-remote_work_dir="/home/$test_user/damon-tests-cont"
 ssh -p "$ssh_port" "$test_user@$test_machine" mkdir -p "$remote_work_dir" \
 	2>&1 | tee "$log_file"
 rsync -e "ssh -p $ssh_port" "$bindir/$local_setup_sh" \
