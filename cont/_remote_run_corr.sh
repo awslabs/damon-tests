@@ -1,6 +1,8 @@
 #!/bin/bash
 # Run DAMON correctness tests on a remote test machine
 
+set -o pipefail
+
 if [ $# -ne 5 ]
 then
 	echo "Usage: $0 <test user> <test machine> <ssh port> <log file> \\"
