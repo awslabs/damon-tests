@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LBX=$HOME/lazybox
+LBX="$(dirname "$0")/../../../lazybox"
 
 $LBX/scripts/report/memfree_to_used.py $1/memfree > $2/memused
 

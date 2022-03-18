@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LBX=$HOME/lazybox
+LBX="$(dirname "$0")/../../lazybox"
 BINDIR=`dirname $0`
 
 if [ -z "$CFG" ] || [ ! -f "$CFG" ]

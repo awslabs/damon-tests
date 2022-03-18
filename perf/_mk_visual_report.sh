@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DAMO=$HOME/damo/damo
+DAMO="$(dirname "$0")/../../damo/damo"
 
 if [ $# -ne 2 ]
 then

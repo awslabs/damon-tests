@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LBX=$HOME/lazybox
+LBX="$(dirname "$0")/../../../lazybox"
 PSWPIN=$1/pswpin
 
 $LBX/scripts/report/recs_to_diff.py $PSWPIN > $2/pswpin.diff

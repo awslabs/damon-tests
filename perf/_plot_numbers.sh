@@ -9,7 +9,7 @@ fi
 ODIR=$1
 
 BINDIR=`dirname $0`
-LBX=$HOME/lazybox
+LBX="$(dirname "$0")/../../lazybox"
 PLOT=$LBX/gnuplot/plot.py
 
 mkdir -p $ODIR

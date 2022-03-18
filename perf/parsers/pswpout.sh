@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LBX=$HOME/lazybox
+LBX="$(dirname "$0")/../../../lazybox"
 PSWPOUT=$1/pswpout
 
 $LBX/scripts/report/recs_to_diff.py $PSWPOUT > $2/pswpout.diff
