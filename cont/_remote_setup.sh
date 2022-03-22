@@ -21,7 +21,7 @@ damon_tests_version=$6
 damo_version=$7
 linux_ver=$8
 linux_remote_name=$9
-linux_remote_url=$10
+linux_remote_url="${10}"
 
 local_setup_sh="_local_setup.sh"
 ssh -p "$ssh_port" "$test_user@$test_machine" mkdir -p "$remote_work_dir" \
