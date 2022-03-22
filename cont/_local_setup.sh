@@ -74,6 +74,7 @@ echo "setup masim"
 masim_path=$work_dir/masim
 masim_gh_repo=https://github.com/sjp38/masim
 checkout_git "$masim_path" "origin" "$masim_gh_repo" "origin/master"
+make -C "$masim_path"
 
 echo "setup lazybox"
 lazybox_path=$work_dir/lazybox
