@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 #define DBGFS_TARGET_IDS "/sys/kernel/debug/damon/target_ids"
@@ -27,8 +28,26 @@ static void write_targetid_exit(void)
 	exit(0);
 }
 
+unsigned long msec_timestamp(void)
+{
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	return tv.tv_sec * 1000UL + tv.tv_usec / 1000;
+}
+
 int main(int argc, char *argv[])
 {
+	unsigned long start_ms;
+	int time_to_run, nr_forks = 0;
+
+	if (argc != 2) {
+		fprintf(stderr, "Usage: %s <msecs to run>\n", argv[0]);
+		exit(1);
+	}
+	time_to_run = atoi(argv[1]);
+
+	start_ms = msec_timestamp();
 	while (true) {
 		int pid = fork();
 
@@ -39,6 +58,11 @@ int main(int argc, char *argv[])
 		if (pid == 0)
 			write_targetid_exit();
 		wait(NULL);
+		nr_forks++;
+
+		if (msec_timestamp() - start_ms > time_to_run)
+			break;
 	}
+	printf("%d\n", nr_forks);
 	return 0;
 }
