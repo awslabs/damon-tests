@@ -3,9 +3,11 @@
 BINDIR=`dirname $0`
 LOG=$PWD/log
 
+repos_dir=$(realpath "$BINDIR/../../")
+
 if [ -z $LINUX_DIR ]
 then
-	LINUX_DIR=$(realpath "$BINDIR/../../linux")
+	LINUX_DIR="$repos_dir/linux"
 fi
 
 if [ ! -d $LINUX_DIR ]
@@ -17,11 +19,23 @@ fi
 ksft_dir=tools/testing/selftests/damon-tests
 ksft_abs_path=$LINUX_DIR/$ksft_dir
 
-if ! $BINDIR/_install.sh $LINUX_DIR
+mkdir -p "$ksft_abs_path"
+
+damo_dir="$repos_dir/damo"
+if [ ! -x "$damo_dir/damo" ]
 then
-	echo "install failed"
+	echo "damo at $damo_dir/damo not found"
 	exit 1
 fi
+cp -R "$damo_dir" "$ksft_abs_path/"
+
+masim_dir="$repos_dir/masim"
+if [ ! -x "$masim_dir/masim" ]
+then
+	echo "masim at $masim_dir/masim not found"
+	exit 1
+fi
+cp -R "$masim_dir" "$ksft_abs_path/"
 
 # run
 (
