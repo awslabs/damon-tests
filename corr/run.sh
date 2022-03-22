@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Run damon-tests/corr on $(uname -r) kernel"
+
 BINDIR=`dirname $0`
 LOG=$PWD/log
 
