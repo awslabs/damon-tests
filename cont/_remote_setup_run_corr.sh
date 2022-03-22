@@ -17,7 +17,7 @@ linux_branch=$4
 linux_commit=$(git -C "$linux_repo" rev-parse "$linux_remote/$linux_branch")
 
 bindir=$(dirname "$0")
-logs_dir=logs/$linux_remote-$linux_branch/$(date +%Y-%m-%d-%H-%M)
+logs_dir="logs/$(date +%Y-%m-%d)/$linux_remote-$linux_branch/$(date +%Y-%m-%d-%H-%M)"
 mkdir -p "$logs_dir"
 
 # config.sh should define test_machines, test_users, and test_ssh_ports vars
