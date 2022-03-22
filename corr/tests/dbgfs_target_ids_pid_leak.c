@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
 {
 	while (true) {
 		int pid = fork();
-		pid_t child_pid;
 
 		if (pid < 0) {
 			fprintf(stderr, "fork() failed\n");
@@ -39,7 +38,7 @@ int main(int argc, char *argv[])
 		}
 		if (pid == 0)
 			write_targetid_exit();
-		child_pid = wait(NULL);
+		wait(NULL);
 	}
 	return 0;
 }
