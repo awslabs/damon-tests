@@ -70,6 +70,11 @@ then
 	mkdir -p "$work_dir"
 fi
 
+echo "setup masim"
+masim_path=$work_dir/masim
+masim_gh_repo=https://github.com/sjp38/masim
+checkout_git "$masim_path" "origin" "$masim_gh_repo" "origin/master"
+
 echo "setup lazybox"
 lazybox_path=$work_dir/lazybox
 lazybox_gh_repo=https://github.com/sjp38/lazybox
