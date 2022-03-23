@@ -21,9 +21,6 @@ then
 fi
 
 "$lazybox_dir/humble_ci/hci.py" --repo ./linux \
-	--tree_to_track linus \
-		git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
-		master \
 	--tree_to_track stable \
 		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-5.15.y \
@@ -33,6 +30,9 @@ fi
 	--tree_to_track stable \
 		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-5.17.y \
+	--tree_to_track linus \
+		git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
+		master \
 	--tree_to_track akpm-mm \
 		https://github.com/hnaz/linux-mm master \
 	--cmds "$bindir/_for_tree_updates.sh" \
