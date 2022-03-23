@@ -29,6 +29,13 @@ then
 fi
 source "$config_sh"
 
+if [ -z ${test_machines+x} ] || [ -z ${test_users+x} ] || \
+	[ -z ${test_ssh_ports+x} ]
+then
+	echo "config is insuffient"
+	exit 1
+fi
+
 echo "setup machines"
 for ((i = 0 ; i < ${#test_machines[@]} ; i++))
 do
@@ -74,3 +81,13 @@ do
 		"$logs_dir/$logfile" "$remote_work_dir" &
 done
 wait
+
+if [ "$result_noti_recipients" = "" ]
+then
+	echo "result_noti_recipients are unset, skip sending the noti"
+	exit 0
+fi
+echo "send results notification"
+"$bindir/_noti_results.sh" \
+	"$linux_repo" "$linux_remote" "$linux_url" "$linux_branch" \
+	"$logs_dir" "$result_noti_recipients"
