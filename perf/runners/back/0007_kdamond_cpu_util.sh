@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+then
+	echo "run as root"
+	exit 1
+fi
+
 if [ $# -ne 1 ]
 then
 	echo "Usage: $0 <output dir>"
@@ -61,12 +67,18 @@ start_usage=""
 start_time=""
 kdamond_pid="none"
 kdamond_pid_file="/sys/kernel/debug/damon/kdamond_pid"
+if [ -d "/sys/kernel/mm/damon/admin" ]
+then
+	kdamond_pid_file="/sys/kernel/mm/damon/admin/kdamonds/0/pid"
+fi
+
 while :;
 do
-	sleep 1
-	if [ "$kdamond_pid" = "none" ]
+	# When kdamond is not running debugfs kdamond_pid file returns "none"
+	# while sysfs kdamond/pid file returns "-1"
+	if [ "$kdamond_pid" = "none" ] || [ "$kdamond_pid" = "-1" ]
 	then
-		kdamond_pid=$(cat "$kdamond_pid_file")
+		sleep 1
 		continue
 	fi
 
