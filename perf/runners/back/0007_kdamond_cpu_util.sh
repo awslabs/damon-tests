@@ -74,11 +74,11 @@ fi
 
 while :;
 do
+	sleep 1
 	# When kdamond is not running debugfs kdamond_pid file returns "none"
 	# while sysfs kdamond/pid file returns "-1"
 	if [ "$kdamond_pid" = "none" ] || [ "$kdamond_pid" = "-1" ]
 	then
-		sleep 1
 		kdamond_pid=$(cat "$kdamond_pid_file")
 		continue
 	fi
