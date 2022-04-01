@@ -79,6 +79,7 @@ do
 	if [ "$kdamond_pid" = "none" ] || [ "$kdamond_pid" = "-1" ]
 	then
 		sleep 1
+		kdamond_pid=$(cat "$kdamond_pid_file")
 		continue
 	fi
 
