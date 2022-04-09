@@ -2,6 +2,13 @@
 
 set -e
 
+if [ $# -eq 1 ] && [ "$1" = "--uncond_single_run" ]
+then
+	uncond_signle_run="uncond_single_run"
+else
+	uncond_signle_run=""
+fi
+
 bindir=$(dirname "$0")
 
 lazybox_dir="$bindir/lazybox"
@@ -36,4 +43,4 @@ fi
 	--tree_to_track akpm-mm \
 		https://github.com/hnaz/linux-mm master \
 	--cmds "$bindir/_for_tree_updates.sh" \
-	--delay 3600
+	--delay 3600 $uncond_single_run
