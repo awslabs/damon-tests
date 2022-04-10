@@ -26,6 +26,17 @@ echo "Subject: $subject" > "$mail_file"
 echo >> "$mail_file"
 for log_file in "$logs_dir"/*
 do
+	if basename "$log_file" | grep "^remote_run_corr_*"
+	then
+		if tail -n 2 "$log_file" | head -n 1 | grep "PASS"
+		then
+			echo "PASS" >> "$mail_file"
+		else
+			echo "FAIL" >> "$mail_file"
+		fi
+		echo >> "$mail_file"
+	fi
+
 	echo "log file: $log_file" >> "$mail_file"
 	echo >> "$mail_file"
 	head -n 10 "$log_file" >> "$mail_file"
