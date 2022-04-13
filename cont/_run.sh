@@ -28,6 +28,10 @@ then
 fi
 
 "$lazybox_dir/humble_ci/hci.py" --repo ./linux \
+	--tree_to_track al https://github.com/amazonlinux/linux \
+		amazon-5.4.y/master \
+	--tree_to_track al https://github.com/amazonlinux/linux \
+		amazon-5.10.y/master \
 	--tree_to_track stable \
 		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-5.15.y \
