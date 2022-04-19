@@ -18,6 +18,8 @@ then
 	exit 1
 fi
 
+"$BINDIR/install_deps.sh"
+
 ksft_dir=tools/testing/selftests/damon-tests
 ksft_abs_path=$LINUX_DIR/$ksft_dir
 
