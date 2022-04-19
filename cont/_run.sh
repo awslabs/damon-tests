@@ -4,9 +4,9 @@ set -e
 
 if [ $# -eq 1 ] && [ "$1" = "--uncond_single_run" ]
 then
-	uncond_signle_run="uncond_single_run"
+	uncond_single_run="--uncond_single_run"
 else
-	uncond_signle_run=""
+	uncond_single_run=""
 fi
 
 bindir=$(dirname "$0")
