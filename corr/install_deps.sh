@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo apt install -y xz-utils lftp
+sudo apt install -y xz-utils lftp python
