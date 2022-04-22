@@ -103,3 +103,11 @@ build_install_linux=$lazybox_path/scripts/kernel_dev/build_install_kernel.sh
 damon_config=$damon_tests_path/corr/tests/damon_config
 sudo bash "$build_install_linux" "$linux_path" "$linux_path.out" \
 	"$damon_config"
+
+# build/install perf
+build_install_perf="$lazybox_path/scripts/kernel_dev/build_install_perf.sh"
+perf_out="$workdir/perf.out"
+if ! which perf
+then
+	sudo "$build_install_perf" "$linux_path" "$perf_out"
+fi
