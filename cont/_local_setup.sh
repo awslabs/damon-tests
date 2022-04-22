@@ -106,7 +106,7 @@ sudo bash "$build_install_linux" "$linux_path" "$linux_path.out" \
 
 # build/install perf
 build_install_perf="$lazybox_path/scripts/kernel_dev/build_install_perf.sh"
-perf_out="$workdir/perf.out"
+perf_out="$work_dir/perf.out"
 if ! which perf
 then
 	sudo "$build_install_perf" "$linux_path" "$perf_out"
