@@ -55,7 +55,8 @@ RUN_CMD+=" | tee $ODIR/commlog"
 
 echo "RUN_CMD: $RUN_CMD"
 
-if [ "$var" = "orig" ] || [ "$var" = "thp" ]
+# mprs for memory pressure
+if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "mprs" ]
 then
 	if [ "$var" = "thp" ]
 	then
