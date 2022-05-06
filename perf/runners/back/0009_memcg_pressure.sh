@@ -58,16 +58,17 @@ then
 	exit 1
 fi
 
+echo "$full_limit" > "$memcg_lim"
+if [ ! "$var" = "mprs" ]
+then
+	exit 0
+fi
+
 memcg_lim="$memcg_dir/memory.limit_in_bytes"
 while :;
 do
-	echo "$full_limit" > "$memcg_lim"
-	if [ ! "$var" = "mprs" ]
-	then
-		exit 0
-	fi
-	sleep 30
-
 	echo "$pressure_limit" > "$memcg_lim"
-	sleep 3
+	sleep 1
+	echo "$full_limit" > "$memcg_lim"
+	sleep 10
 done
