@@ -24,6 +24,8 @@ LBX="$repos_dir/lazybox"
 scheme=""
 timeout=3600
 
+"$BINDIR/_set_memcg.sh" $$ || exit 1
+
 EXP_DIR="$ODIR/../../../../../../perf/"
 var=$(basename $(dirname $ODIR))
 work=$(basename $(dirname $(dirname $ODIR)))
