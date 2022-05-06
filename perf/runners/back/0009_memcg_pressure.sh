@@ -41,7 +41,7 @@ then
 	echo "couldn't get rss_kb.  maybe wrong odir? $odir"
 	exit 1
 fi
-full_limit=$((rss_kb * 2))
+full_limit=$((rss_kb * 1024 * 2))
 pressure_limit=$((rss_kb * 1024 * 8 / 10))
 
 memcg_root="/sys/fs/cgroup/memory"
