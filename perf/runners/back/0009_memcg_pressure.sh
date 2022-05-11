@@ -42,7 +42,7 @@ then
 	exit 1
 fi
 full_limit=$((rss_kb * 1024 * 2))
-pressure_limit=$((rss_kb * 1024 * 7 / 10))
+pressure_limit=$((rss_kb * 1024 * 75 / 100))
 
 memcg_root="/sys/fs/cgroup/memory"
 if ! mount | grep "$memcg_root"
