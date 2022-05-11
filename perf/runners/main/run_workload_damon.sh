@@ -123,7 +123,7 @@ then
 	sudo "$DAMO_WRAPPER" \
 		"$DAMO" "record" "$ODIR/damon.data" "" paddr "$pid" "$timeout"
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
-	[[ "$var" == "plurs-"* ]]
+	[[ "$var" == "plrus-"* ]]
 then
 	if [ -f "$custom_schemes_dir/$var.damos" ]
 	then
