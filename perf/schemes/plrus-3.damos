@@ -1,0 +1,8 @@
+# format is:
+# <min/max size> <min/max frequency (0-100)> <min/max age> <action> <quota> <weight> <watermarks>
+
+# LRU-activate hot pages, more hot pages first under 5% CPU usage
+4K  max		20 max		min max		hot		50ms 0B 1s	0 3 7	free_mem_rate 5s 1000 999 0
+
+# LRU-deactive cold pages, colder pages first under 5% CPU usage
+4K  max		min min		400ms max		cold		50ms 0B 1s	0 3 7	free_mem_rate 5s 1000 999 0
