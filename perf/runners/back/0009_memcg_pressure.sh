@@ -59,7 +59,7 @@ then
 fi
 
 echo "$full_limit" > "$memcg_lim"
-if [ ! "$var" = "mprs" ] && [[ ! "$var" == "plurs-"* ]]
+if [ ! "$var" = "mprs" ] && [[ ! "$var" == "plrus-"* ]]
 then
 	exit 0
 fi
