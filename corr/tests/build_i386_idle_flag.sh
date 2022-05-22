@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 # Test i386 build failure problem reported[1] by kbuild robot
 #

@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 # Test m68k build failure problem reported[1] by kbuild robot
 #

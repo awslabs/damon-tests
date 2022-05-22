@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 damon_dir="/sys/kernel/debug/damon"
 

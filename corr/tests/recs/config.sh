@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 EXPERIMENTS=`dirname $BASH_SOURCE`/../../../perf
 
