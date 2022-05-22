@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 RAW_ODIR=$1
 work_category=$(basename $(dirname $(dirname $(dirname $RAW_ODIR))))

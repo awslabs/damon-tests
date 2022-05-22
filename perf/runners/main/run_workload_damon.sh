@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 # exp: perf
 # variance: (parsec3|splash2x|ycsb|mysqld)/<workload>/(orig|thp|ethp|rec|prec)

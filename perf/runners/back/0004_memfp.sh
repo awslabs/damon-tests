@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 ODIR=$1
 work=$(basename $(dirname $(dirname $ODIR)))

@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 input_file="$1/pgmajfaults"
 out_file="$2/pgmajfaults"

@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 input_file=$1/kdamond_cpu_usage
 out_file=$2/kdamond_cpu_util

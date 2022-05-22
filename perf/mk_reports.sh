@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 LC_NUMERIC="en_US.UTF-8"
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 float_add() {
 	awk -v a="$1" -v b="$2" 'BEGIN {print a + b}'

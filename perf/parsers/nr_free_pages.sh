@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 LBX="$(dirname "$0")/../../../lazybox"
 outfile="nr_used_pages"

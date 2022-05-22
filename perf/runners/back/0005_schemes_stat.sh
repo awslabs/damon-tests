@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
 
 SCHEMES="/sys/kernel/debug/damon/schemes"
 
