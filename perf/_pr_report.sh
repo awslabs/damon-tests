@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0
 
 BINDIR=`dirname $0`
+LBX="$(dirname "$0")/../../lazybox"
 
 echo "======="
 echo "Summary"
@@ -10,7 +11,7 @@ echo
 
 for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
 do
-	$BINDIR/_summary_results.sh avg $metric | ~/lazybox/scripts/report/fmt_tbl.py
+	$BINDIR/_summary_results.sh avg $metric | "$LBX/scripts/report/fmt_tbl.py"
 	echo
 	echo
 done
