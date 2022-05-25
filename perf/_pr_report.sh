@@ -9,7 +9,7 @@ echo "Summary"
 echo "======="
 echo
 
-for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
+for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults psi_mem_some_us
 do
 	$BINDIR/_summary_results.sh avg $metric | "$LBX/scripts/report/fmt_tbl.py"
 	echo
@@ -23,7 +23,7 @@ echo
 
 for stat in avg stdev min max
 do
-	for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults
+	for metric in runtime kdamond_cpu_util memused.avg rss.avg pgmajfaults psi_mem_some_us
 	do
 		$BINDIR/_pr_metrics.sh $stat $metric
 		echo
