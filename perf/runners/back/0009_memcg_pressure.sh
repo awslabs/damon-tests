@@ -64,6 +64,12 @@ then
 	exit 0
 fi
 
+# -nomp suffix for no memory pressure
+if echo "$var" | grep "\-nomp" > /dev/null
+then
+	exit 0
+fi
+
 memcg_lim="$memcg_dir/memory.limit_in_bytes"
 while :;
 do

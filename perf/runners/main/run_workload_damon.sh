@@ -126,11 +126,18 @@ then
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
 	[[ "$var" == "plrus-"* ]]
 then
-	if [ -f "$custom_schemes_dir/$var.damos" ]
+	scheme_name="$var"
+	if [[ "$scheme_name" == "plrus-"* ]]
 	then
-		scheme="$custom_schemes_dir/$var.damos"
+		# -nomp suffix for no memory pressure
+		scheme_name=$(echo "$scheme_name" | awk -F"-nomp" '{print $1}')
+	fi
+
+	if [ -f "$custom_schemes_dir/$scheme_name.damos" ]
+	then
+		scheme="$custom_schemes_dir/$scheme_name.damos"
 	else
-		scheme="$schemes_dir/$var.damos"
+		scheme="$schemes_dir/$scheme_name.damos"
 	fi
 	echo "apply scheme '$scheme'"
 	sudo "$DAMO_WRAPPER" \
