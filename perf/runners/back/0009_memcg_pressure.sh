@@ -58,6 +58,7 @@ then
 	exit 1
 fi
 
+memcg_lim="$memcg_dir/memory.limit_in_bytes"
 echo "$full_limit" > "$memcg_lim"
 if [ ! "$var" = "mprs" ] && [[ ! "$var" == "plrus-"* ]]
 then
@@ -70,7 +71,6 @@ then
 	exit 0
 fi
 
-memcg_lim="$memcg_dir/memory.limit_in_bytes"
 while :;
 do
 	echo "$pressure_limit" > "$memcg_lim"
