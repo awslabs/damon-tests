@@ -23,7 +23,7 @@ done
 
 #vars="orig prcl darc"
 #vars="orig pprcl pdarc_v4_1_1 pdarc_v4_2_1 pdarc_v4_1_2 pdarc_v4_2_2 pdarc_v4_1_3 pdarc_v4_2_3"
-vars="orig rec prec thp ethp prcl pdarc_v4_2_2 mprs plrus-0-2"
+vars="orig rec prec thp ethp prcl pdarc_v4_2_2 mprs plrus-2"
 
 VARIANTS=""
 
