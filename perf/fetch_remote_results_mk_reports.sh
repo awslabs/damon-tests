@@ -54,7 +54,7 @@ mkdir $dst_dir
 for host in "${hosts[@]}"
 do
 	rsync -arvz -e "ssh -p $port" --progress \
-		"$username@$host:$remote_results_path" "$dst_dir/results.$host"
+		"$username@$host:$remote_results_path/" "$dst_dir/results.$host"
 done
 
 echo "aggregate the results at $dst_dir/results"
