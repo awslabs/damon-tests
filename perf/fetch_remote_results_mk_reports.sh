@@ -74,6 +74,6 @@ echo "ODIR_ROOT=$dst_dir/results" >> "$tmp_cfg"
 export CFG="$tmp_cfg"
 "$bindir/post.sh"
 "$bindir/mk_reports.sh"
-mv reports "$dst_dir/"
+mv report "$dst_dir/"
 
 rm "$tmp_cfg"
