@@ -19,7 +19,7 @@ nr_hosts=$(($# - 4))
 hosts=(${@:4:$nr_hosts})
 dst_dir="${@: -1}"
 
-if [ ! -f $CFG ]
+if [ ! -f "$CFG" ]
 then
 	echo "CFG should be set properly but \"$CFG\""
 	exit 1
