@@ -47,5 +47,5 @@ do
 	echo >> "$mail_file"
 done
 
-git send-email --to "$recipients" "$mail_file"
+git send-email --compose-encoding UTF-8 --to "$recipients" "$mail_file"
 rm "$mail_file"
