@@ -46,5 +46,9 @@ fi
 		master \
 	--tree_to_track akpm-mm \
 		https://github.com/hnaz/linux-mm master \
+	--tree_to_track akpm.korg.mm \
+		git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-stable \
+	--tree_to_track akpm.korg.mm \
+		git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable \
 	--cmds "$bindir/_for_tree_updates.sh" \
 	--delay 3600 $uncond_single_run
