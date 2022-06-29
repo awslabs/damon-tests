@@ -50,7 +50,7 @@ do
 	echo "	$username@$host of port $port"
 done
 
-mkdir $dst_dir
+mkdir -p $dst_dir
 for host in "${hosts[@]}"
 do
 	rsync -arvz -e "ssh -p $port" --progress \
