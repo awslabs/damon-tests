@@ -25,8 +25,6 @@ LBX="$repos_dir/lazybox"
 scheme=""
 timeout=3600
 
-"$BINDIR/_set_memcg.sh" $$ || exit 1
-
 EXP_DIR="$ODIR/../../../../../../perf/"
 var=$(basename $(dirname $ODIR))
 work=$(basename $(dirname $(dirname $ODIR)))
@@ -56,8 +54,8 @@ RUN_CMD+=" | tee $ODIR/commlog"
 
 echo "RUN_CMD: $RUN_CMD"
 
-# mprs for memory pressure
-if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "mprs" ]
+# ttmo for too-simplified TMO (to be compared with plrus)
+if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmo" ]
 then
 	if [ "$var" = "thp" ]
 	then
