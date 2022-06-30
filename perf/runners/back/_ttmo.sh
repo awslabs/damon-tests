@@ -23,6 +23,20 @@ cgroup_dir="/sys/fs/cgroup/unified"
 memory_reclaim_file="$cgroup_dir/memory.reclaim"
 memory_pressure_file="$cgroup_dir/memory.pressure"
 
+if [ ! -f "$memory_reclaim_file" ]
+then
+	echo "memory.reclaim file not found at $memory_reclaim_file"
+	echo "have you put \'cgroup_no_v1=memory\' on the kernel cmdline?"
+	exit 1
+fi
+
+if [ ! -f "$memory_pressure_file" ]
+then
+	echo "memory.pressure file not found at $memory_pressure_file"
+	echo "have you set CONFIG_PSI?"
+	exit 1
+fi
+
 before_psi_some_us=$(awk 'NR==1{print $5}' "$memory_pressure_file" | \
 	awk -F= '{print $2}')
 before_timestamp_us=$(date +%s%6N)
