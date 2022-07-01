@@ -11,6 +11,6 @@ then
 fi
 
 # for paper default param, it should be
-# "$bindir/_ttmo.sh" 5 10 6000
+"$bindir/_ttmo.sh" 5 10 6000
 # we use 10% reclaim_ratio, 1% PSI threshold, 1 sec reclaim interval
-"$bindir/_ttmo.sh" 1000 100 1000
+# "$bindir/_ttmo.sh" 1000 100 1000
