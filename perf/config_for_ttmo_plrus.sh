@@ -21,7 +21,7 @@ do
 	workloads+=" splash2x/$w"
 done
 
-vars="orig ttmo plrus-1 plrus-2 plrus-3"
+vars="orig ttmo plrus-2"
 
 VARIANTS=""
 
