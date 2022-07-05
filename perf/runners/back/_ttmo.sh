@@ -70,10 +70,10 @@ do
 	fi
 
 	# for debugging
-	echo "max reclaim: $max_reclaim_kb"
-	echo "psi: $psi_bp"
-	echo "psi thres: $psi_threshold_bp"
-	echo "final reclaim: $kb_to_reclaim"
+	# echo "max reclaim: $max_reclaim_kb"
+	# echo "psi: $psi_bp"
+	# echo "psi thres: $psi_threshold_bp"
+	# echo "final reclaim: $kb_to_reclaim"
 
 	before_psi_some_us=$now_psi_some_us
 	before_timestamp_us=$now_timestamp_us
