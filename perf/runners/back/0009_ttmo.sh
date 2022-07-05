@@ -12,7 +12,7 @@ fi
 
 # for paper default param, it should be
 # "$bindir/_ttmo.sh" 5 10 6000
-# we use 10% reclaim_ratio, 1% PSI threshold, 1 sec reclaim interval
-# "$bindir/_ttmo.sh" 1000 100 1000
-# 5% reclaim_ratio, 1% PSI threshold, 1 sec reclaim interval
-"$bindir/_ttmo.sh" 500 100 1000
+# The default parameter is too conservative to show change to our test
+# workloads.  we use 3% reclaim_ratio, 1% PSI threshold, and 1 sec reclaim
+# interval for the reason.
+"$bindir/_ttmo.sh" 300 100 1000
