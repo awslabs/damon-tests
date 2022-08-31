@@ -41,9 +41,14 @@ do
 		echo "$thp" > "$thp_file"
 	fi
 
-for pattern in stairs_30secs zigzag_30secs
+for pattern in stairs_30secs zigzag_30secs 2mb
 do
-	$DAMO record "./masim/masim masim/configs/$pattern.cfg"
+	if [ "$pattern" == "2mb" ]
+	then
+		$DAMO record "./masim/masim -h masim/configs/$pattern.cfg"
+	else
+		$DAMO record "./masim/masim masim/configs/$pattern.cfg"
+	fi
 	if [ ! -f damon.data ]
 	then
 		echo "damon.data for $pattern not found"
@@ -71,6 +76,10 @@ do
 	then
 		min_wss=90000000
 		max_wss=110000000
+	elif [ "$pattern" == "2mb" ]
+	then
+		min_wss=4000000
+		max_wss=7000000
 	fi
 	wss=$($DAMO report wss --raw_number --range 50 51 1 | \
 		grep -e "^ 50" | awk '{print $2}')
@@ -82,5 +91,4 @@ do
 		echo "$pattern: expected wss ($min_wss <= $wss <= $max_wss)"
 	fi
 done
-
 done	# thps
