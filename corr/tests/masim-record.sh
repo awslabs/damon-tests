@@ -41,7 +41,28 @@ do
 		echo "$thp" > "$thp_file"
 	fi
 
-for pattern in stairs_30secs zigzag_30secs 2mb
+patterns_to_test="stairs_30secs zigzag_30secs"
+nr_hugetlbpages_file="/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages"
+if [ -e "$nr_hugetlbpages_file" ]
+then
+	nr_hugetlbpages=$(cat "$nr_hugetlbpages_file")
+	if [ "$nr_hugetlbpages" -lt 1 ]
+	then
+		echo "allocate 10 hugepages"
+		echo 10 > "$nr_hugetlbpages_file"
+		nr_hugetlbpages=$(cat "$nr_hugetlbpages_file")
+		if [ $nr_hugetlbpages -ne 10 ]
+		then
+			echo "hugetlb alloc failed, skip it"
+		else
+			patterns_to_test+=" 2mb"
+		fi
+	else
+		patterns_to_test+=" 2mb"
+	fi
+fi
+
+for pattern in $patterns_to_test
 do
 	if [ "$pattern" == "2mb" ]
 	then
