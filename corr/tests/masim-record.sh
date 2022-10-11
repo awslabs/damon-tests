@@ -99,7 +99,7 @@ do
 		max_wss=110000000
 	elif [ "$pattern" == "2mb" ]
 	then
-		min_wss=4000000
+		min_wss=3500000
 		max_wss=7000000
 	fi
 	wss=$($DAMO report wss --raw_number --range 50 51 1 | \
