@@ -33,6 +33,7 @@ then
 	echo "damo at $damo_dir/damo not found"
 	exit 1
 fi
+rm -fr "$ksft_abs_path/damo"
 cp -R "$damo_dir" "$ksft_abs_path/"
 
 masim_dir="$repos_dir/masim"
