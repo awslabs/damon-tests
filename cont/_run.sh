@@ -37,10 +37,10 @@ fi
 		linux-5.15.y \
 	--tree_to_track stable \
 		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
-		linux-5.18.y \
+		linux-6.0.y \
 	--tree_to_track stable \
 		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
-		linux-5.19.y \
+		linux-6.1.y \
 	--tree_to_track linus \
 		git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
 		master \
