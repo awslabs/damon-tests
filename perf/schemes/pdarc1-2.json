@@ -18,8 +18,8 @@
         }, 
         "quotas": {
             "time_ms": "0 ns", 
-            "sz_bytes": "0 B", 
-            "reset_interval_ms": "max", 
+            "sz_bytes": "5.000 GiB", 
+            "reset_interval_ms": "1 s", 
             "weights": {
                 "sz_permil": "0 %", 
                 "nr_accesses_permil": "0 %", 

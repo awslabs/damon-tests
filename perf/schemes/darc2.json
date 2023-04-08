@@ -18,12 +18,12 @@
         }, 
         "quotas": {
             "time_ms": "0 ns", 
-            "sz_bytes": "0 B", 
-            "reset_interval_ms": "max", 
+            "sz_bytes": "500.000 MiB", 
+            "reset_interval_ms": "1 s", 
             "weights": {
                 "sz_permil": "0 %", 
-                "nr_accesses_permil": "0 %", 
-                "age_permil": "0 %"
+                "nr_accesses_permil": "0.3 %", 
+                "age_permil": "0.7 %"
             }
         }, 
         "watermarks": {

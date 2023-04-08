@@ -4,7 +4,7 @@
         "action": "pageout", 
         "access_pattern": {
             "sz_bytes": {
-                "min": "4.000 KiB", 
+                "min": "110.000 MiB", 
                 "max": "max"
             }, 
             "nr_accesses": {
@@ -12,7 +12,7 @@
                 "max": "0 %"
             }, 
             "age": {
-                "min": "5 s", 
+                "min": "20 s", 
                 "max": "max"
             }
         }, 

@@ -1,14 +1,14 @@
 [
     {
         "name": "0", 
-        "action": "hugepage", 
+        "action": "lru_prio", 
         "access_pattern": {
             "sz_bytes": {
-                "min": "0 B", 
+                "min": "4.000 KiB", 
                 "max": "max"
             }, 
             "nr_accesses": {
-                "min": "5 %", 
+                "min": "10 %", 
                 "max": "100 %"
             }, 
             "age": {
@@ -17,30 +17,30 @@
             }
         }, 
         "quotas": {
-            "time_ms": "0 ns", 
+            "time_ms": "20 ms", 
             "sz_bytes": "0 B", 
-            "reset_interval_ms": "max", 
+            "reset_interval_ms": "1 s", 
             "weights": {
                 "sz_permil": "0 %", 
-                "nr_accesses_permil": "0 %", 
-                "age_permil": "0 %"
+                "nr_accesses_permil": "0.3 %", 
+                "age_permil": "0.7 %"
             }
         }, 
         "watermarks": {
-            "metric": "none", 
-            "interval_us": "0 ns", 
-            "high_permil": "0 %", 
-            "mid_permil": "0 %", 
+            "metric": "free_mem_rate", 
+            "interval_us": "5 s", 
+            "high_permil": "100 %", 
+            "mid_permil": "99.9 %", 
             "low_permil": "0 %"
         }, 
         "filters": []
     }, 
     {
         "name": "0", 
-        "action": "nohugepage", 
+        "action": "lru_deprio", 
         "access_pattern": {
             "sz_bytes": {
-                "min": "2.000 MiB", 
+                "min": "4.000 KiB", 
                 "max": "max"
             }, 
             "nr_accesses": {
@@ -48,25 +48,25 @@
                 "max": "0 %"
             }, 
             "age": {
-                "min": "7 s", 
+                "min": "5 s", 
                 "max": "max"
             }
         }, 
         "quotas": {
-            "time_ms": "0 ns", 
+            "time_ms": "20 ms", 
             "sz_bytes": "0 B", 
-            "reset_interval_ms": "max", 
+            "reset_interval_ms": "1 s", 
             "weights": {
                 "sz_permil": "0 %", 
-                "nr_accesses_permil": "0 %", 
-                "age_permil": "0 %"
+                "nr_accesses_permil": "0.3 %", 
+                "age_permil": "0.7 %"
             }
         }, 
         "watermarks": {
-            "metric": "none", 
-            "interval_us": "0 ns", 
-            "high_permil": "0 %", 
-            "mid_permil": "0 %", 
+            "metric": "free_mem_rate", 
+            "interval_us": "5 s", 
+            "high_permil": "100 %", 
+            "mid_permil": "99.9 %", 
             "low_permil": "0 %"
         }, 
         "filters": []

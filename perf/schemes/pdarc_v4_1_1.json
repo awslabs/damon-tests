@@ -17,9 +17,9 @@
             }
         }, 
         "quotas": {
-            "time_ms": "0 ns", 
+            "time_ms": "10 ms", 
             "sz_bytes": "0 B", 
-            "reset_interval_ms": "max", 
+            "reset_interval_ms": "1 s", 
             "weights": {
                 "sz_permil": "0 %", 
                 "nr_accesses_permil": "0 %", 
@@ -27,10 +27,10 @@
             }
         }, 
         "watermarks": {
-            "metric": "none", 
-            "interval_us": "0 ns", 
-            "high_permil": "0 %", 
-            "mid_permil": "0 %", 
+            "metric": "free_mem_rate", 
+            "interval_us": "5 s", 
+            "high_permil": "100 %", 
+            "mid_permil": "99.9 %", 
             "low_permil": "0 %"
         }, 
         "filters": []
