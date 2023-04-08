@@ -1,0 +1,48 @@
+[
+	{
+		"name": "0", "action": "lru_prio", 
+		"access_pattern": {
+			"sz_bytes": {"min": "4 KB", "max": "max"}, 
+			"nr_accesses": {"min": "20 %", "max": "100 %"}, 
+			"age": {"min": "min", "max": "max"}
+		}, 
+		"quotas": {
+			"time_ms": "20 ms", "sz_bytes": "0 B", 
+			"reset_interval_ms": "1s", 
+			"weights": {
+				"sz_permil": "0 %", 
+				"nr_accesses_permil": "30 %", 
+				"age_permil": "70 %"
+			}
+		}, 
+		"watermarks": {
+			"metric": "free_mem_rate", "interval_us": "5s",
+			"high_permil": "100 %", "mid_permil": "99 %", 
+			"low_permil": "0 %"
+		}, 
+		"filters": []
+	},
+	{
+		"name": "1", "action": "lru_deprio", 
+		"access_pattern": {
+			"sz_bytes": {"min": "4 KB", "max": "max"}, 
+			"nr_accesses": {"min": "min", "max": "min"}, 
+			"age": {"min": "5s", "max": "max"}
+		}, 
+		"quotas": {
+			"time_ms": "20 ms", "sz_bytes": "0 B", 
+			"reset_interval_ms": "1s", 
+			"weights": {
+				"sz_permil": "0 %", 
+				"nr_accesses_permil": "30 %", 
+				"age_permil": "70 %"
+			}
+		}, 
+		"watermarks": {
+			"metric": "free_mem_rate", "interval_us": "5s",
+			"high_permil": "100 %", "mid_permil": "99 %", 
+			"low_permil": "0 %"
+		}, 
+		"filters": []
+	}
+]
