@@ -1,0 +1,18 @@
+[                    
+	{
+		"name": "0", "action": "hugepage",
+		"access_pattern": {
+			"sz_bytes": {"min": "0 B", "max": "max"},
+			"nr_accesses": {"min": "5 %", "max": "100 %"},
+			"age": {"min": "0 ns", "max": "max"}
+		}
+	},
+	{
+		"name": "1", "action": "nohugepage",
+		"access_pattern": {
+			"sz_bytes": {"min": "2 MB", "max": "max"},
+			"nr_accesses": {"min": "0 %", "max": "0 %"},
+			"age": {"min": "7 s", "max": "max"}
+		}
+	}
+]
