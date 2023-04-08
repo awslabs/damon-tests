@@ -108,9 +108,15 @@ then
 		"$DAMO" "record" "$ODIR/damon.data" "" "$pid" "$pid" "$timeout"
 elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]] || [[ "$var" == "darc"* ]]
 then
-	if [ -f "$custom_schemes_dir/$var.damos" ]
+	if [ -f "$custom_schemes_dir/$var.json" ]
+	then
+		scheme="$custom_schemes_dir/$var.json"
+	elif [ -f "$custom_schemes_dir/$var.damos" ]
 	then
 		scheme="$custom_schemes_dir/$var.damos"
+	elif [ -f "$schemes_dir/$var.json" ]
+	then
+		scheme="$schemes_dir/$var.json"
 	else
 		scheme="$schemes_dir/$var.damos"
 	fi
@@ -131,12 +137,19 @@ then
 		scheme_name=$(echo "$scheme_name" | awk -F"-nomp" '{print $1}')
 	fi
 
-	if [ -f "$custom_schemes_dir/$scheme_name.damos" ]
+	if [ -f "$custom_schemes_dir/$scheme_name.json" ]
+	then
+		scheme="$custom_schemes_dir/$scheme_name.json"
+	elif [ -f "$custom_schemes_dir/$scheme_name.damos" ]
 	then
 		scheme="$custom_schemes_dir/$scheme_name.damos"
+	elif [ -f "$schemes_dir/$scheme_name.json" ]
+	then
+		scheme="$schemes_dir/$scheme_name.json"
 	else
 		scheme="$schemes_dir/$scheme_name.damos"
 	fi
+
 	echo "apply scheme '$scheme'"
 	sudo "$DAMO_WRAPPER" \
 		"$DAMO" "schemes" "" "$scheme" paddr "$pid" "$timeout"
