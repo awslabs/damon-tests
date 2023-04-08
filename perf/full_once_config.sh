@@ -21,8 +21,6 @@ do
 	workloads+=" splash2x/$w"
 done
 
-#vars="orig prcl darc"
-#vars="orig pprcl pdarc_v4_1_1 pdarc_v4_2_1 pdarc_v4_1_2 pdarc_v4_2_2 pdarc_v4_1_3 pdarc_v4_2_3"
 vars="orig rec prec thp ethp prcl pdarc_v4_2_2 ttmo plrus-2"
 
 VARIANTS=""
