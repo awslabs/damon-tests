@@ -48,8 +48,6 @@ fi
 	--tree_to_track linus \
 		git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
 		master \
-	--tree_to_track akpm-mm \
-		https://github.com/hnaz/linux-mm master \
 	--tree_to_track akpm.korg.mm \
 		git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-stable \
 	--tree_to_track akpm.korg.mm \
