@@ -19,17 +19,25 @@ work_dir=$5
 timeout_interval=3600
 for i in {1..5};
 do
-	if ssh "$test_user@$test_machine" -p "$ssh_port" \
+	ssh "$test_user@$test_machine" -p "$ssh_port" \
 		-o ServerAliveInterval=60 \ nohup \
 		sudo timeout "$timeout_interval" \
 			"$work_dir/damon-tests/corr/run.sh" 2>&1 | \
 				tee --append "$log_file"
+	exit_code=$?
+	if [ "$exit_code" -eq 0 ]
 	then
 		echo "$(basename "$0") SUCCESS" | tee --append "$log_file"
 		break
 	fi
-	echo "$(basename "$0") time out or failure ($i times)" | \
-		tee --append "$log_file"
+	if [ "$exit_code" -eq 124 ]
+	then
+		echo "$(basename "$0") time out ($i times)" | \
+			tee --append "$log_file"
+	else
+		echo "$(basename "$0") failed ($i times)" | \
+			tee --append "$log_file"
+	fi
 	ssh -p "$ssh_port" "$test_user@$test_machine" \
 		sudo shutdown -r now 2>&1 | tee --append "$log_file"
 	sleep 60
