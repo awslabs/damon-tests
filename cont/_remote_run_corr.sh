@@ -28,7 +28,8 @@ do
 		echo "$(basename "$0") SUCCESS" | tee --append "$log_file"
 		break
 	fi
-	echo "$(basename "$0") time out ($i times)" | tee --append "$log_file"
+	echo "$(basename "$0") time out or failure ($i times)" | \
+		tee --append "$log_file"
 	ssh -p "$ssh_port" "$test_user@$test_machine" \
 		sudo shutdown -r now 2>&1 | tee --append "$log_file"
 	sleep 60
