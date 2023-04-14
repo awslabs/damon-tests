@@ -23,7 +23,7 @@ do
 		-o ServerAliveInterval=60 \ nohup \
 		sudo timeout "$timeout_interval" \
 			"$work_dir/damon-tests/corr/run.sh" 2>&1 | \
-				tee "$log_file"
+				tee --append "$log_file"
 	then
 		echo "$(basename "$0") SUCCESS" | tee --append "$log_file"
 		break
