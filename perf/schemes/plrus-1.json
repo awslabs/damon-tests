@@ -1,6 +1,5 @@
 [
     {
-        "name": "0", 
         "action": "lru_prio", 
         "access_pattern": {
             "sz_bytes": {
@@ -36,7 +35,6 @@
         "filters": []
     }, 
     {
-        "name": "1", 
         "action": "lru_deprio", 
         "access_pattern": {
             "sz_bytes": {
