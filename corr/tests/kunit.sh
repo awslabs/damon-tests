@@ -1,6 +1,15 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0
 
+ksft_skip=4
+
+# we are in tools/testing/selftests/damon-tests/
+if [ ! -f ../../kunit/kunit.py ]
+then
+	echo "kunit.py not found"
+	exit "$ksft_skip"
+fi
+
 TEST_DIR=$PWD
 KUNIT_BDIR=$TEST_DIR/kunit.out
 KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
