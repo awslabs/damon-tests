@@ -12,10 +12,12 @@ LOG=$1
 echo -e "\e[32m"
 grep -e '^ok' $LOG
 echo -e "\e[33m"
-grep -e '^not ok' $LOG
-failed=$?
 
-if [ $failed -eq 0 ]
+nr_failures=$(grep -e '^not ok' "$LOG" | wc -l)
+nr_skip=$(grep -e '^not ok' "$LOG" | grep -e '# SKIP$' | wc -l)
+nr_failures=$((nr_failures - nr_skip))
+
+if [ "$nr_failures" -gt 0 ]
 then
 	echo
 	echo -e "\e[91mFAIL\e[39m"
