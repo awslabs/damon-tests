@@ -50,17 +50,13 @@ cp -R "$masim_dir" "$ksft_abs_path/"
 
 	# commit 44ee9ff07fd7 ("selftests: error out if kernel header files are
 	# not yet built") made 'make headers' required for kselftest in
-	# general.  Work around the check with below hack.
-	touch usr/include/foo.h
-	mkdir usr/include/linux
-	touch usr/include/linux/foo.h
+	# general.  Respect the requirement.
+	linux_build_output="$ksft_abs_path/linux_build_output"
+	make O="$linux_build_output" headers
+	export KBUILD_OUTPUT="$linux_build_output"
 
 	make --silent -C $ksft_dir/../damon run_tests | tee $LOG
 	make --silent -C $ksft_dir/ run_tests | tee -a $LOG
-
-	# cleanup the 'make headers' requirement hack.
-	rm usr/include/foo.h
-	rm -fr usr/include/linux
 
 	echo "# kselftest dir '$ksft_abs_path' is in dirty state."
 	echo "# the log is at '$LOG'."
