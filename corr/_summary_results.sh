@@ -13,6 +13,8 @@ echo -e "\e[32m"
 grep -e '^ok' $LOG
 echo -e "\e[33m"
 
+grep -e '^not ok' "$LOG"
+
 nr_failures=$(grep -e '^not ok' "$LOG" | wc -l)
 nr_skip=$(grep -e '^not ok' "$LOG" | grep -e '# SKIP$' | wc -l)
 nr_failures=$((nr_failures - nr_skip))
