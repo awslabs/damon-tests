@@ -47,5 +47,31 @@ do
 	echo >> "$mail_file"
 done
 
+if [ "$remote" = "stable-rc" ]
+then
+	echo >> "$mail_file"
+	echo "For stable rc announcement reply:" >> "$mail_file"
+	echo >> "$mail_file"
+	echo "# TODO: Cc damon@lists.linux.dev
+
+This rc kernel passes DAMON functionality test[1] on my test machine.
+Attaching the test results summary below.  Please note that I retrieved the
+kernel from linux-stable-rc tree[2].
+
+Tested-by: SeongJae Park <sj@kernel.org>
+
+[1] https://github.com/awslabs/damon-tests/tree/next/corr
+[2] $commit_intro
+
+Thanks,
+SJ
+
+[...]
+
+---
+" >> "$mail_file"
+	tail -n 30 "$logs_dir"/"remote_run_corr_"* >> "$mail_file"
+fi
+
 git send-email --compose-encoding UTF-8 --to "$recipients" "$mail_file"
 rm "$mail_file"
