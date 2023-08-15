@@ -73,5 +73,6 @@ SJ
 	tail -n 30 "$logs_dir"/"remote_run_corr_"* >> "$mail_file"
 fi
 
-git send-email --compose-encoding UTF-8 --to "$recipients" "$mail_file"
+git send-email --compose-encoding UTF-8 --to "$recipients" --confirm never \
+	"$mail_file"
 rm "$mail_file"
