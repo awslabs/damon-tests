@@ -41,6 +41,10 @@ done
 kill -SIGINT "$damo_pid"
 
 monitor_on="/sys/kernel/debug/damon/monitor_on"
+if [ -d "/sys/kernel/mm/damon/admin" ]
+then
+	monitor_on="/sys/kernel/mm/damon/admin/kdamonds/0/state"
+fi
 for ((i = 0;  i > 0; i++))
 do
 	monitor_on=$(cat "$monitor_on")
