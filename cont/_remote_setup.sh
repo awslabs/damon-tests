@@ -7,7 +7,7 @@ if [ $# -ne 10 ]
 then
 	echo "Usage: $0 <test user> <test machine> <ssh port> <log file> \\"
 	echo "		<work dir> <damon-tests version> <damo version> \\"
-	echo "		<linux ver> <linux remote name> <linux remote url>"
+	echo "		<linux commit> <linux remote name> <linux remote url>"
 	exit 1
 fi
 
@@ -19,7 +19,7 @@ log_file=$4
 remote_work_dir=$5
 damon_tests_version=$6
 damo_version=$7
-linux_ver=$8
+linux_commit=$8
 linux_remote_name=$9
 linux_remote_url="${10}"
 
@@ -32,7 +32,7 @@ rsync -e "ssh -p $ssh_port" "$bindir/$local_setup_sh" \
 if ! ssh -p "$ssh_port" -o ServerAliveInterval=60 "$test_user@$test_machine" \
 	nohup "$remote_work_dir/$local_setup_sh" "$remote_work_dir" \
 	"$damon_tests_version" "$damo_version" \
-	"$linux_ver" "$linux_remote_name" "$linux_remote_url" 2>&1 | \
+	"$linux_commit" "$linux_remote_name" "$linux_remote_url" 2>&1 | \
 	tee --append "$log_file"
 then
 	echo "$local_setup_sh failed" | tee --append "$log_file"
