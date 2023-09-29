@@ -101,8 +101,8 @@ checkout_git "$linux_path" "$linux_remote_name" "$linux_remote_url" \
 # build/install linux
 build_linux=$lazybox_path/scripts/kernel_dev/build.sh
 damon_config=$damon_tests_path/corr/tests/damon_config
-sudo bash "$build_linux" --install "$linux_path" "$linux_path.out" \
-	"$damon_config"
+sudo bash "$build_linux" --install --config "$damon_config" \
+	"$linux_path" "$linux_path.out"
 
 # build/install perf
 build_install_perf="$lazybox_path/scripts/kernel_dev/build_install_perf.sh"
