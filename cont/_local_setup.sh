@@ -7,15 +7,15 @@ set -e
 
 if [ $# -ne 6 ]
 then
-	echo "Usage: $0 <workdir> <damon-tests ver> <damo ver> \\"
-	echo "		<linux ver> <linux remote name> <linux remote url>"
+	echo "Usage: $0 <workdir> <damon-tests commit> <damo commit> \\"
+	echo "		<linux commit> <linux remote name> <linux remote url>"
 	exit 1
 fi
 
 work_dir=$1
-damon_tests_ver=$2
-damo_ver=$3
-linux_ver=$4
+damon_tests_commit=$2
+damo_commit=$3
+linux_commit=$4
 linux_remote_name=$5
 linux_remote_url=$6
 
@@ -85,18 +85,18 @@ echo "setup damon-tests"
 damon_tests_path=$work_dir/damon-tests
 fetch_git "$damon_tests_path" "upstream" "$gh_upstream/damon-tests"
 fetch_git "$damon_tests_path" "downstream" "$gh_downstream/damon-tests"
-git -C "$damon_tests_path" checkout "$damon_tests_ver"
+git -C "$damon_tests_path" checkout "$damon_tests_commit"
 
 echo "setup damo"
 damo_path=$work_dir/damo
 fetch_git "$damo_path" "upstream" "$gh_upstream/damo"
 fetch_git "$damo_path" "downstream" "$gh_downstream/damo"
-git -C "$damo_path" checkout "$damo_ver"
+git -C "$damo_path" checkout "$damo_commit"
 
 echo "setup linux"
 linux_path=$work_dir/linux
 checkout_git "$linux_path" "$linux_remote_name" "$linux_remote_url" \
-	"$linux_ver"
+	"$linux_commit"
 
 # build/install linux
 build_linux=$lazybox_path/scripts/kernel_dev/build.sh
