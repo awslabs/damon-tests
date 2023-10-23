@@ -17,23 +17,27 @@ KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
 rm -fr "$KUNIT_BDIR"
 mkdir -p $KUNIT_BDIR
 
-if [ ! -f $KUNITCONFIG ]; then
+echo "
+CONFIG_KUNIT=y
+
+CONFIG_DAMON=y
+CONFIG_DAMON_KUNIT_TEST=y
+
+CONFIG_DAMON_VADDR=y
+CONFIG_DAMON_VADDR_KUNIT_TEST=y
+
+CONFIG_DEBUG_FS=y
+CONFIG_DAMON_DBGFS=y
+CONFIG_DAMON_DBGFS_KUNIT_TEST=y
+" > $KUNITCONFIG
+
+# kunit compilation could fail due to wrong config
+if [ -f ../../../../mm/damon/sysfs-test.h ]
+then
 	echo "
-	CONFIG_KUNIT=y
-
-	CONFIG_DAMON=y
-	CONFIG_DAMON_KUNIT_TEST=y
-
-	CONFIG_DAMON_VADDR=y
-	CONFIG_DAMON_VADDR_KUNIT_TEST=y
-
-	CONFIG_DEBUG_FS=y
-	CONFIG_DAMON_DBGFS=y
-	CONFIG_DAMON_DBGFS_KUNIT_TEST=y
-
 	CONFIG_DAMON_SYSFS=y
 	CONFIG_DAMON_SYSFS_KUNIT_TEST=y
-	" > $KUNITCONFIG
+	" >> $KUNITCONFIG
 fi
 
 # we are in tools/testing/selftests/damon-tests/
