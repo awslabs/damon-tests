@@ -22,7 +22,10 @@ do
 	if [ ! "$last_psi" = "" ]
 	then
 		# 1% (10ms per second) PSI is the goal
-		echo 1 > "$goals_dir/nr_goals"
+		if [ ! -d "$goal_dir" ]
+		then
+			echo 1 > "$goals_dir/nr_goals"
+		fi
 		echo 10000 > "$goal_dir/target_value"
 		echo $((now_psi - last_psi)) > "$goal_dir/current_value"
 		echo commit_schemes_quota_goals > "$sysfs_dir/state"
