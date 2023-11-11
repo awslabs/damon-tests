@@ -5,7 +5,7 @@ bindir=$(dirname "$0")
 odir=$1
 var=$(basename $(dirname "$odir"))
 
-if [ ! "$var" = "pdarc_auto" ]
+if ! echo "$var" | grep "_auto$" --quiet
 then
 	exit 0
 fi
