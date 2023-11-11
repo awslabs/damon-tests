@@ -10,12 +10,9 @@ then
 	exit 0
 fi
 
-cd /sys/kernel/mm/damon/admin/kdamonds/0/
-echo 1 > ./contexts/0/schemes/0/quotas/goals/nr_goals
-echo 999 > ./contexts/0/schemes/0/quotas/goals/0/target_value
-echo 999 > ./contexts/0/schemes/0/quotas/goals/0/current_value
-echo 1000 > ./contexts/0/schemes/0/quotas/reset_interval_ms
-echo commit > ./state
+sysfs_dir="/sys/kernel/mm/damon/admin/kdamonds/0/"
+goals_dir="$sysfs_dir/contexts/0/schemes/0/quotas/goals/"
+goal_dir="$sysfs_dir/contexts/0/schemes/0/quotas/goals/0"
 
 last_psi=""
 while :;
@@ -25,9 +22,10 @@ do
 	if [ ! "$last_psi" = "" ]
 	then
 		# 1% (10ms per second) PSI is the goal
-		echo 10000 > /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/goals/0/target_value
-		echo $((now_psi - last_psi)) > /sys/kernel/mm/damon/admin/kdamonds/0/contexts/0/schemes/0/quotas/goals/0/current_value
-		echo commit_schemes_quota_goals > /sys/kernel/mm/damon/admin/kdamonds/0/state
+		echo 1 > "$goals_dir/nr_goals"
+		echo 10000 > "$goal_dir/target_value"
+		echo $((now_psi - last_psi)) > "$goal_dir/current_value"
+		echo commit_schemes_quota_goals > "$sysfs_dir/state"
 	fi
 	last_psi=$now_psi
 	sleep 1
