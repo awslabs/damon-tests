@@ -33,7 +33,7 @@ do
 
 	now_psi_bp=$(cat /proc/pressure/memory | grep some | awk '{print $2}' | \
 		awk -F= '{print $2 * 100}')
-	echo psi_goal_bp > "$goal_dir/target_value"
+	echo "$psi_goal_bp" > "$goal_dir/target_value"
 	echo "$now_psi_bp" > "$goal_dir/current_value"
 	echo commit_schemes_quota_goals > "$sysfs_dir/state"
 	sleep 1
