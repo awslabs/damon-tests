@@ -131,6 +131,11 @@ then
 	done
 
 	kill -SIGINT "$damo_pid"
+	while pidof kdamond.0
+	do
+		echo "wait kdamond to finish?"
+		sleep 1
+	done
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
 	[[ "$var" == "plrus-"* ]]
 then
