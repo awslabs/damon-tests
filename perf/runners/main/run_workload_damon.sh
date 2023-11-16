@@ -104,8 +104,7 @@ custom_schemes_dir="$schemes_dir/$work_category/$work"
 
 if [ "$var" = "rec" ]
 then
-	sudo "$DAMO_WRAPPER" \
-		"$DAMO" "record" "$ODIR/damon.data" "" "$pid" "$pid" "$timeout"
+	sudo timeout "$timeout" "$DAMO" record "$pid" --out "$ODIR/damon.data"
 elif [ "$var" == "ethp" ] || [[ "$var" == "prcl"* ]] || [[ "$var" == "darc"* ]]
 then
 	if [ -f "$custom_schemes_dir/$var.json" ]
