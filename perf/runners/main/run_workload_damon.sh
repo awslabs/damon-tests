@@ -149,8 +149,20 @@ then
 	scheme="$schemes_dir/$scheme_name.json"
 
 	echo "apply scheme '$scheme'"
-	sudo "$DAMO_WRAPPER" \
-		"$DAMO" "schemes" "" "$scheme" paddr "$pid" "$timeout"
+
+	sudo timeout "$timeout" "$DAMO" schemes paddr --schemes "$scheme" &
+	damo_pid=$!
+	while [ -d "/proc/$pid" ]
+	do
+		sleep 1
+	done
+
+	kill -SIGINT "$damo_pid"
+	while pidof kdamond.0
+	do
+		echo "wait kdamond to finish?"
+		sleep 1
+	done
 else
 	echo "Wrong var $var"
 	killall $cmdname
