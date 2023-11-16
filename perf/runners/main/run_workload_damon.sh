@@ -135,18 +135,7 @@ then
 		scheme_name=$(echo "$scheme_name" | awk -F"-nomp" '{print $1}')
 	fi
 
-	if [ -f "$custom_schemes_dir/$scheme_name.json" ]
-	then
-		scheme="$custom_schemes_dir/$scheme_name.json"
-	elif [ -f "$custom_schemes_dir/$scheme_name.damos" ]
-	then
-		scheme="$custom_schemes_dir/$scheme_name.damos"
-	elif [ -f "$schemes_dir/$scheme_name.json" ]
-	then
-		scheme="$schemes_dir/$scheme_name.json"
-	else
-		scheme="$schemes_dir/$scheme_name.damos"
-	fi
+	scheme="$schemes_dir/$scheme_name.json"
 
 	echo "apply scheme '$scheme'"
 	sudo "$DAMO_WRAPPER" \
