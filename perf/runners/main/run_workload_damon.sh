@@ -120,8 +120,7 @@ then
 		scheme="$schemes_dir/$var.damos"
 	fi
 	echo "apply scheme '$scheme'"
-	sudo "$DAMO_WRAPPER" \
-		"$DAMO" "schemes" "" "$scheme" "$pid" "$pid" "$timeout"
+	sudo timeout "$timeout" "$DAMO" schemes "$pid"
 elif [ "$var" = "prec" ]
 then
 	sudo "$DAMO_WRAPPER" \
