@@ -123,8 +123,14 @@ then
 	sudo timeout "$timeout" "$DAMO" schemes "$pid"
 elif [ "$var" = "prec" ]
 then
-	sudo "$DAMO_WRAPPER" \
-		"$DAMO" "record" "$ODIR/damon.data" "" paddr "$pid" "$timeout"
+	sudo timeout "$timeout" "$DAMO" record paddr --out "$ODIR/damon.data" &
+	damo_pid=$!
+	while [ -d "/proc/$pid" ]
+	do
+		sleep 1
+	done
+
+	kill -SIGINT "$damo_pid"
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
 	[[ "$var" == "plrus-"* ]]
 then
