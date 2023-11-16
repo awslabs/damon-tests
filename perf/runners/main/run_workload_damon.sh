@@ -123,18 +123,11 @@ then
 elif [ "$var" = "prec" ]
 then
 	sudo timeout "$timeout" "$DAMO" record paddr --out "$ODIR/damon.data" &
-	damo_pid=$!
 	while [ -d "/proc/$pid" ]
 	do
 		sleep 1
 	done
-
-	kill -SIGINT "$damo_pid"
-	while pidof kdamond.0
-	do
-		echo "wait kdamond to finish?"
-		sleep 1
-	done
+	sudo "$DAMO" stop
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
 	[[ "$var" == "plrus-"* ]]
 then
@@ -150,18 +143,11 @@ then
 	echo "apply scheme '$scheme'"
 
 	sudo timeout "$timeout" "$DAMO" schemes paddr --schemes "$scheme" &
-	damo_pid=$!
 	while [ -d "/proc/$pid" ]
 	do
 		sleep 1
 	done
-
-	kill -SIGINT "$damo_pid"
-	while pidof kdamond.0
-	do
-		echo "wait kdamond to finish?"
-		sleep 1
-	done
+	sudo "$DAMO" stop
 else
 	echo "Wrong var $var"
 	killall $cmdname
