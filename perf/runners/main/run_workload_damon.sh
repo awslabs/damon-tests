@@ -16,7 +16,6 @@ fi
 BINDIR=$(dirname "$0")
 ODIR=$1
 
-DAMO_WRAPPER="$BINDIR/_run_damo.sh"
 repos_dir="$(dirname "$0")/../../../../"
 PARSEC_RUN="$repos_dir/parsec3_on_ubuntu/run.sh"
 SILO_DBTEST="$repos_dir/silo/out-perf.masstree/benchmarks/dbtest"
