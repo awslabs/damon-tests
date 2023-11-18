@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Do feedback-based quota autotune for "*_auto*" variants.
+# Do feedback-based quota autotune for "prcl_auto*" variants.
 #
-# For prcl, var name is XXX_auto[_<goal_bp>].  The <goal_bp> means the target
-# value of last 10 secs memory some PSI, in bp (per 10K).  1% by default.
+# var name is XXX_auto[_<goal_bp>].  The <goal_bp> means the target value of
+# last 10 secs memory some PSI, in bp (per 10K).  1% by default.
 
 # $1: <...>/results/<exp>/<variance>/0(0-9)
 bindir=$(dirname "$0")
 odir=$1
 var=$(basename $(dirname "$odir"))
 
-if ! echo "$var" | grep "_auto" --quiet
+if ! echo "$var" | grep "prcl_auto" --quiet
 then
 	exit 0
 fi
