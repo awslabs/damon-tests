@@ -129,7 +129,7 @@ then
 	done
 	sudo "$DAMO" stop
 elif [ "$var" = "pprcl" ] || [[ "$var" == "pdarc"* ]] || \
-	[[ "$var" == "plrus-"* ]]
+	[[ "$var" == "plrus"* ]]
 then
 	scheme_name="$var"
 	if [[ "$scheme_name" == "plrus-"* ]]
