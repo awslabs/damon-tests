@@ -66,7 +66,7 @@ do
 	rm -fr "$dst_dir/results.$host"
 done
 
-"$bindir/mk_visual_report.sh" "$dst_dir/results" "$dst_dir/visual_report"
+# "$bindir/mk_visual_report.sh" "$dst_dir/results" "$dst_dir/visual_report"
 
 tmp_cfg="$CFG"_for_"$(date +%Y-%m-%d-%H-%M-%S)"
 cp "$CFG" "$tmp_cfg"
