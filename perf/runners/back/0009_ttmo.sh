@@ -5,7 +5,7 @@ bindir=$(dirname "$0")
 odir=$1
 var=$(basename $(dirname "$odir"))
 
-if [ ! "$var" = "ttmo" ] && [[ ! "$var" == "plrus-"* ]]
+if [ ! "$var" = "ttmo" ] && [[ ! "$var" == "plrus"* ]]
 then
 	exit 0
 fi
