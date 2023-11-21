@@ -22,7 +22,7 @@ do
 done
 
 vars="orig rec prec thp ethp prcl pdarc_v4_2_2 ttmo plrus-2"
-vars="orig plrus-2 plrus_auto plrus_auto_50 plrus_auto_30"
+vars="orig plrus-2 plrus_auto_7000 plrus_auto_5000 plrus_auto_3000"
 
 VARIANTS=""
 
