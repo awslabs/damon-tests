@@ -21,8 +21,7 @@ do
 	workloads+=" splash2x/$w"
 done
 
-vars="orig rec prec thp ethp prcl pdarc_v4_2_2 ttmo plrus-2"
-vars="orig plrus-2 plrus_auto_7000 plrus_auto_5000 plrus_auto_3000 prcl_untuned prcl prcl_auto_50"
+vars="orig rec prec thp ethp prcl prcl_auto_50 pdarc_v4_2_2 ttmo plrus-2 plrus_auto_7000"
 
 VARIANTS=""
 
