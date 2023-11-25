@@ -19,6 +19,8 @@ nr_hosts=$(($# - 4))
 hosts=(${@:4:$nr_hosts})
 dst_dir="${@: -1}"
 
+dst_dir="$dst_dir/$(date +%Y-%m-%d-%H-%M-%S)/"
+
 if [ ! -f "$CFG" ]
 then
 	echo "CFG should be set properly but \"$CFG\""
