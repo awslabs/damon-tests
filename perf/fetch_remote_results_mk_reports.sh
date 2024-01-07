@@ -79,6 +79,7 @@ then
 fi
 mkdir -p "$final_dst_dir"
 mv "$tmp_dst_dir"/* "$final_dst_dir"/
+rmdir "$tmp_dst_dir"
 
 "$bindir/mk_visual_report.sh" "$final_dst_dir/results" "$final_dst_dir/visual_report"
 
