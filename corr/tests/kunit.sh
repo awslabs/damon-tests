@@ -43,7 +43,7 @@ fi
 if grep --quiet DAMON_DBGFS_DEPRECATED ../../../../mm/damon/Kconfig
 then
 	echo "
-	CONFIG_DAMON_DBGFS_DEPRECATED
+	CONFIG_DAMON_DBGFS_DEPRECATED=y
 	" >> $KUNITCONFIG
 fi
 
