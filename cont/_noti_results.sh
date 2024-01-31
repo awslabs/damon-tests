@@ -80,6 +80,9 @@ then
 	then
 		git clone git://git.kernel.org/pub/scm/linux/kernel/git/sj/damon-hack.git \
 			"$damon_hack_dir"
+	else
+		git -C "$damon_hack_dir" remote update
+		git -C "$damon_hack_dir" reset --hard origin/master
 	fi
 	echo >> "$mail_file"
 	pushd "$repo"
