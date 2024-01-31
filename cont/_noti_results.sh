@@ -73,6 +73,21 @@ SJ
 	tail -n 30 "$logs_dir"/"remote_run_corr_"* >> "$mail_file"
 fi
 
+if [ "$remote" = "akpm.korg.mm" ]
+then
+	damon_hack_dir=$(realpath "$repo/../damon-hack")
+	if [ ! -d "$damon_hack_dir" ]
+	then
+		git clone git://git.kernel.org/pub/scm/linux/kernel/git/sj/damon-hack.git \
+			"$damon_hack_dir"
+	fi
+	echo >> "$mail_file"
+	pushd "$repo"
+	mm_commits_stat_text=$("$damon_hack_dir/mm_commits_stat.sh")
+	popd
+	echo "$mm_commits_stat_text" >> "$mail_file"
+fi
+
 git send-email --compose-encoding UTF-8 --to "$recipients" --confirm never \
 	"$mail_file"
 rm "$mail_file"
