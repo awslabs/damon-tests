@@ -19,6 +19,8 @@ linux_commit=$4
 linux_remote_name=$5
 linux_remote_url=$6
 
+sudo apt install -y git build-essential
+
 fetch_git()
 {
 	if [ $# -ne 3 ]
