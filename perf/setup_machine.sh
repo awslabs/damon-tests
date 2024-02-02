@@ -11,3 +11,7 @@ cont_local_setup_sh=$(realpath "$bindir/../cont/_local_setup.sh")
 	gh.damon https://github.com/damonitor/linux.git
 
 # Install PARSEC3/SPLASH-2X
+cd "$repos_dir"
+git clone https://github.com/sjp38/parsec3_on_ubuntu
+cd parsec3_on_ubuntu
+./build.sh
