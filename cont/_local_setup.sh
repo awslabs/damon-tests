@@ -103,8 +103,14 @@ checkout_git "$linux_path" "$linux_remote_name" "$linux_remote_url" \
 # build/install linux
 build_linux=$lazybox_path/scripts/kernel_dev/build.sh
 damon_config=$damon_tests_path/corr/tests/damon_config
+damon_config_edited="$damon_config.cont_kernel"
+cp "$damon_config" "$damon_config_edited"
+# For perf tests
+echo "CONFIG_PSI=y" >> "$damon_config_edited"
+echo "CONFIG_ZRAM=m" >> "$damon_config_edited"
 sudo bash "$build_linux" --install --config "$damon_config" \
 	"$linux_path" "$linux_path.out"
+rm "$damon_config_edited"
 
 # build/install perf
 build_install_perf="$lazybox_path/scripts/kernel_dev/build_install_perf.sh"
