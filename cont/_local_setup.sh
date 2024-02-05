@@ -108,7 +108,7 @@ cp "$damon_config" "$damon_config_edited"
 # For perf tests
 echo "CONFIG_PSI=y" >> "$damon_config_edited"
 echo "CONFIG_ZRAM=m" >> "$damon_config_edited"
-sudo bash "$build_linux" --install --config "$damon_config" \
+sudo bash "$build_linux" --install --config "$damon_config_edited" \
 	"$linux_path" "$linux_path.out"
 rm "$damon_config_edited"
 
