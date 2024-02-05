@@ -6,6 +6,11 @@ bindir=$(dirname "$0")
 repos_dir=$(realpath "$bindir/../../")
 
 # Setup test machine for corr test run
+linux_dir="$repos_dir/linux"
+if [ -d "$linux_dir" ]
+then
+	git -C "$linux_dir" fetch gh.damon
+fi
 cont_local_setup_sh=$(realpath "$bindir/../cont/_local_setup.sh")
 "$cont_local_setup_sh" "$repos_dir" upstream/next upstream/next gh.damon/next \
 	gh.damon https://github.com/damonitor/linux.git
