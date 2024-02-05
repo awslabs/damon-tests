@@ -17,7 +17,7 @@ then
 	git clone https://github.com/sjp38/parsec3_on_ubuntu
 else
 	git -C parsec3_on_ubuntu remote update
-	git checkout origin/master
+	git -C parsec3_on_ubuntu checkout origin/master
 fi
 cd parsec3_on_ubuntu
 ./build.sh
