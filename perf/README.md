@@ -23,31 +23,14 @@ The workloads are:
 Pre-requisites
 ==============
 
-lazybox
--------
+setup.sh
+--------
 
-The tests are using lazybox[1].  You should place it at '$HOME/lazybox'.  For
-example, you can:
-
-    $ cd $HOME; git clone https://github.com/sjp38/lazybox
-
-[1] https://github.com/sjp38/lazybox
-
-
-parsec3_on_ubuntu
------------------
-
-For more easier and automated use of the target workloads in PARSEC3 and
-SPLASH-2X, the tests use another wrapper for the benchmark suites, called
-parsec3_on_ubuntu[1].  You should first place it at '$HOME/parsec3_on_ubuntu'.
-For example:
-
-    $ cd $HOME; git clone https://github.com/sjp38/parsec3_on_ubuntu
-
-After that, you should follow the instructions in the README in the project to
-install PARSEC3 and SPLASH-2X workloads.
-
-[1] https://github.com/sjp38/parsec3_on_ubuntu
+Run setup.sh on this directory.  It clones necessary repositories, install
+linux kernel with appropriate configs, and setup PARSEC3/SPLASH-2X benchmarks.
+You may modify the script before running if you want to have a customized
+environment or want to skip some of the setup stesp such as PARSEC3/SPLASH-2X
+setup.
 
 
 silo

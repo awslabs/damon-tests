@@ -17,7 +17,7 @@ BINDIR=$(dirname "$0")
 ODIR=$1
 
 repos_dir="$(dirname "$0")/../../../../"
-PARSEC_RUN="$repos_dir/parsec3_on_ubuntu/run.sh"
+PARSEC_BENCHMARK="$repos_dir/parsec-benchmark"
 SILO_DBTEST="$repos_dir/silo/out-perf.masstree/benchmarks/dbtest"
 DAMO="$repos_dir/damo/damo"
 LBX="$repos_dir/lazybox"
@@ -32,10 +32,12 @@ echo $work_category $work
 
 if [ "$work_category" = "splash2x" ]
 then
-	RUN_CMD="$PARSEC_RUN splash2x.$work"
+	RUN_CMD="bash -c \"cd $PARSEC_BENCHMARK && source ./env.sh && \
+		parsecmgmt -a run -p splash2x.$work -i native -n 1\""
 elif [ "$work_category" = "parsec3" ]
 then
-	RUN_CMD="$PARSEC_RUN $work"
+	RUN_CMD="bash -c \"cd $PARSEC_BENCHMARK && source ./env.sh && \
+		parsecmgmt -a run -p $work -i native -n 1\""
 elif [ "$work_category" = "ycsb" ]
 then
 	RUN_CMD="$SILO_DBTEST --bench ycsb --verbose --scale-factor 1000 \

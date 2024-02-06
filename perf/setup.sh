@@ -31,12 +31,14 @@ cont_local_setup_sh=$(realpath "$bindir/../cont/_local_setup.sh")
 
 # Install PARSEC3/SPLASH-2X
 cd "$repos_dir"
-if [ ! -d parsec3_on_ubuntu ]
+if [ ! -d parsec-benchmark ]
 then
-	git clone https://github.com/sjp38/parsec3_on_ubuntu
+	git clone https://github.com/damonitor/parsec-benchmark
 else
-	git -C parsec3_on_ubuntu remote update
-	git -C parsec3_on_ubuntu checkout origin/master
+	git -C parsec-benchmark fetch origin
+	git -C parsec-benchmark checkout origin/master
 fi
-cd parsec3_on_ubuntu
-./build.sh
+cd parsec-benchmark
+./configure
+./get-inputs -n
+parsecmgmt -a build
