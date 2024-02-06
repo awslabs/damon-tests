@@ -13,6 +13,13 @@ then
 	exit 1
 fi
 
+odir=$1
+var=$(basename $(dirname "$odir"))
+if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmp" ]
+then
+	exit 0
+fi
+
 cpu_usage_file=$1/kdamond_cpu_usage
 rm "$cpu_usage_file"
 touch "$cpu_usage_file"
