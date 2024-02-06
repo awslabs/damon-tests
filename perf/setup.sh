@@ -43,4 +43,4 @@ fi
 cd parsec-benchmark
 ./configure
 ./get-inputs -n
-parsecmgmt -a build
+bash -c "source env.sh && parsecmgmt -a build"
