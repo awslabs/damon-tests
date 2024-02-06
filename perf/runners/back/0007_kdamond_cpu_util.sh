@@ -52,7 +52,7 @@ do
 		cpuacct_cgroup_mounted="true"
 		break
 	fi
-done < <(mount | grep -e "^cgroup on ")
+done < <(mount | grep "type cgroup ")
 
 if [ "$cpuacct_cgroup_mounted" = "false" ]
 then
