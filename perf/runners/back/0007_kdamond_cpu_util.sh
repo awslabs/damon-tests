@@ -15,7 +15,7 @@ fi
 
 odir=$1
 var=$(basename $(dirname "$odir"))
-if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmp" ]
+if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmo" ]
 then
 	exit 0
 fi
