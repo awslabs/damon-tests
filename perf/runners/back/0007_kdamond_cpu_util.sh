@@ -15,64 +15,16 @@ fi
 
 odir=$1
 var=$(basename $(dirname "$odir"))
+
+cpu_usage_file=$1/kdamond_cpu_usage
+rm -f "$cpu_usage_file"
+touch "$cpu_usage_file"
+
 if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmo" ]
 then
 	exit 0
 fi
 
-cpu_usage_file=$1/kdamond_cpu_usage
-rm "$cpu_usage_file"
-touch "$cpu_usage_file"
-
-cpuacct_cgroup_mounted="false"
-cpuacct_cgroup_root="/sys/fs/cgroup"
-
-while read -r line
-do
-	options=$(echo "$line" | awk '{print $6}')
-	if echo "$options" | grep -q "cpuacct"
-	then
-		cpuacct_cgroup_root=$(echo "$line" | awk '{print $3}')
-		cpuacct_cgroup_dir="$cpuacct_cgroup_root/kdamond"
-		echo "found cpuacct cgroup $cpuacct_cgroup_root"
-		if [ -d "$cpuacct_cgroup_dir" ]
-		then
-			if [ ! "$(cat "$cpuacct_cgroup_dir/tasks")" = "" ]
-			then
-				echo "someone is using kdamond cgroup"
-				exit 1
-			fi
-		else
-			if ! mkdir "$cpuacct_cgroup_dir"
-			then
-				echo "cpuacct cgroup dir creation failed"
-				exit 1
-			fi
-		fi
-		cpuacct_cgroup_mounted="true"
-		break
-	fi
-done < <(mount | grep "type cgroup ")
-
-if [ "$cpuacct_cgroup_mounted" = "false" ]
-then
-	cpuacct_cgroup_root="/sys/fs/cgroup"
-	if ! mount -t cgroup -ocpuacct none /sys/fs/cgroup
-	then
-		echo "cpuacct cgroup mount failed"
-		exit 1
-	fi
-	cpuacct_cgroup_dir="$cpuacct_cgroup_root/kdamond"
-	if ! mkdir "$cpuacct_cgroup_dir"
-	then
-		echo "cpuacct cgroup dir creation failed"
-		exit 1
-	fi
-	cpuacct_cgroup_mounted="true"
-fi
-
-start_usage=""
-start_time=""
 kdamond_pid="none"
 kdamond_pid_file="/sys/kernel/debug/damon/kdamond_pid"
 if [ -d "/sys/kernel/mm/damon/admin" ]
@@ -80,7 +32,9 @@ then
 	kdamond_pid_file="/sys/kernel/mm/damon/admin/kdamonds/0/pid"
 fi
 
-while :;
+# When kdamond is not running debugfs kdamond_pid file returns "none" while
+# sysfs kdamond/pid file returns "-1"
+while [ "$kdamond_pid" = "none" ] || [ "$kdamond_pid" = "-1" ]
 do
 	sleep 1
 	# the sysfs file might not yet created
@@ -89,32 +43,30 @@ do
 		echo "wait for ($kdamond_pid_file) creation"
 		continue
 	fi
-	# When kdamond is not running debugfs kdamond_pid file returns "none"
-	# while sysfs kdamond/pid file returns "-1"
-	if [ "$kdamond_pid" = "none" ] || [ "$kdamond_pid" = "-1" ]
-	then
-		echo "wait for kdamond run"
-		kdamond_pid=$(cat "$kdamond_pid_file")
-		continue
-	fi
+	echo "wait for kdamond run"
+	kdamond_pid=$(cat "$kdamond_pid_file")
+done
 
-	if [ "$start_time" = "" ]
-	then
-		echo "monitor kdamond ($kdamond_pid)"
-		start_time=$SECONDS
-		start_usage=$(cat "$cpuacct_cgroup_dir/cpuacct.usage")
-		echo "$kdamond_pid" > "$cpuacct_cgroup_dir/tasks"
-	fi
+echo "monitor kdamond ($kdamond_pid)"
+kdamond_stat_file="/proc/$kdamond_pid/stat"
+start_total_jiffies=$(cat /proc/timer_list | grep "^jiffies: " --max-count=1 | \
+	awk '{print $2}')
+# 15-th column is the kernel mode jiffies
+start_kdamond_jiffies=$(cat "$kdamond_stat_file" | awk '{print $15}')
 
-	now_usage=$(cat "$cpuacct_cgroup_dir/cpuacct.usage")
-	cpu_usage=$((now_usage - start_usage))
-	runtime=$((SECONDS - start_time))
-	if [ "$runtime" = "0" ]
-	then
-		continue
-	fi
+while :;
+do
+	sleep 1
 
-	cpu_util=$(awk -v use_ns="$cpu_usage" -v total_sec="$runtime" \
-		'BEGIN {print use_ns / 1000000000 / total_sec}')
-	echo "$cpu_util $cpu_usage $runtime" >> "$cpu_usage_file"
+	now_total_jiffies=$(cat /proc/timer_list | \
+		grep "^jiffies: " --max-count=1 | awk '{print $2}')
+	now_kdamond_jiffies=$(cat "$kdamond_stat_file" | awk '{print $15}')
+
+	total_jiffies=$((now_total_jiffies - start_total_jiffies))
+	kdamond_jiffies=$((now_kdamond_jiffies - start_kdamond_jiffies))
+	kdamond_util=$(echo "$kdamond_jiffies $total_jiffies" | \
+		awk '{print $1 / $2}')
+
+	echo "$kdamond_util $kdamond_jiffies $total_jiffies" >> \
+		"$cpu_usage_file"
 done
