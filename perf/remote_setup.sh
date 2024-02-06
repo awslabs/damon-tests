@@ -21,5 +21,5 @@ lazybox="$bindir/../../lazybox"
 "$lazybox/parallel_ssh_cmds/ssh_parallel.sh" \
 	--port "$port" --user "$username" \
 	"cd $remote_damon_tests_dir/perf && \
-	nohup ./setup.sh $linux_commit $linux_remote_name $linux_remote_url \
-	> remote_setup_log 2>&1 &" $remote_hosts
+	nohup ./setup.sh $linux_commit $linux_remote_name $linux_remote_url" \
+	$remote_hosts
