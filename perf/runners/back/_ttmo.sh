@@ -19,7 +19,7 @@ reclaim_ratio_bp=$1
 psi_threshold_bp=$2
 interval_ms=$3
 
-cgroup_dir="/sys/fs/cgroup/unified"
+cgroup_dir=$(mount | grep "type cgroup2 " | awk '{print $3}')
 memory_reclaim_file="$cgroup_dir/memory.reclaim"
 memory_pressure_file="$cgroup_dir/memory.pressure"
 
