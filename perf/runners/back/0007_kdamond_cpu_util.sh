@@ -54,13 +54,17 @@ start_total_jiffies=$(cat /proc/timer_list | grep "^jiffies: " --max-count=1 | \
 # 15-th column is the kernel mode jiffies
 start_kdamond_jiffies=$(cat "$kdamond_stat_file" | awk '{print $15}')
 
-while :;
+while [ -f "$kdamond_stat_file" ]
 do
 	sleep 1
 
 	now_total_jiffies=$(cat /proc/timer_list | \
 		grep "^jiffies: " --max-count=1 | awk '{print $2}')
 	now_kdamond_jiffies=$(cat "$kdamond_stat_file" | awk '{print $15}')
+	if ! [ -f "$kdamond_stat_file" ]
+	then
+		break
+	fi
 
 	total_jiffies=$((now_total_jiffies - start_total_jiffies))
 	kdamond_jiffies=$((now_kdamond_jiffies - start_kdamond_jiffies))
