@@ -5,9 +5,9 @@ EXPERIMENTS=`dirname $BASH_SOURCE`
 
 parsec_workloads="blackscholes bodytrack canneal dedup facesim "
 parsec_workloads+="fluidanimate freqmine raytrace streamcluster swaptions "
-parsec_workloads+="vips x264"
+parsec_workloads+="vips"
 
-splash2x_workloads="barnes fft lu_cb lu_ncb ocean_cp ocean_ncp radiosity "
+splash2x_workloads="barnes fft lu_cb lu_ncb ocean_cp radiosity "
 splash2x_workloads+="radix raytrace volrend water_nsquared water_spatial"
 
 workloads=""
