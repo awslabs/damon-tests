@@ -89,6 +89,15 @@ then
 	mm_commits_stat_text=$("$damon_hack_dir/mm_commits_stat.sh")
 	popd
 	echo "$mm_commits_stat_text" >> "$mail_file"
+	echo >> "$mail_file"
+	last_mm_commits_file="last_mm_commits"
+	if [ -f "$last_mm_commits_file" ]
+	then
+		echo "mm commits diff from last update" >> "$mail_file"
+		diff -u "$last_mm_commits_file" \
+			<(echo "$mm_commits_stat_text") >> "$mail_file"
+	fi
+	echo "$mm_commits_stat_text" > "$last_mm_commits_file"
 fi
 
 git send-email --compose-encoding UTF-8 --to "$recipients" --confirm never \
