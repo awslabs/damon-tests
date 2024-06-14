@@ -86,7 +86,7 @@ then
 	fi
 	echo >> "$mail_file"
 	pushd "$repo"
-	mm_commits_stat_text=$("$damon_hack_dir/mm_commits_stat.sh")
+	mm_commits_stat_text=$("$damon_hack_dir/scripts/mm_commits_stat.sh")
 	popd
 	echo "$mm_commits_stat_text" >> "$mail_file"
 	echo >> "$mail_file"
