@@ -6,7 +6,7 @@
 void test(char *file)
 {
 	int filedesc = open(file, O_RDWR);
-	char buf[25];
+	char buf[512];
 	int ret;
 
 	printf("test %s\n", file);

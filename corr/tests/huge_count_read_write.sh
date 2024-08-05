@@ -1,6 +1,8 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0
 
+set -e
+
 dmesg -C
 
 for file in /sys/kernel/debug/damon/*
