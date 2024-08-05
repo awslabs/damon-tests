@@ -12,11 +12,21 @@ fi
 
 TEST_DIR=$PWD
 KUNIT_BDIR=$TEST_DIR/kunit.out
-KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
 
 rm -fr "$KUNIT_BDIR"
 mkdir -p $KUNIT_BDIR
 
+if [ -f ../../../../mm/damon/tests/.kunitconfig ]
+then
+	# we are in tools/testing/selftests/damon-tests/
+	cd ../../../../
+	./tools/testing/kunit/kunit.py run --kunitconfig=mm/damon/tests \
+		--build_dir $KUNIT_BDIR
+	exit $?
+fi
+
+
+KUNITCONFIG=$KUNIT_BDIR/.kunitconfig
 echo "
 CONFIG_KUNIT=y
 
