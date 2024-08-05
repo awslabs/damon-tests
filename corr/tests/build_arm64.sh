@@ -13,6 +13,10 @@ PATH=$TESTDIR/bin/lkp-tests/kbuild/:$PATH
 if [ ! -x ./bin/lkp-tests/kbuild/make.cross ]
 then
 	git clone https://github.com/intel/lkp-tests ./bin/lkp-tests
+	# By default make.cross compiles kernel with strict compiler flags on
+	# top. To disable them and make a regular kernel build, edit or erase
+	# extra flags in kbuld-kcflags file:
+	# echo "" > ./bin/lkp-tests/kbuild/etc/kbuild-kcflags
 	chmod +x ./bin/lkp-tests/kbuild/make.cross
 fi
 
