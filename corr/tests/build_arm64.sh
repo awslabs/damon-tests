@@ -8,12 +8,12 @@ TESTDIR=$PWD
 ODIR=$TESTDIR/`basename $0`.out
 
 mkdir -p bin
-PATH=$TESTDIR/bin/:$PATH
+PATH=$TESTDIR/bin/lkp-tests/kbuild/:$PATH
 
-if [ ! -x ./bin/make.cross ]
+if [ ! -x ./bin/lkp-tests/kbuild/make.cross ]
 then
-	wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ./bin/make.cross
-	chmod +x ./bin/make.cross
+	git clone https://github.com/intel/lkp-tests ./bin/lkp-tests
+	chmod +x ./bin/lkp-tests/kbuild/make.cross
 fi
 
 mkdir -p $ODIR
@@ -25,6 +25,7 @@ cat "$TESTDIR/damon_config" >> $ODIR/.config
 export COMPILER_INSTALL_PATH=$HOME/0day
 export COMPILER=gcc-9.3.0
 export ARCH=arm64
+export URL=https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/9.3.0
 
 make.cross O=$ODIR olddefconfig
 make.cross O=$ODIR -j$(nproc)
