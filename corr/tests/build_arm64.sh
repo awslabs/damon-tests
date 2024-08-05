@@ -13,6 +13,8 @@ PATH=$TESTDIR/bin/lkp-tests/kbuild/:$PATH
 if [ ! -x ./bin/lkp-tests/kbuild/make.cross ]
 then
 	git clone https://github.com/intel/lkp-tests ./bin/lkp-tests
+	# Disable restricted kernel compilation flags
+	echo "" > ./bin/lkp-tests/kbuild/etc/kbuild-kcflags
 	chmod +x ./bin/lkp-tests/kbuild/make.cross
 fi
 
