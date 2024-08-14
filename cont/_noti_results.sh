@@ -60,7 +60,7 @@ kernel from linux-stable-rc tree[2].
 
 Tested-by: SeongJae Park <sj@kernel.org>
 
-[1] https://github.com/awslabs/damon-tests/tree/next/corr
+[1] https://github.com/damonitor/damon-tests/tree/next/corr
 [2] $commit_intro
 
 Thanks,

@@ -1,6 +1,6 @@
 For contributions, please refer to the linux kernel development process[1] and
 send patches to sjpark@amazon.com or pull-requests to
-https://github.com/awslabs/damon-tests via Github.  The contributions should
+https://github.com/damonitor/damon-tests via Github.  The contributions should
 have proper 'Signed-off-by:' tags[2].  The tag will be considered same to that
 of the linux kernel development process.
 

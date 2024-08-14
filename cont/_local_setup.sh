@@ -63,8 +63,8 @@ checkout_git()
 	git -C "$repo" checkout "$ref"
 }
 
-gh_upstream="https://github.com/awslabs"
-gh_downstream="https://github.com/damonitor"
+gh_upstream="https://github.com/damonitor"
+gh_downstream="https://github.com/awslabs"
 
 if [ ! -d "$work_dir" ]
 then
